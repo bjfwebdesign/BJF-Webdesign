@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prijzen — BJF Web Design</title>
+<meta name="description" content="Bekijk eerst hoe je website eruit kan zien, kies daarna pas een pakket. Transparante prijzen voor eenmalige realisatie en maandelijkse zorg. Gratis demo, geen risico vooraf.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#050609;
+    --bg-alt:#0a0c13;
+    --surface:#0f1119;
+    --surface-2:#151826;
+    --border:rgba(255,255,255,0.08);
+    --text:#f3f5fb;
+    --muted:#8b90a3;
+    --muted-2:#5c6178;
+    --muted-3:#7b8299;
+    --cyan:#67e8f9;
+    --violet:#c084fc;
+    --cyan-rgb:103,232,249;
+    --violet-rgb:192,132,252;
+    --grad: linear-gradient(120deg, var(--cyan), var(--violet));
+    --ff-head:'Bricolage Grotesque', sans-serif;
+    --ff-body:'Inter', sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--ff-body);
+    font-weight:400;
+    line-height:1.5;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:rgba(103,232,249,0.25); color:#fff;}
+
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  img,svg{display:block; max-width:100%;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit;}
+
+  .container{
+    max-width:1240px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  h1,h2,h3,h4{
+    font-family:var(--ff-head);
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+
+  .eyebrow{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:var(--ff-body);
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:7px; height:7px;
+    border-radius:50%;
+    background:var(--grad);
+    box-shadow:0 0 12px rgba(103,232,249,0.7);
+    flex-shrink:0;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 26px;
+    border-radius:100px;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:0.01em;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, background .35s ease, color .35s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--text);
+    color:#05060a;
+  }
+  .btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(103,232,249,0.25);
+  }
+  .btn-ghost{
+    border:1px solid var(--border);
+    color:var(--text);
+  }
+  .btn-ghost:hover{
+    border-color:rgba(255,255,255,0.28);
+    background:rgba(255,255,255,0.04);
+    transform:translateY(-2px);
+  }
+  .btn-arrow{transition:transform .35s cubic-bezier(.2,.8,.2,1);}
+  .btn:hover .btn-arrow{transform:translate(3px,-3px);}
+
+  /* ---------- custom cursor ---------- */
+  #cursor-dot, #cursor-ring{
+    position:fixed;
+    top:0; left:0;
+    pointer-events:none;
+    z-index:9999;
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    will-change:transform;
+  }
+  #cursor-dot{
+    width:6px; height:6px;
+    background:var(--cyan);
+    display:none;
+  }
+  #cursor-ring{
+    width:34px; height:34px;
+    border:1px solid rgba(103,232,249,0.55);
+    transition:width .25s ease, height .25s ease, border-color .25s ease, background .25s ease;
+    display:none;
+  }
+  #cursor-ring.grow{
+    width:64px; height:64px;
+    background:rgba(103,232,249,0.08);
+    border-color:rgba(192,132,252,0.6);
+  }
+  @media(hover:hover) and (pointer:fine){
+    #cursor-dot,#cursor-ring{display:block;}
+  }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:500;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:26px 32px;
+    transition:padding .4s ease, background .4s ease, border-color .4s ease, backdrop-filter .4s ease;
+    border-bottom:1px solid transparent;
+  }
+  .nav.scrolled{
+    padding:16px 32px;
+    background:rgba(5,6,9,0.72);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .logo{
+    font-family:var(--ff-head);
+    font-weight:700;
+    font-size:19px;
+    letter-spacing:-0.02em;
+    display:flex;
+    align-items:center;
+    gap:9px;
+  }
+  .logo-mark{
+    width:11px; height:11px;
+    background:var(--grad);
+    border-radius:3px;
+    transform:rotate(45deg);
+  }
+  .nav-links{
+    display:flex;
+    gap:38px;
+    font-size:14px;
+    color:var(--muted);
+  }
+  .nav-links a{position:relative; transition:color .3s ease; padding:4px 0;}
+  .nav-links a::after{
+    content:'';
+    position:absolute; left:0; bottom:0;
+    width:0; height:1px;
+    background:var(--grad);
+    transition:width .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a:hover::after{width:100%;}
+  .nav-links a.active{color:var(--text);}
+  .nav-links a.active::after{width:100%;}
+  .nav-cta{display:flex; align-items:center; gap:22px;}
+  .nav .btn-primary{padding:11px 22px; font-size:13px;}
+  .nav-toggle{
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px;
+    width:34px; height:34px;
+    flex-shrink:0;
+    z-index:600;
+  }
+  .nav-toggle span{
+    display:block;
+    width:100%; height:1.5px;
+    background:var(--text);
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), opacity .3s ease;
+  }
+  .nav-toggle.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .nav-toggle.open span:nth-child(2){opacity:0;}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+  .mobile-menu{
+    position:fixed;
+    inset:0;
+    background:rgba(5,6,9,0.98);
+    backdrop-filter:blur(14px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:30px;
+    transform:translateY(-100%);
+    transition:transform .5s cubic-bezier(.2,.8,.2,1);
+    z-index:550;
+  }
+  .mobile-menu.open{transform:translateY(0);}
+  .mobile-menu a{font-family:var(--ff-head); font-size:26px; font-weight:600; color:var(--text);}
+  .mobile-menu a.btn{margin-top:14px; font-size:15px; color:#05060a;}
+
+  @media(max-width:860px){
+    .nav-links{display:none;}
+    .nav-cta .btn-primary{display:none;}
+    .nav-toggle{display:flex;}
+    .logo{font-size:16px;}
+    .nav{padding:20px 22px;}
+    .nav.scrolled{padding:14px 22px;}
+  }
+
+  /* ---------- compact hero (adapted from main hero, shorter height for a sub-page) ---------- */
+  .hero{
+    position:relative;
+    min-height:88vh;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    padding:150px 0 70px;
+    background:radial-gradient(ellipse at 50% 0%, #0d1220 0%, #050609 65%);
+  }
+  .hero-canvas-wrap{
+    position:absolute; inset:0;
+    will-change:transform;
+  }
+  #heroCanvas{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+  }
+  .hero-grid-overlay{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse at 50% 40%, black 10%, transparent 72%);
+    pointer-events:none;
+  }
+  .hero-vignette{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(5,6,9,0.15) 0%, rgba(5,6,9,0) 35%, rgba(5,6,9,0.55) 82%, var(--bg) 100%);
+    pointer-events:none;
+  }
+  .hero-content{
+    position:relative;
+    z-index:5;
+    width:100%;
+    will-change:transform, opacity;
+  }
+  .hero-content .eyebrow{justify-content:center;}
+  .hero h1{
+    font-size:clamp(34px, 5.6vw, 64px);
+    line-height:1.1;
+    text-align:center;
+    max-width:900px;
+    margin:0 auto 22px;
+  }
+  .hero h1 .hl{
+    background:var(--grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero-sub{
+    text-align:center;
+    max-width:560px;
+    margin:0 auto 30px;
+    color:var(--muted);
+    font-size:16.5px;
+    line-height:1.6;
+  }
+  .hero-actions{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    margin-bottom:40px;
+  }
+  .hero-stats{
+    display:flex;
+    justify-content:center;
+    gap:48px;
+    padding-top:22px;
+    border-top:1px solid var(--border);
+    max-width:640px;
+    margin:0 auto;
+  }
+  .hero-stats div{text-align:center;}
+  .hero-stats .num{
+    font-family:var(--ff-head);
+    font-size:26px;
+    font-weight:700;
+  }
+  .hero-stats .lbl{
+    font-size:12px;
+    color:var(--muted-3);
+    letter-spacing:0.04em;
+    margin-top:4px;
+  }
+
+  /* ---------- section shell ---------- */
+  .section-pad{padding:150px 0;}
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:56px;
+    flex-wrap:wrap;
+  }
+  .section-head.centered{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    max-width:640px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .section-head h2{
+    font-size:clamp(28px, 4vw, 44px);
+    line-height:1.14;
+    max-width:600px;
+  }
+  .section-head p{
+    color:var(--muted);
+    max-width:340px;
+    font-size:15px;
+    line-height:1.6;
+  }
+  .section-head.centered p{max-width:480px;}
+
+  .reveal{
+    opacity:0;
+    transform:translateY(34px);
+    transition:opacity .8s cubic-bezier(.16,.8,.24,1), transform .8s cubic-bezier(.16,.8,.24,1);
+  }
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+
+  /* ---------- process (verbatim from index.html) ---------- */
+  .process{padding:0 0 150px; background:var(--bg);}
+  .process-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+  }
+  .process-card{
+    background:var(--surface);
+    padding:38px 30px;
+    transition:background .4s ease;
+  }
+  .process-card:hover{background:var(--surface-2);}
+  .process-card .step-num{
+    font-family:var(--ff-head);
+    font-size:13px;
+    color:var(--cyan);
+    margin-bottom:26px;
+  }
+  .process-card h3{font-size:19px; margin-bottom:10px;}
+  .process-card p{font-size:14px; color:var(--muted); line-height:1.6;}
+
+  @media(max-width:900px){
+    .process-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:560px){
+    .process-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- pricing cards (verbatim price-card language from index.html, new 3-col grid) ---------- */
+  .pricing{padding:0 0 150px; background:var(--bg-alt);}
+  .pricing.alt{background:var(--bg);}
+  .tier-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+  }
+  .price-card .tag{
+    font-size:11px; letter-spacing:0.09em; text-transform:uppercase;
+    color:var(--cyan); font-weight:700; display:block; margin-bottom:12px;
+  }
+  .price-card{
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:36px 30px;
+    background:var(--surface);
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    transition:transform .4s cubic-bezier(.2,.8,.2,1), border-color .4s ease;
+  }
+  .price-card:hover{transform:translateY(-6px); border-color:rgba(255,255,255,0.18);}
+  .price-card.feat{
+    background:linear-gradient(160deg, rgba(103,232,249,0.08), rgba(192,132,252,0.05)), var(--surface);
+    border-color:rgba(103,232,249,0.35);
+  }
+  .badge{
+    position:absolute; top:-12px; left:30px;
+    background:var(--grad);
+    color:#05060a;
+    font-size:11px; font-weight:700; letter-spacing:0.04em;
+    padding:6px 14px; border-radius:100px;
+  }
+  .price-card h3{font-size:20px; margin-bottom:8px;}
+  .price-card .desc{font-size:13.5px; color:var(--muted); margin-bottom:24px; min-height:38px;}
+  .price-card .price{
+    font-family:var(--ff-head);
+    font-size:36px;
+    font-weight:700;
+    margin-bottom:2px;
+  }
+  .price-card .price span{font-size:14px; color:var(--muted); font-weight:400; font-family:var(--ff-body);}
+  .price-card .from{font-size:12px; color:var(--muted-3); margin-bottom:26px;}
+  .price-feats{margin-bottom:30px; flex:1;}
+  .price-feats li{
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:13.5px; color:var(--text);
+    padding:9px 0;
+    border-top:1px solid var(--border);
+  }
+  .price-feats li:first-child{border-top:none;}
+  .price-feats li svg{flex-shrink:0; width:14px; height:14px; margin-top:2px; color:var(--cyan);}
+  .price-feats li.dim{color:var(--muted-3);}
+  .price-feats li.dim svg{color:var(--muted-3);}
+  .price-card .btn{justify-content:center; width:100%;}
+
+  @media(max-width:900px){
+    .tier-grid{grid-template-columns:1fr; max-width:460px; margin:0 auto;}
+  }
+
+  /* ---------- comparison (reuses price-card surface language) ---------- */
+  .compare-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .compare-list{display:flex; flex-direction:column; gap:14px; margin-top:22px;}
+  .compare-list li{display:flex; align-items:flex-start; gap:10px; font-size:14px; line-height:1.5;}
+  .compare-list li svg{flex-shrink:0; width:15px; height:15px; margin-top:2px;}
+  .compare-list.no li{color:var(--muted-3);}
+  .compare-list.no li svg{color:var(--muted-3);}
+  .compare-list.yes li{color:var(--text);}
+  .compare-list.yes li svg{color:var(--cyan);}
+
+  @media(max-width:800px){
+    .compare-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- callout (reuses feat-card gradient tint) ---------- */
+  .callout{
+    border:1px solid rgba(103,232,249,0.3);
+    border-radius:22px;
+    padding:48px 40px;
+    text-align:center;
+    background:linear-gradient(160deg, rgba(103,232,249,0.08), rgba(192,132,252,0.05)), var(--surface);
+  }
+  .callout .eyebrow{justify-content:center;}
+  .callout h2{font-size:clamp(24px,3.4vw,32px); margin-bottom:16px; max-width:640px; margin-left:auto; margin-right:auto;}
+  .callout p{color:var(--muted); max-width:600px; margin:0 auto; font-size:15px; line-height:1.65;}
+
+  /* ---------- CTA band (verbatim from index.html) ---------- */
+  .cta-band{
+    position:relative;
+    padding:150px 0;
+    background:var(--bg-alt);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    text-align:center;
+    overflow:hidden;
+  }
+  .cta-band h2{
+    font-size:clamp(32px, 4.6vw, 56px);
+    line-height:1.1;
+    margin:0 0 20px;
+  }
+  .cta-band p{color:var(--muted); max-width:480px; margin:0 auto 34px; font-size:16px; line-height:1.6; position:relative; z-index:2;}
+  .cta-band .btn{padding:17px 34px; font-size:15px; position:relative; z-index:2;}
+  .cta-glow{
+    position:absolute; top:20%; left:15%;
+    width:50vw; height:50vw;
+    background:radial-gradient(circle, rgba(103,232,249,0.10), transparent 65%);
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+
+  /* ---------- footer (verbatim from index.html) ---------- */
+  footer{
+    position:relative;
+    background:var(--bg);
+    padding:100px 0 0;
+    overflow:hidden;
+  }
+  .footer-glow{
+    position:absolute;
+    width:420px; height:420px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(103,232,249,0.14), transparent 70%);
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    left:var(--fx,50%); top:var(--fy,20%);
+    transition:opacity .4s ease;
+    opacity:0;
+  }
+  footer:hover .footer-glow{opacity:1;}
+  .footer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:40px;
+    padding-bottom:90px;
+    border-bottom:1px solid var(--border);
+  }
+  .footer-top h2{
+    font-size:clamp(28px, 5vw, 58px);
+    max-width:560px;
+    line-height:1.1;
+  }
+  .footer-cols{
+    display:grid;
+    grid-template-columns:repeat(4, minmax(120px,1fr));
+    gap:32px;
+    padding:56px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .footer-col h5{
+    font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--muted-3); margin-bottom:18px; font-family:var(--ff-body); font-weight:600;
+  }
+  .footer-col a, .footer-col p{
+    display:block;
+    font-size:14px;
+    color:var(--muted);
+    padding:6px 0;
+    transition:color .3s ease;
+  }
+  .footer-col a:hover{color:var(--text);}
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:26px 0 34px;
+    font-size:12.5px;
+    color:var(--muted-3);
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  @media(max-width:700px){
+    .footer-cols{grid-template-columns:1fr 1fr;}
+  }
+
+  @media(max-width:640px){
+    .container{padding:0 22px;}
+    .hero-actions{flex-direction:column; align-items:stretch; width:80%; margin:0 auto 32px;}
+    .hero-stats{gap:22px;}
+    .process{padding:0 0 110px;}
+    .pricing{padding:0 0 110px;}
+    .section-pad{padding:110px 0;}
+    .cta-band{padding:100px 0;}
+    .compare-grid{gap:16px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<nav class="nav" id="nav">
+  <a href="index.html#top" class="logo"><span class="logo-mark"></span>BJF WEB DESIGN</a>
+  <div class="nav-links">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#process">Werkwijze</a>
+    <a href="pricing.html" class="active">Prijzen</a>
+  </div>
+  <div class="nav-cta">
+    <a href="index.html#contact" class="btn btn-primary">Gratis Demo Aanvragen <span class="btn-arrow">→</span></a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#work">Work</a>
+  <a href="index.html#process">Werkwijze</a>
+  <a href="pricing.html">Prijzen</a>
+  <a href="index.html#contact" class="btn btn-primary">Gratis Demo Aanvragen</a>
+</div>
+
+<section class="hero" id="top">
+  <div class="hero-canvas-wrap" id="heroCanvasWrap">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-grid-overlay"></div>
+  </div>
+  <div class="hero-vignette"></div>
+  <div class="container hero-content" id="heroContent">
+    <div class="eyebrow" style="justify-content:center;">Eerst vertrouwen, dan de prijzen</div>
+    <h1>Bekijk eerst hoe <span class="hl">je website eruit kan zien.</span></h1>
+    <p class="hero-sub">Je ziet en keurt eerst een gratis ontwerpconcept goed. Pas daarna kies je het realisatiepakket dat bij je bedrijf past — geen verrassingen, geen risico vooraf.</p>
+    <div class="hero-actions">
+      <a href="index.html#contact" class="btn btn-primary">Vraag Gratis Demo Aan <span class="btn-arrow">→</span></a>
+      <a href="index.html#work" class="btn btn-ghost">Bekijk Ons Werk</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="num">48u</div><div class="lbl">Eerste Ontwerp</div></div>
+      <div><div class="num">€0</div><div class="lbl">Risico Vooraf</div></div>
+      <div><div class="num">Incl.</div><div class="lbl">Hosting &amp; Support</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="process section-pad">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Hoe de gratis demo werkt.</h2>
+      <p>Een risicovrije manier om een website te krijgen waar je trots op bent.</p>
+    </div>
+    <div class="process-grid reveal">
+      <div class="process-card">
+        <div class="step-num">01</div>
+        <h3>Wij ontwerpen eerst</h3>
+        <p>Deel je bedrijf, doelen en gewenste stijl. Je ontvangt een op maat gemaakt homepage-concept, nog vóór je iets afspreekt.</p>
+      </div>
+      <div class="process-card">
+        <div class="step-num">02</div>
+        <h3>Jij keurt het goed</h3>
+        <p>Voelt het concept goed? Dan kies je hieronder het pakket dat past en bouwen we de volledige site uit, geoptimaliseerd voor mobiel.</p>
+      </div>
+      <div class="process-card">
+        <div class="step-num">03</div>
+        <h3>Wij houden het draaiende</h3>
+        <p>Hosting, onderhoud, updates en support — inbegrepen in een overzichtelijk maandelijks abonnement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="realisatie">
+  <div class="container">
+    <div class="section-head centered reveal">
+      <div class="eyebrow">Eenmalige Website-Realisatie</div>
+      <h2>Kies het realisatiepakket nadat je het ontwerp hebt goedgekeurd.</h2>
+      <p>Eenmalige bouwkosten, op maat per pakket. Je betaalt pas na goedkeuring van je gratis ontwerp.</p>
+    </div>
+    <div class="tier-grid reveal">
+      <div class="price-card">
+        <span class="tag">Starter+</span>
+        <h3>€499</h3>
+        <div class="desc">Voor professionele websites die snel online moeten.</div>
+        <div class="from">eenmalig</div>
+        <ul class="price-feats">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Gratis designvoorbeeld</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Website op maat, one-page</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Responsive design</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Contactformulier</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Basis SEO &amp; analytics</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>SSL, hosting gereed &amp; livegang</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>30 dagen support</li>
+        </ul>
+        <a href="index.html#contact" class="btn btn-ghost">Begin met Starter+</a>
+      </div>
+
+      <div class="price-card feat">
+        <span class="badge">Meest Gekozen</span>
+        <span class="tag">Professional</span>
+        <h3>€1.099</h3>
+        <div class="desc">Meest populair bij groeiende bedrijven.</div>
+        <div class="from">eenmalig</div>
+        <ul class="price-feats">
+          <li class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Alle functies van Starter+, plus</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Meerdere pagina's &amp; CMS</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Blog / portfolio</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Conversiegerichte structuur</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Geavanceerde responsive optimalisatie</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Integraties &amp; prioriteitssupport</li>
+        </ul>
+        <a href="index.html#contact" class="btn btn-primary">Kies voor Professional</a>
+      </div>
+
+      <div class="price-card">
+        <span class="tag">Business</span>
+        <h3>€2.099</h3>
+        <div class="desc">Voor bedrijven met meer pagina's en een uitgebreide website.</div>
+        <div class="from">eenmalig</div>
+        <ul class="price-feats">
+          <li class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Alle functies van Professional, plus</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Volledig maatwerk &amp; animaties</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Complexe CMS-oplossingen</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Automatiseringen &amp; externe integraties</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Performance-optimalisatie</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Persoonlijke begeleiding</li>
+        </ul>
+        <a href="index.html#contact" class="btn btn-ghost">Bouw met Business</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing alt section-pad" id="zorg">
+  <div class="container">
+    <div class="section-head centered reveal">
+      <div class="eyebrow">Maandelijkse Zorg</div>
+      <h2>Onderhoud dat je website snel, veilig en up-to-date houdt.</h2>
+      <p>Doorlopend, maandelijks opzegbaar. Begint zodra je website live gaat.</p>
+    </div>
+    <div class="tier-grid reveal">
+      <div class="price-card">
+        <span class="tag">Basic</span>
+        <h3>€49<span> /mnd</span></h3>
+        <div class="desc">Basisonderhoud voor een stabiele, veilige website.</div>
+        <div class="from">doorlopend, maandelijks opzegbaar</div>
+        <ul class="price-feats">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Veilige en snelle premium hosting</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Regelmatige beveiligingsupdates</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Doorlopend technisch onderhoud</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Persoonlijke support via e-mail</li>
+        </ul>
+        <a href="index.html#contact" class="btn btn-ghost">Kies Basic</a>
+      </div>
+
+      <div class="price-card">
+        <span class="tag">Professional</span>
+        <h3>€79<span> /mnd</span></h3>
+        <div class="desc">Alles uit Basic, plus meer aandacht voor groei.</div>
+        <div class="from">doorlopend, maandelijks opzegbaar</div>
+        <ul class="price-feats">
+          <li class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Alles uit het Basic-pakket</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Regelmatige contentaanpassingen</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Prioriteit bij supportverzoeken</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Doorlopende performance monitoring</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Maandelijkse controle &amp; optimalisatie</li>
+        </ul>
+        <a href="index.html#contact" class="btn btn-ghost">Kies Professional</a>
+      </div>
+
+      <div class="price-card">
+        <span class="tag">Business+</span>
+        <h3>€109<span> /mnd</span></h3>
+        <div class="desc">Voor bedrijven die maximale zorg en strategisch advies willen.</div>
+        <div class="from">doorlopend, maandelijks opzegbaar</div>
+        <ul class="price-feats">
+          <li class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Alles uit het Professional-pakket</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Prioriteit bij updates en onderhoud</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Advies voor conversieverbetering</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Per kwartaal website-evaluatie</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Strategisch overleg voor verdere groei</li>
+        </ul>
+        <a href="index.html#contact" class="btn btn-ghost">Kies Business+</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head centered reveal">
+      <h2>Een zorgeloze weg naar een professionele website.</h2>
+    </div>
+    <div class="compare-grid reveal">
+      <div class="price-card">
+        <h3 style="font-size:18px;">Traditionele werkwijze</h3>
+        <ul class="compare-list no">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>Eerst betalen, daarna pas het ontwerp</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>Wekenlange trajecten voordat er iets zichtbaar is</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>Na de oplevering sta je er vaak alleen voor</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>Onderhoud kost extra tijd en aandacht</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <h3 style="font-size:18px;">Waarom onze werkwijze anders is</h3>
+        <ul class="compare-list yes">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Eerst een gratis websiteconcept, daarna pas beslissen</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Binnen korte tijd een duidelijke designrichting</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Volledige oplevering inclusief hosting en onderhoud</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Een vaste partner voor support en toekomstige groei</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="callout reveal">
+      <div class="eyebrow">Eerst het ontwerp, daarna pas betalen</div>
+      <h2>Je hoeft niet te gokken hoe je nieuwe website eruit zal zien.</h2>
+      <p>Met een gratis ontwerpconcept zie je direct de uitstraling, structuur en kwaliteit van je toekomstige website. Pas wanneer je overtuigd bent van de richting, starten wij met de volledige realisatie en bouwen we een professionele website die klaar is voor livegang.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="cta-glow"></div>
+  <div class="container">
+    <div class="eyebrow" style="justify-content:center;">Start Vandaag</div>
+    <h2>Benieuwd hoe jouw<br>website eruit kan zien?</h2>
+    <p>Vertel ons kort over je bedrijf en wij ontwikkelen een premium websiteconcept — volledig gratis en vrijblijvend, voordat je ergens aan vastzit.</p>
+    <a href="index.html#contact" class="btn btn-primary">Vraag Gratis Demo Aan <span class="btn-arrow">→</span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-glow" id="footerGlow"></div>
+  <div class="container">
+    <div class="footer-top">
+      <h2>Laten we praten<br>over je website.</h2>
+      <a href="mailto:hello@bjfwebdesign.com" class="btn btn-ghost">hello@bjfwebdesign.com</a>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h5>Studio</h5>
+        <a href="index.html#work">Work</a>
+        <a href="index.html#process">Werkwijze</a>
+        <a href="pricing.html">Prijzen</a>
+        <a href="index.html#contact">Gratis Demo</a>
+      </div>
+      <div class="footer-col">
+        <h5>Industrieën</h5>
+        <a href="index.html#services">Vastgoed</a>
+        <a href="index.html#services">Restaurants &amp; Hotels</a>
+        <a href="index.html#services">Verzekeringen</a>
+        <a href="index.html#services">Sport &amp; Beauty</a>
+        <a href="index.html#services">Bouw &amp; Lokaal</a>
+      </div>
+      <div class="footer-col">
+        <h5>Connect</h5>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">TikTok</a>
+      </div>
+      <div class="footer-col">
+        <h5>Studio</h5>
+        <p>Amsterdam, NL</p>
+        <p>Werkzaam voor heel NL</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BJF Web Design. Alle rechten voorbehouden.</span>
+      <span>Free demo first. Pay only if you want to launch.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- nav scroll state ---------- */
+  const nav = document.getElementById('nav');
+  function updateNav(){
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  }
+
+  /* ---------- custom cursor ---------- */
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let cx=0, cy=0, rx=0, ry=0;
+  window.addEventListener('mousemove', e=>{
+    cx = e.clientX; cy = e.clientY;
+    dot.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+  });
+  document.querySelectorAll('a, button').forEach(el=>{
+    el.addEventListener('mouseenter', ()=>ring.classList.add('grow'));
+    el.addEventListener('mouseleave', ()=>ring.classList.remove('grow'));
+  });
+  function ringLoop(){
+    rx += (cx-rx)*0.16;
+    ry += (cy-ry)*0.16;
+    ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+    requestAnimationFrame(ringLoop);
+  }
+  requestAnimationFrame(ringLoop);
+
+  /* ---------- mobile menu ---------- */
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  function closeMobileMenu(){
+    navToggle.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  navToggle.addEventListener('click', ()=>{
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMobileMenu));
+
+  /* ---------- hero canvas: flowing ribbons + particles + ripple (verbatim from index.html) ---------- */
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+  let w=0, h=0, dpr=1;
+  function resizeCanvas(){
+    dpr = Math.min(window.devicePixelRatio||1, 2);
+    w = canvas.clientWidth; h = canvas.clientHeight;
+    canvas.width = Math.floor(w*dpr);
+    canvas.height = Math.floor(h*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  const RIBBONS = Array.from({length:5}, (_,i)=>({
+    offset: Math.random()*1000,
+    speed: 0.5 + Math.random()*0.6,
+    amp: 34 + Math.random()*54,
+    yBase: (i+1)/6,
+    rgb: i%2===0 ? '103,232,249' : '192,132,252',
+    width: 1.1 + Math.random()*1.3,
+  }));
+
+  const PARTICLES = Array.from({length:64}, ()=>({
+    x: Math.random(), y: Math.random(),
+    r: 0.6 + Math.random()*1.6,
+    vx: (Math.random()-0.5)*0.00035,
+    vy: (Math.random()-0.5)*0.00035,
+    a: 0.2 + Math.random()*0.5,
+  }));
+
+  let ripples = [];
+  function spawnRipple(x,y){
+    ripples.push({x,y,r:0,a:0.5});
+    if(ripples.length>6) ripples.shift();
+  }
+  canvas.addEventListener('pointerdown', e=>{
+    const r = canvas.getBoundingClientRect();
+    spawnRipple(e.clientX-r.left, e.clientY-r.top);
+  });
+  setInterval(()=>{
+    spawnRipple(w*(0.25+Math.random()*0.5), h*(0.3+Math.random()*0.4));
+  }, 3400);
+
+  const mouse = {x:0.5,y:0.5,tx:0.5,ty:0.5,active:false};
+  window.addEventListener('pointermove', e=>{
+    const r = canvas.getBoundingClientRect();
+    if(e.clientY >= r.top && e.clientY <= r.bottom){
+      mouse.tx = (e.clientX-r.left)/w;
+      mouse.ty = (e.clientY-r.top)/h;
+      mouse.active = true;
+    }
+  });
+
+  const heroEl = document.querySelector('.hero');
+  const heroContent = document.getElementById('heroContent');
+  const heroCanvasWrap = document.getElementById('heroCanvasWrap');
+  let heroProgress = 0;
+  function updateHeroProgress(){
+    const rect = heroEl.getBoundingClientRect();
+    heroProgress = Math.min(Math.max(-rect.top/(rect.height*0.9||1), 0), 1);
+    heroContent.style.transform = `translateY(${heroProgress*70}px) scale(${1-heroProgress*0.06})`;
+    heroContent.style.opacity = String(1 - heroProgress*1.25);
+    heroCanvasWrap.style.transform = `scale(${1+heroProgress*0.18}) rotate(${heroProgress*3.2}deg)`;
+  }
+
+  let t = 0;
+  function drawHero(){
+    t += 1;
+    mouse.x += (mouse.tx-mouse.x)*0.045;
+    mouse.y += (mouse.ty-mouse.y)*0.045;
+
+    ctx.clearRect(0,0,w,h);
+
+    const g = ctx.createRadialGradient(w*mouse.x, h*mouse.y, 0, w*mouse.x, h*mouse.y, Math.max(w,h)*0.55);
+    g.addColorStop(0, 'rgba(103,232,249,0.07)');
+    g.addColorStop(1, 'rgba(103,232,249,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,w,h);
+
+    RIBBONS.forEach(rb=>{
+      ctx.beginPath();
+      const yShift = (mouse.y-0.5)*26 + heroProgress*50;
+      const step = Math.max(6, w/140);
+      for(let x=0; x<=w; x+=step){
+        const nx = x/w;
+        const y = rb.yBase*h
+          + Math.sin(nx*3.6 + t*0.0032*rb.speed*10 + rb.offset) * rb.amp * (1-heroProgress*0.35)
+          + Math.sin(nx*9 + t*0.01) * 6
+          + yShift;
+        if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.strokeStyle = `rgba(${rb.rgb},0.32)`;
+      ctx.lineWidth = rb.width;
+      ctx.shadowColor = `rgba(${rb.rgb},0.55)`;
+      ctx.shadowBlur = 10;
+      ctx.stroke();
+    });
+    ctx.shadowBlur = 0;
+
+    PARTICLES.forEach(p=>{
+      p.x += p.vx; p.y += p.vy;
+      if(p.x<0||p.x>1) p.vx*=-1;
+      if(p.y<0||p.y>1) p.vy*=-1;
+      const dx = p.x-mouse.x, dy = p.y-mouse.y;
+      const d = Math.hypot(dx,dy);
+      let px = p.x*w, py = p.y*h;
+      if(d < 0.16){
+        const f = (0.16-d)/0.16;
+        px += dx*f*70; py += dy*f*70;
+      }
+      ctx.beginPath();
+      ctx.arc(px, py, p.r*(1+heroProgress*0.4), 0, Math.PI*2);
+      ctx.fillStyle = `rgba(232,238,255,${p.a})`;
+      ctx.fill();
+    });
+
+    ripples.forEach(rp=>{
+      rp.r += 3.6;
+      rp.a *= 0.965;
+    });
+    ripples = ripples.filter(rp=>rp.a > 0.015);
+    ripples.forEach(rp=>{
+      ctx.beginPath();
+      ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(192,132,252,${rp.a})`;
+      ctx.lineWidth = 1.4;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(rp.x, rp.y, rp.r*0.6, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(103,232,249,${rp.a*0.7})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+
+    requestAnimationFrame(drawHero);
+  }
+  requestAnimationFrame(drawHero);
+
+  /* ---------- generic reveal-on-scroll ---------- */
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.14});
+  revealEls.forEach(el=>io.observe(el));
+
+  /* ---------- footer magnetic glow ---------- */
+  const footerGlow = document.getElementById('footerGlow');
+  document.querySelector('footer').addEventListener('mousemove', e=>{
+    const r = e.currentTarget.getBoundingClientRect();
+    footerGlow.style.setProperty('--fx', (e.clientX-r.left)+'px');
+    footerGlow.style.setProperty('--fy', (e.clientY-r.top)+'px');
+  });
+
+  /* ---------- master scroll loop (throttled) ---------- */
+  let ticking = false;
+  function onScroll(){
+    if(!ticking){
+      requestAnimationFrame(()=>{
+        updateNav();
+        updateHeroProgress();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+})();
+</script>
+</body>
+</html>
