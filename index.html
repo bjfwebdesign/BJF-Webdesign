@@ -14,11 +14,6 @@ Claude Desktop (macOS), Connected
 
 
 
-
-
-
-
-
 Index · HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -735,84 +730,73 @@ Index · HTML
     .realty-fp .fp-l{stroke-dashoffset:0; opacity:1;}
   }
  
-  /* ---------- sushi scene (Restaurants & Hotels panel — animated nigiri-dip mockup) ---------- */
-  .visual-card .screen.sushi-screen{
+  /* ---------- omakase scene (Restaurants & Hotels panel — real photo + booking widget mockup) ---------- */
+  .visual-card .screen.omakase-screen{
     flex-direction:column;
     align-items:stretch;
     justify-content:flex-start;
   }
-  .sushi-top{
+  .omakase-top{
     position:relative;
     flex:1.4;
     min-height:0;
     overflow:hidden;
     border-bottom:1px solid var(--border);
-    background:linear-gradient(160deg, #0d0f17 0%, #07080d 68%, #050609 100%);
+    background:#0b0d15;
   }
-  .sushi-scene{position:absolute!important; inset:0; z-index:1;}
-  .sushi-scene svg{position:absolute!important; inset:0; width:100%!important; height:100%!important; z-index:1!important;}
-  .sushi-scrim{
-    position:absolute!important; inset:0; z-index:2;
-    background:linear-gradient(180deg, rgba(5,6,9,0.58) 0%, rgba(5,6,9,0.04) 26%, rgba(5,6,9,0.08) 58%, rgba(5,6,9,0.86) 100%);
+  .omakase-photo{
+    position:absolute!important;
+    inset:0;
+    z-index:0;
+    background-image:url('omakase-chef.jpg');
+    background-size:cover;
+    background-position:52% 40%;
+    transform:scale(1);
+    animation:omakase-kenburns 27s ease-in-out infinite alternate;
+    will-change:transform;
   }
-  .sushi-crumb{
-    position:absolute; top:13px; left:15px; z-index:3;
+  .omakase-scrim{
+    position:absolute!important;
+    inset:0;
+    z-index:1;
+    background:linear-gradient(180deg, rgba(5,6,9,0.64) 0%, rgba(5,6,9,0.10) 24%, rgba(5,6,9,0.14) 55%, rgba(5,6,9,0.90) 100%);
+  }
+  .omakase-crumb{
+    position:absolute; top:13px; left:15px; z-index:2;
     font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase;
     color:var(--text);
     text-shadow:0 1px 4px rgba(0,0,0,0.7);
   }
-  .sushi-caption{position:absolute; left:15px; right:15px; bottom:13px; z-index:3; line-height:1.05;}
-  .sushi-caption-label{font-family:var(--ff-head); font-weight:600; font-size:14.5px; letter-spacing:0.02em; color:var(--text);}
-  .sushi-caption-sub{font-size:10px; color:var(--muted-3); letter-spacing:0.02em; margin-top:4px;}
- 
-  .sushi-rig{
-    animation:sushi-dip 5600ms cubic-bezier(.4,0,.2,1) infinite;
-    transform-box:fill-box;
-    transform-origin:62% 0%;
-    will-change:transform;
+  .omakase-caption{position:absolute; left:15px; right:15px; bottom:13px; z-index:2; line-height:1.05;}
+  .omakase-tag{
+    display:flex; align-items:center; gap:6px;
+    font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--cyan);
+    text-shadow:0 1px 4px rgba(0,0,0,0.7);
+    margin-bottom:7px;
   }
-  .sushi-ripple{
-    animation:sushi-ripple 5600ms ease-out infinite;
-    transform-box:fill-box;
-    transform-origin:center;
+  .omakase-tag::before{
+    content:''; width:5px; height:5px; border-radius:50%; flex-shrink:0;
+    background:var(--cyan);
+    box-shadow:0 0 6px rgba(103,232,249,0.85);
   }
-  .sushi-dip-tint{ animation:sushi-wet 5600ms ease-in-out infinite; }
-  .sushi-steam{
-    animation:sushi-steam 3800ms ease-in-out infinite;
-    transform-box:fill-box;
-    transform-origin:bottom center;
-  }
- 
-  @keyframes sushi-dip{
-    0%{ transform:translate(0,-6px) rotate(-2deg); animation-timing-function:cubic-bezier(.6,0,.85,.4); }
-    40%{ transform:translate(-1px,-5px) rotate(-2deg); animation-timing-function:cubic-bezier(.3,.6,.3,1); }
-    56%{ transform:translate(1px,33px) rotate(1.4deg); animation-timing-function:ease-out; }
-    63%{ transform:translate(0,29px) rotate(0deg); animation-timing-function:linear; }
-    76%{ transform:translate(0,30px) rotate(0deg); animation-timing-function:cubic-bezier(.5,0,.2,1); }
-    95%{ transform:translate(-1px,-5px) rotate(-2deg); animation-timing-function:ease-out; }
-    100%{ transform:translate(0,-6px) rotate(-2deg); }
-  }
-  @keyframes sushi-ripple{
-    0%,50%{ transform:scale(0.4); opacity:0; }
-    54%{ transform:scale(0.55); opacity:0.75; }
-    72%{ transform:scale(2.1); opacity:0; }
-    100%{ opacity:0; }
-  }
-  @keyframes sushi-wet{
-    0%,50%{ opacity:0; }
-    56%{ opacity:0.85; }
-    75%{ opacity:0.85; }
-    90%{ opacity:0; }
-    100%{ opacity:0; }
-  }
-  @keyframes sushi-steam{
-    0%{ transform:translateY(0) scaleX(1); opacity:0; }
-    18%{ opacity:0.45; }
-    55%{ opacity:0.3; }
-    100%{ transform:translateY(-20px) scaleX(1.2); opacity:0; }
+  .omakase-title{
+    font-family:var(--ff-head);
+    font-weight:600;
+    font-size:18.5px;
+    line-height:1.16;
+    letter-spacing:-0.005em;
+    color:var(--text);
+    text-shadow:0 2px 10px rgba(0,0,0,0.55);
   }
  
-  .sushi-panel{
+  @keyframes omakase-kenburns{ 0%{ transform:scale(1); } 100%{ transform:scale(1.05); } }
+ 
+  @media (prefers-reduced-motion: reduce){
+    .omakase-photo{ animation:none!important; }
+  }
+ 
+  .omakase-panel{
     position:relative;
     flex:1;
     min-height:0;
@@ -822,47 +806,65 @@ Index · HTML
     padding:10px 14px 11px;
     background:linear-gradient(180deg, #0b0d15 0%, #070810 100%);
   }
-  .sh-fade-target{transition:opacity .35s ease;}
-  .sh-fade-target.sh-fade{opacity:0;}
-  .sushi-panel-head{display:flex; align-items:flex-start; justify-content:space-between;}
-  .sushi-time-label{font-size:11px; font-weight:600; letter-spacing:0.03em; color:var(--text);}
-  .sushi-time-label .sh-time{color:var(--cyan);}
-  .sushi-sub{font-size:9.5px; color:var(--muted-3); margin-top:2px;}
-  .sushi-avail{font-size:11px; font-weight:600; color:var(--text);}
+  .om-fade-target{transition:opacity .35s ease;}
+  .om-fade-target.om-fade{opacity:0;}
+  .omakase-panel-head{display:flex; align-items:flex-start; justify-content:space-between;}
+  .omakase-step-label{font-size:11px; font-weight:600; letter-spacing:0.03em; color:var(--text);}
+  .omakase-step-sub{font-size:9.5px; color:var(--muted-3); margin-top:2px;}
+  .omakase-step-value{font-size:11px; font-weight:600; color:var(--text); transition:color .35s ease;}
+  .omakase-step-value.om-cyan{color:var(--cyan);}
  
-  .sushi-tables{flex:1; min-height:0; display:flex; align-items:center; gap:9px; flex-wrap:wrap;}
-  .table-dot{
-    width:19px; height:19px; border-radius:6px;
-    flex-shrink:0;
-    transition:background .3s ease, opacity .3s ease;
+  .omakase-stage{position:relative; flex:1; min-height:0;}
+  .omakase-state{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column;
+    opacity:0;
+    transition:opacity .4s ease;
+    pointer-events:none;
   }
-  .table-dot.avail{
-    background:radial-gradient(circle at 32% 28%, rgba(180,246,255,0.95), rgba(103,232,249,0.35));
-    box-shadow:0 0 8px rgba(103,232,249,0.55);
-    animation:sushi-pulse 2.6s ease-in-out infinite;
-  }
-  .table-dot.booked{
-    background:rgba(255,255,255,0.05);
+  .omakase-state.active{opacity:1; pointer-events:auto;}
+  .omakase-state-select{justify-content:center;}
+  .omakase-state-confirm{justify-content:space-between;}
+ 
+  .omakase-grid{display:flex; flex-wrap:wrap; align-content:center; justify-content:center; gap:7px;}
+  .om-table{
+    position:relative;
+    width:38px; height:26px;
+    border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:9px; font-weight:600; letter-spacing:0.02em;
+    color:var(--muted-3);
+    background:rgba(255,255,255,0.04);
     border:1px solid var(--border);
-    opacity:0.7;
   }
-  .table-dot:nth-of-type(2){animation-delay:.3s;}
-  .table-dot:nth-of-type(3){animation-delay:.6s;}
-  .table-dot:nth-of-type(4){animation-delay:.9s;}
-  .table-dot:nth-of-type(5){animation-delay:1.2s;}
-  .table-dot:nth-of-type(6){animation-delay:1.5s;}
-  .table-dot:nth-of-type(7){animation-delay:1.8s;}
-  .table-dot:nth-of-type(8){animation-delay:2.1s;}
-  @keyframes sushi-pulse{ 0%,100%{ transform:scale(1); opacity:0.78; } 50%{ transform:scale(1.16); opacity:1; } }
+  .om-table.selected{
+    color:var(--text);
+    background:linear-gradient(135deg, rgba(103,232,249,0.32), rgba(192,132,252,0.22));
+    border-color:rgba(103,232,249,0.65);
+    box-shadow:0 0 10px rgba(103,232,249,0.4);
+  }
+  .om-check{
+    position:absolute; top:-5px; right:-5px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--cyan);
+    color:#05060a;
+    font-size:7.5px; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 6px rgba(103,232,249,0.7);
+  }
  
-  .sushi-stats{display:flex; gap:10px;}
- 
-  @media (prefers-reduced-motion: reduce){
-    .sushi-rig, .sushi-ripple, .sushi-dip-tint, .sushi-steam, .table-dot.avail{
-      animation:none!important;
-    }
-    .sushi-rig{ transform:translate(0,30px) rotate(0deg); }
-    .sushi-dip-tint{ opacity:0.75; }
+  .omakase-confirm-row{display:flex; align-items:baseline; justify-content:space-between; gap:10px;}
+  .ocr-label{font-size:9.5px; color:var(--muted-3); letter-spacing:0.02em;}
+  .ocr-value{font-size:11px; font-weight:600; color:var(--text); text-align:right;}
+  .omakase-cta{
+    display:flex; align-items:center; justify-content:center; gap:7px;
+    width:100%;
+    padding:9px 16px;
+    border-radius:100px;
+    background:var(--grad);
+    color:#05060a;
+    font-size:11px; font-weight:600; letter-spacing:0.01em;
+    box-shadow:0 8px 20px rgba(103,232,249,0.28);
   }
  
   @media(max-width:900px){
@@ -1411,101 +1413,42 @@ Index · HTML
           <div class="visual-card" data-tilt>
             <div class="visual-card-inner">
               <div class="bar"><i></i><i></i><i></i></div>
-              <div class="screen sushi-screen" id="sushiPanel">
-                <div class="sushi-top">
-                  <div class="glow" style="z-index:0; background:radial-gradient(circle at 58% 68%, rgba(255,138,92,0.32), transparent 62%);"></div>
-                  <div class="sushi-scene">
-                    <svg viewBox="0 0 300 220" aria-hidden="true">
-                      <defs>
-                        <linearGradient id="sushiStickGrad" x1="0" y1="0" x2="1" y2="1">
-                          <stop offset="0" stop-color="#d8b27f"/>
-                          <stop offset="1" stop-color="#7c5a34"/>
-                        </linearGradient>
-                        <linearGradient id="sushiRiceGrad" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0" stop-color="#fffaf0"/>
-                          <stop offset="1" stop-color="#ecdcbc"/>
-                        </linearGradient>
-                        <linearGradient id="sushiFishGrad" x1="0" y1="0" x2="1" y2="1">
-                          <stop offset="0" stop-color="#ffb37a"/>
-                          <stop offset="0.55" stop-color="#ff8a5c"/>
-                          <stop offset="1" stop-color="#e8623f"/>
-                        </linearGradient>
-                        <radialGradient id="sushiDishGrad" cx="35%" cy="28%" r="80%">
-                          <stop offset="0" stop-color="#24272f"/>
-                          <stop offset="1" stop-color="#08090c"/>
-                        </radialGradient>
-                        <radialGradient id="sushiSoyGrad" cx="38%" cy="30%" r="80%">
-                          <stop offset="0" stop-color="#3a2210"/>
-                          <stop offset="1" stop-color="#0e0805"/>
-                        </radialGradient>
-                        <linearGradient id="sushiLeafGrad" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0" stop-color="#8bb768"/>
-                          <stop offset="1" stop-color="#4c7536"/>
-                        </linearGradient>
-                      </defs>
- 
-                      <!-- steam -->
-                      <path class="sushi-steam" d="M0 0 C 6 -8 -6 -14 0 -22 C 6 -28 -4 -34 2 -40" transform="translate(184,132)" stroke="rgba(255,255,255,0.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
- 
-                      <!-- garnish leaf -->
-                      <g transform="translate(38,150) rotate(-18) scale(0.85)" opacity="0.85">
-                        <path d="M0 0 C -9 -10 -9 -23 0 -30 C 9 -23 9 -10 0 0 Z" fill="url(#sushiLeafGrad)"/>
-                        <path d="M0 -1 L0 -27" stroke="rgba(0,0,0,0.22)" stroke-width="1" fill="none"/>
-                      </g>
- 
-                      <!-- dish -->
-                      <ellipse cx="150" cy="176" rx="94" ry="25" fill="url(#sushiDishGrad)" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-                      <path d="M66 170 A 84 20 0 0 1 234 170" stroke="rgba(180,225,255,0.22)" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-                      <ellipse cx="150" cy="181" rx="55" ry="13" fill="url(#sushiSoyGrad)"/>
-                      <ellipse cx="128" cy="177" rx="16" ry="4" fill="rgba(255,190,120,0.16)"/>
-                      <ellipse class="sushi-ripple" cx="150" cy="181" rx="12" ry="3.4" fill="none" stroke="rgba(255,196,140,0.65)" stroke-width="1.4"/>
- 
-                      <!-- chopsticks + nigiri rig -->
-                      <g class="sushi-rig">
-                        <path d="M214 -14 L168 96" stroke="url(#sushiStickGrad)" stroke-width="6.5" stroke-linecap="round"/>
-                        <path d="M196 -14 L150 104" stroke="url(#sushiStickGrad)" stroke-width="6.5" stroke-linecap="round"/>
-                        <circle cx="168" cy="96" r="3.2" fill="#5c4223"/>
-                        <circle cx="150" cy="104" r="3.2" fill="#5c4223"/>
-                        <g transform="translate(159,108) rotate(-13)">
-                          <rect x="-32" y="-15" width="64" height="30" rx="15" fill="url(#sushiRiceGrad)" stroke="rgba(0,0,0,0.15)" stroke-width="0.6"/>
-                          <path d="M-20 -6 q4 3 0 7 M-6 -8 q4 3 0 8 M8 -7 q4 3 0 7 M20 -6 q4 3 0 6" stroke="rgba(120,105,80,0.35)" stroke-width="1" fill="none" stroke-linecap="round"/>
-                          <path d="M-30 -10 C -22 -22 20 -24 30 -8 C 24 6 -6 10 -30 4 C -34 -2 -33 -7 -30 -10 Z" fill="url(#sushiFishGrad)"/>
-                          <ellipse cx="-4" cy="-12" rx="16" ry="5" fill="rgba(255,255,255,0.32)"/>
-                          <path d="M-18 -4 q10 -6 22 -2 M-10 2 q12 -4 20 0" stroke="rgba(190,60,40,0.35)" stroke-width="1" fill="none" stroke-linecap="round"/>
-                          <rect class="sushi-dip-tint" x="-32" y="6" width="64" height="10" rx="6" fill="rgba(40,20,8,0.55)" opacity="0"/>
-                        </g>
-                      </g>
-                    </svg>
-                  </div>
-                  <div class="sushi-scrim"></div>
-                  <div class="sushi-crumb">Restaurants &middot; Reserveren</div>
-                  <div class="sushi-caption">
-                    <div class="sushi-caption-label">Omakase Counter</div>
-                    <div class="sushi-caption-sub">Verse vis &middot; Elke ochtend</div>
+              <div class="screen omakase-screen" id="omakasePanel">
+                <div class="omakase-top">
+                  <div class="omakase-photo"></div>
+                  <div class="omakase-scrim"></div>
+                  <div class="omakase-crumb">Restaurants &middot; Reserveren</div>
+                  <div class="omakase-caption">
+                    <div class="omakase-tag">Vanavond beschikbaar</div>
+                    <div class="omakase-title">Reserve Your<br>Omakase Experience</div>
                   </div>
                 </div>
-                <div class="sushi-panel">
-                  <div class="sushi-panel-head sh-fade-target">
+                <div class="omakase-panel">
+                  <div class="omakase-panel-head om-fade-target">
                     <div>
-                      <div class="sushi-time-label">VANAVOND &middot; <span class="sh-time">19:30</span></div>
-                      <div class="sushi-sub sh-sub">Gezelschap &middot; 4 personen</div>
+                      <div class="omakase-step-label om-label">Tafel Kiezen</div>
+                      <div class="omakase-step-sub om-sub">Binnen &middot; 4 gasten</div>
                     </div>
-                    <div class="sushi-avail sh-avail">6 VRIJ</div>
+                    <div class="omakase-step-value om-value">19:30</div>
                   </div>
-                  <div class="sushi-tables sh-fade-target">
-                    <span class="table-dot avail"></span>
-                    <span class="table-dot avail"></span>
-                    <span class="table-dot avail"></span>
-                    <span class="table-dot booked"></span>
-                    <span class="table-dot avail"></span>
-                    <span class="table-dot booked"></span>
-                    <span class="table-dot avail"></span>
-                    <span class="table-dot avail"></span>
-                  </div>
-                  <div class="sushi-stats sh-fade-target">
-                    <div class="stat"><span class="stat-dot" style="background:var(--cyan); box-shadow:0 0 6px rgba(103,232,249,0.7);"></span><span class="stat-txt"><b class="sh-wait">12 MIN</b>Wachttijd</span></div>
-                    <div class="stat"><span class="stat-dot" style="background:var(--violet); box-shadow:0 0 6px rgba(192,132,252,0.7);"></span><span class="stat-txt"><b class="sh-free">6</b>Tafels Vrij</span></div>
-                    <div class="stat"><span class="stat-dot" style="background:var(--cyan); box-shadow:0 0 6px rgba(103,232,249,0.7);"></span><span class="stat-txt"><b class="sh-score">4.8</b>Score</span></div>
+                  <div class="omakase-stage">
+                    <div class="omakase-state omakase-state-select active">
+                      <div class="omakase-grid">
+                        <span class="om-table">13</span>
+                        <span class="om-table">14</span>
+                        <span class="om-table">15</span>
+                        <span class="om-table selected">16<span class="om-check">&check;</span></span>
+                        <span class="om-table">17</span>
+                        <span class="om-table">18</span>
+                        <span class="om-table">19</span>
+                        <span class="om-table">20</span>
+                      </div>
+                    </div>
+                    <div class="omakase-state omakase-state-confirm">
+                      <div class="omakase-confirm-row"><span class="ocr-label">Datum</span><span class="ocr-value">Vanavond &middot; 19:30</span></div>
+                      <div class="omakase-confirm-row"><span class="ocr-label">Tafel</span><span class="ocr-value">#16 &middot; Omakase counter</span></div>
+                      <a href="#contact" class="omakase-cta">Reserveer Nu <span class="btn-arrow">&rarr;</span></a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2094,44 +2037,39 @@ Index · HTML
     }
   })();
  
-  /* ---------- sushi scene fade-swap (Restaurants panel) ---------- */
+  /* ---------- omakase booking widget state-swap (Restaurants panel) ---------- */
   (function(){
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const root = document.getElementById('sushiPanel');
+    const root = document.getElementById('omakasePanel');
     if(!root || reduceMotion) return;
-    const fadeTargets = root.querySelectorAll('.sh-fade-target');
-    if(!fadeTargets.length) return;
+    const fadeTargets = root.querySelectorAll('.om-fade-target');
+    const selectState = root.querySelector('.omakase-state-select');
+    const confirmState = root.querySelector('.omakase-state-confirm');
+    if(!fadeTargets.length || !selectState || !confirmState) return;
     const states = [
-      {time:'19:30', sub:'Gezelschap · 4 personen', avail:'6 VRIJ', tables:[1,1,1,0,1,0,1,1], wait:'12 MIN', free:'6', score:'4.8'},
-      {time:'20:30', sub:'Gezelschap · 2 personen', avail:'4 VRIJ', tables:[1,0,1,0,1,0,1,0], wait:'18 MIN', free:'4', score:'4.8'}
+      {label:'Tafel Kiezen', sub:'Binnen · 4 gasten', value:'19:30', cyan:false},
+      {label:'Gereserveerd', sub:'Tafel 16 · Omakase counter', value:'✓', cyan:true}
     ];
     let idx = 0;
-    const timeEl = root.querySelector('.sh-time');
-    const subEl = root.querySelector('.sh-sub');
-    const availEl = root.querySelector('.sh-avail');
-    const waitEl = root.querySelector('.sh-wait');
-    const freeEl = root.querySelector('.sh-free');
-    const scoreEl = root.querySelector('.sh-score');
-    const dots = root.querySelectorAll('.table-dot');
+    const labelEl = root.querySelector('.om-label');
+    const subEl = root.querySelector('.om-sub');
+    const valueEl = root.querySelector('.om-value');
     setInterval(()=>{
       idx = (idx + 1) % states.length;
-      fadeTargets.forEach(el=>el.classList.add('sh-fade'));
+      fadeTargets.forEach(el=>el.classList.add('om-fade'));
       setTimeout(()=>{
         const s = states[idx];
-        if(timeEl) timeEl.textContent = s.time;
+        if(labelEl) labelEl.textContent = s.label;
         if(subEl) subEl.textContent = s.sub;
-        if(availEl) availEl.textContent = s.avail;
-        if(waitEl) waitEl.textContent = s.wait;
-        if(freeEl) freeEl.textContent = s.free;
-        if(scoreEl) scoreEl.textContent = s.score;
-        dots.forEach((d,i)=>{
-          const on = !!s.tables[i];
-          d.classList.toggle('avail', on);
-          d.classList.toggle('booked', !on);
-        });
-        fadeTargets.forEach(el=>el.classList.remove('sh-fade'));
+        if(valueEl){
+          valueEl.textContent = s.value;
+          valueEl.classList.toggle('om-cyan', s.cyan);
+        }
+        selectState.classList.toggle('active', idx === 0);
+        confirmState.classList.toggle('active', idx === 1);
+        fadeTargets.forEach(el=>el.classList.remove('om-fade'));
       }, 360);
-    }, 5200);
+    }, 4800);
   })();
  
   /* ---------- contact form (front-end only — wire to a form backend to receive submissions) ---------- */
@@ -2179,3 +2117,4 @@ Index · HTML
 </body>
 </html>
  
+
