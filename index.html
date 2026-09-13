@@ -14,6 +14,10 @@ Claude Desktop (macOS), Connected
 
 
 
+
+
+
+
 Index · HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -867,6 +871,146 @@ Index · HTML
     box-shadow:0 8px 20px rgba(103,232,249,0.28);
   }
  
+  /* ---------- cover scene (Verzekeringen panel — Borderless Insurance real photo + compare widget) ---------- */
+  .visual-card .screen.cover-screen{
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+  }
+  .cover-top{
+    position:relative;
+    flex:1.4;
+    min-height:0;
+    overflow:hidden;
+    border-bottom:1px solid var(--border);
+    background:#0b0d15;
+  }
+  .cover-photo{
+    position:absolute!important;
+    inset:0;
+    z-index:0;
+    background-image:url('borderless-globe.jpg');
+    background-size:cover;
+    background-position:50% 44%;
+    transform:scale(1);
+    filter:saturate(0.82) hue-rotate(-14deg) brightness(1.03);
+    animation:cover-kenburns 25s ease-in-out infinite alternate;
+    will-change:transform;
+  }
+  .cover-scrim{
+    position:absolute!important;
+    inset:0;
+    z-index:1;
+    background:linear-gradient(180deg, rgba(5,6,9,0.66) 0%, rgba(5,6,9,0.10) 22%, rgba(5,6,9,0.14) 55%, rgba(5,6,9,0.90) 100%);
+  }
+  .cover-crumb{
+    position:absolute; top:13px; left:15px; z-index:2;
+    font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text);
+    text-shadow:0 1px 4px rgba(0,0,0,0.7);
+  }
+  .cover-caption{position:absolute; left:15px; right:15px; bottom:13px; z-index:2; line-height:1.05;}
+  .cover-tag{
+    display:flex; align-items:center; gap:6px;
+    font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--cyan);
+    text-shadow:0 1px 4px rgba(0,0,0,0.7);
+    margin-bottom:7px;
+  }
+  .cover-tag::before{
+    content:''; width:5px; height:5px; border-radius:50%; flex-shrink:0;
+    background:var(--cyan);
+    box-shadow:0 0 6px rgba(103,232,249,0.85);
+  }
+  .cover-title{
+    font-family:var(--ff-head);
+    font-weight:600;
+    font-size:18.5px;
+    line-height:1.16;
+    letter-spacing:-0.005em;
+    color:var(--text);
+    text-shadow:0 2px 10px rgba(0,0,0,0.55);
+  }
+ 
+  @keyframes cover-kenburns{ 0%{ transform:scale(1); } 100%{ transform:scale(1.05); } }
+ 
+  @media (prefers-reduced-motion: reduce){
+    .cover-photo{ animation:none!important; }
+  }
+ 
+  .cover-panel{
+    position:relative;
+    flex:1;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    padding:10px 14px 11px;
+    background:linear-gradient(180deg, #0b0d15 0%, #070810 100%);
+  }
+  .cvr-fade-target{transition:opacity .35s ease;}
+  .cvr-fade-target.cvr-fade{opacity:0;}
+  .cover-panel-head{display:flex; align-items:flex-start; justify-content:space-between;}
+  .cover-step-label{font-size:11px; font-weight:600; letter-spacing:0.03em; color:var(--text);}
+  .cover-step-sub{font-size:9.5px; color:var(--muted-3); margin-top:2px;}
+  .cover-step-value{font-size:11px; font-weight:600; color:var(--text); transition:color .35s ease;}
+  .cover-step-value.cv-cyan{color:var(--cyan);}
+ 
+  .cover-stage{position:relative; flex:1; min-height:0;}
+  .cover-state{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column;
+    opacity:0;
+    transition:opacity .4s ease;
+    pointer-events:none;
+  }
+  .cover-state.active{opacity:1; pointer-events:auto;}
+  .cover-state-coverage{justify-content:center;}
+  .cover-state-stats{justify-content:space-between;}
+ 
+  .cover-cta{
+    display:flex; align-items:center; justify-content:center; gap:7px;
+    width:100%;
+    padding:9px 16px;
+    border-radius:100px;
+    background:var(--grad);
+    color:#05060a;
+    font-size:11px; font-weight:600; letter-spacing:0.01em;
+    box-shadow:0 8px 20px rgba(103,232,249,0.28);
+    flex-shrink:0;
+  }
+ 
+  .cover-field-grid{display:grid; grid-template-columns:1fr 1fr; gap:6px; width:100%;}
+  .cover-field{
+    background:rgba(255,255,255,0.035);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:6px 9px;
+  }
+  .cover-field .cf-label{font-size:7.5px; letter-spacing:0.05em; text-transform:uppercase; color:var(--muted-3);}
+  .cover-field .cf-value{font-size:11.5px; font-weight:600; color:var(--text); margin-top:2px;}
+ 
+  .cover-results{display:flex; flex-direction:column; gap:4px; width:100%;}
+  .cover-result-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:5.5px 9px;
+    border-radius:7px;
+    background:rgba(255,255,255,0.035);
+    border:1px solid var(--border);
+  }
+  .cover-result-row.best{
+    border-color:rgba(103,232,249,0.55);
+    background:linear-gradient(135deg, rgba(103,232,249,0.14), rgba(192,132,252,0.09));
+  }
+  .cr-name{display:flex; align-items:center; gap:6px; font-size:10.5px; font-weight:700; color:var(--text); line-height:1.2;}
+  .cr-price{font-size:10.5px; font-weight:700; color:var(--cyan); white-space:nowrap; line-height:1.2;}
+  .cr-price span{font-size:8px; font-weight:500; color:var(--muted-3);}
+  .cr-badge{
+    font-size:6.8px; font-weight:700; letter-spacing:0.02em;
+    padding:2px 6px; border-radius:20px;
+    background:var(--grad); color:#05060a;
+  }
+ 
   @media(max-width:900px){
     .services-grid{grid-template-columns:1fr; gap:36px;}
     .services{height:auto;}
@@ -1456,13 +1600,57 @@ Index · HTML
           </div>
         </div>
         <div class="visual-image" data-index="2">
-          <div class="visual-card">
-            <div class="bar"><i></i><i></i><i></i></div>
-            <div class="screen">
-              <div class="glow" style="background:radial-gradient(circle at 40% 60%, rgba(103,232,249,0.22), transparent 60%);"></div>
-              <svg viewBox="0 0 24 24" fill="none" stroke="url(#g3)" stroke-width="1.4"><defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#67e8f9"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs><path d="M12 3 4 6.5V11c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6.5L12 3Z"/></svg>
+          <div class="visual-card" data-tilt>
+            <div class="visual-card-inner">
+              <div class="bar"><i></i><i></i><i></i></div>
+              <div class="screen cover-screen" id="coverPanel">
+                <div class="cover-top">
+                  <div class="cover-photo"></div>
+                  <div class="cover-scrim"></div>
+                  <div class="cover-crumb">Verzekeringen &middot; Wereldwijd</div>
+                  <div class="cover-caption">
+                    <div class="cover-tag">Offerte binnen 60 sec</div>
+                    <div class="cover-title">Insurance Without Borders.</div>
+                  </div>
+                </div>
+                <div class="cover-panel">
+                  <div class="cover-panel-head cvr-fade-target">
+                    <div>
+                      <div class="cover-step-label cv-label">Vergelijk Instellingen</div>
+                      <div class="cover-step-sub cv-sub">Thailand &middot; wereldwijde dekking</div>
+                    </div>
+                    <div class="cover-step-value cv-value">Stap 1/2</div>
+                  </div>
+                  <div class="cover-stage">
+                    <div class="cover-state cover-state-coverage active">
+                      <div class="cover-field-grid">
+                        <div class="cover-field"><div class="cf-label">Land van verblijf</div><div class="cf-value">Thailand</div></div>
+                        <div class="cover-field"><div class="cf-label">Nationaliteit</div><div class="cf-value">Nederlands</div></div>
+                        <div class="cover-field"><div class="cf-label">Leeftijd</div><div class="cf-value">34 jaar</div></div>
+                        <div class="cover-field"><div class="cf-label">Dekking</div><div class="cf-value">Wereldwijd</div></div>
+                      </div>
+                    </div>
+                    <div class="cover-state cover-state-stats">
+                      <div class="cover-results">
+                        <div class="cover-result-row best">
+                          <div class="cr-name">Cigna <span class="cr-badge">Beste Match</span></div>
+                          <div class="cr-price">&euro;89<span>/mnd</span></div>
+                        </div>
+                        <div class="cover-result-row">
+                          <div class="cr-name">Allianz</div>
+                          <div class="cr-price">&euro;76<span>/mnd</span></div>
+                        </div>
+                        <div class="cover-result-row">
+                          <div class="cr-name">VUMI</div>
+                          <div class="cr-price">&euro;62<span>/mnd</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="#contact" class="cover-cta">Vergelijk Nu <span class="btn-arrow">&rarr;</span></a>
+                </div>
+              </div>
             </div>
-            <div class="label">Verzekeringen</div>
           </div>
         </div>
         <div class="visual-image" data-index="3">
@@ -2068,6 +2256,41 @@ Index · HTML
         selectState.classList.toggle('active', idx === 0);
         confirmState.classList.toggle('active', idx === 1);
         fadeTargets.forEach(el=>el.classList.remove('om-fade'));
+      }, 360);
+    }, 4800);
+  })();
+ 
+  /* ---------- cover compare-plans widget state-swap (Verzekeringen panel) ---------- */
+  (function(){
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const root = document.getElementById('coverPanel');
+    if(!root || reduceMotion) return;
+    const fadeTargets = root.querySelectorAll('.cvr-fade-target');
+    const coverageState = root.querySelector('.cover-state-coverage');
+    const statsState = root.querySelector('.cover-state-stats');
+    if(!fadeTargets.length || !coverageState || !statsState) return;
+    const states = [
+      {label:'Vergelijk Instellingen', sub:'Thailand · wereldwijde dekking', value:'Stap 1/2', cyan:false},
+      {label:'Top Verzekeraars', sub:'Gesorteerd op prijs', value:'Stap 2/2', cyan:true}
+    ];
+    let idx = 0;
+    const labelEl = root.querySelector('.cv-label');
+    const subEl = root.querySelector('.cv-sub');
+    const valueEl = root.querySelector('.cv-value');
+    setInterval(()=>{
+      idx = (idx + 1) % states.length;
+      fadeTargets.forEach(el=>el.classList.add('cvr-fade'));
+      setTimeout(()=>{
+        const s = states[idx];
+        if(labelEl) labelEl.textContent = s.label;
+        if(subEl) subEl.textContent = s.sub;
+        if(valueEl){
+          valueEl.textContent = s.value;
+          valueEl.classList.toggle('cv-cyan', s.cyan);
+        }
+        coverageState.classList.toggle('active', idx === 0);
+        statsState.classList.toggle('active', idx === 1);
+        fadeTargets.forEach(el=>el.classList.remove('cvr-fade'));
       }, 360);
     }, 4800);
   })();
