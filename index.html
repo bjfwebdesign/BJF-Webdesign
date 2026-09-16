@@ -12,12 +12,6 @@ Claude Desktop (macOS), Connected
 
 
 
-
-
-
-
-
-
 Index · HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -1011,6 +1005,116 @@ Index · HTML
     background:var(--grad); color:#05060a;
   }
  
+  /* ---------- gym scene (Sportscholen panel — full-bleed cinematic, deliberately different layout) ---------- */
+  .gym-card{background:#000;}
+  .visual-card .screen.gym-screen{
+    display:block;
+    overflow:hidden;
+  }
+  .gym-photo{
+    position:absolute; inset:0; z-index:0;
+    background-image:url('boxing-gym-hero.jpg');
+    background-size:cover;
+    background-position:30% 46%;
+    filter:contrast(1.1) saturate(0.9) brightness(0.97);
+    animation:gym-kenburns 28s ease-in-out infinite alternate;
+    will-change:transform;
+  }
+  @keyframes gym-kenburns{ 0%{transform:scale(1) translateX(0);} 100%{transform:scale(1.1) translateX(-1.5%);} }
+ 
+  .gym-scrim{
+    position:absolute; inset:0; z-index:1;
+    background:
+      linear-gradient(180deg, rgba(3,4,7,0.72) 0%, rgba(3,4,7,0.06) 25%, rgba(3,4,7,0.10) 58%, rgba(3,4,7,0.92) 100%),
+      linear-gradient(90deg, rgba(3,4,7,0.32) 0%, transparent 42%);
+  }
+  .gym-sweep{
+    position:absolute; inset:-40% -10%; z-index:2;
+    background:linear-gradient(115deg, transparent 42%, rgba(255,255,255,0.09) 48%, rgba(103,232,249,0.16) 50%, rgba(255,255,255,0.09) 52%, transparent 58%);
+    transform:translateX(-60%);
+    animation:gym-sweep-move 7s ease-in-out infinite;
+    pointer-events:none;
+    mix-blend-mode:screen;
+  }
+  @keyframes gym-sweep-move{ 0%,100%{transform:translateX(-60%);} 50%{transform:translateX(60%);} }
+ 
+  .gym-crumb{
+    position:absolute; top:13px; left:15px; z-index:3;
+    font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text);
+    text-shadow:0 1px 4px rgba(0,0,0,0.7);
+  }
+  .gym-badge{
+    position:absolute; top:11px; right:14px; z-index:3;
+    display:flex; align-items:center; gap:6px;
+    font-size:8.3px; letter-spacing:0.03em; text-transform:uppercase;
+    color:var(--text);
+    background:rgba(5,6,9,0.45);
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,0.14);
+    padding:5px 9px 5px 7px;
+    border-radius:100px;
+    white-space:nowrap;
+  }
+  .gym-dot{width:5px; height:5px; border-radius:50%; background:#ff5468; box-shadow:0 0 6px rgba(255,84,104,0.85); flex-shrink:0; animation:gym-pulse 1.8s ease-in-out infinite;}
+  @keyframes gym-pulse{ 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+ 
+  .gym-marquee{
+    position:absolute; left:-8%; right:-8%; top:52%; z-index:3;
+    transform:translateY(-50%) rotate(-3.5deg);
+    overflow:hidden;
+    background:rgba(5,6,9,0.5);
+    backdrop-filter:blur(3px);
+    border-top:1px solid rgba(255,255,255,0.16);
+    border-bottom:1px solid rgba(255,255,255,0.16);
+    padding:7px 0;
+    white-space:nowrap;
+  }
+  .gym-marquee-track{
+    display:inline-flex;
+    animation:gym-marquee-scroll 14s linear infinite;
+    font-family:var(--ff-head);
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:0.02em;
+    color:var(--text);
+    text-transform:uppercase;
+  }
+  @keyframes gym-marquee-scroll{ 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+ 
+  .gym-stats{
+    position:absolute; left:15px; right:15px; bottom:52px; z-index:3;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:6px;
+  }
+  .gym-stat{
+    background:rgba(5,6,9,0.4);
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:9px;
+    padding:6px 4px 7px;
+    text-align:center;
+  }
+  .gym-stat-num{font-family:var(--ff-head); font-weight:700; font-size:13.5px; color:var(--text); line-height:1.1;}
+  .gym-stat-label{font-size:6.5px; letter-spacing:0.04em; text-transform:uppercase; color:var(--muted-3); margin-top:2px;}
+ 
+  .gym-cta{
+    position:absolute; right:15px; bottom:15px; z-index:4;
+    display:flex; align-items:center; gap:6px;
+    padding:8px 14px;
+    border-radius:100px;
+    background:var(--grad);
+    color:#05060a;
+    font-size:10.5px; font-weight:600;
+    box-shadow:0 8px 22px rgba(103,232,249,0.32);
+    opacity:0; transform:translateY(8px);
+    animation:gym-cta-in 0.6s cubic-bezier(.2,.8,.2,1) 0.5s forwards;
+  }
+  @keyframes gym-cta-in{ to{opacity:1; transform:translateY(0);} }
+ 
+  @media (prefers-reduced-motion: reduce){
+    .gym-photo, .gym-sweep, .gym-marquee-track, .gym-dot{ animation:none!important; }
+  }
+ 
   @media(max-width:900px){
     .services-grid{grid-template-columns:1fr; gap:36px;}
     .services{height:auto;}
@@ -1654,13 +1758,31 @@ Index · HTML
           </div>
         </div>
         <div class="visual-image" data-index="3">
-          <div class="visual-card">
-            <div class="bar"><i></i><i></i><i></i></div>
-            <div class="screen">
-              <div class="glow" style="background:radial-gradient(circle at 60% 40%, rgba(192,132,252,0.22), transparent 60%);"></div>
-              <svg viewBox="0 0 24 24" fill="none" stroke="url(#g4)" stroke-width="1.4"><defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c084fc"/><stop offset="1" stop-color="#67e8f9"/></linearGradient></defs><path d="M6.5 6.5 3 3M17.5 6.5 21 3M6.5 17.5 3 21M17.5 17.5 21 21"/><rect x="7" y="7" width="10" height="10" rx="2"/></svg>
+          <div class="visual-card gym-card" data-tilt>
+            <div class="visual-card-inner">
+              <div class="screen gym-screen" id="gymPanel">
+                <div class="gym-photo"></div>
+                <div class="gym-scrim"></div>
+                <div class="gym-sweep"></div>
+                <div class="gym-crumb">Sportscholen &middot; Boksen</div>
+                <div class="gym-badge"><span class="gym-dot"></span>1Boxing Gym &middot; Est. 2016</div>
+                <div class="gym-marquee">
+                  <div class="gym-marquee-track">
+                    <span>TRAIN&nbsp;HARD&nbsp;&middot;&nbsp;FIGHT&nbsp;SMART&nbsp;&middot;&nbsp;</span>
+                    <span>TRAIN&nbsp;HARD&nbsp;&middot;&nbsp;FIGHT&nbsp;SMART&nbsp;&middot;&nbsp;</span>
+                    <span>TRAIN&nbsp;HARD&nbsp;&middot;&nbsp;FIGHT&nbsp;SMART&nbsp;&middot;&nbsp;</span>
+                    <span>TRAIN&nbsp;HARD&nbsp;&middot;&nbsp;FIGHT&nbsp;SMART&nbsp;&middot;&nbsp;</span>
+                  </div>
+                </div>
+                <div class="gym-stats">
+                  <div class="gym-stat"><div class="gym-stat-num" data-target="2016">0</div><div class="gym-stat-label">Founded</div></div>
+                  <div class="gym-stat"><div class="gym-stat-num" data-target="1200" data-suffix="+">0</div><div class="gym-stat-label">Members</div></div>
+                  <div class="gym-stat"><div class="gym-stat-num" data-target="4">0</div><div class="gym-stat-label">Programma&#39;s</div></div>
+                  <div class="gym-stat"><div class="gym-stat-num" data-target="7">0</div><div class="gym-stat-label">Dagen/Wk</div></div>
+                </div>
+                <a href="#contact" class="gym-cta">Boek Gratis Proefles <span class="btn-arrow">&rarr;</span></a>
+              </div>
             </div>
-            <div class="label">Sport &amp; Beauty</div>
           </div>
         </div>
         <div class="visual-image" data-index="4">
@@ -2295,6 +2417,35 @@ Index · HTML
     }, 4800);
   })();
  
+  /* ---------- gym stat HUD count-up (Sportscholen panel) ---------- */
+  (function(){
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const nums = document.querySelectorAll('#gymPanel .gym-stat-num');
+    if(!nums.length) return;
+    function countUp(el){
+      const target = parseInt(el.dataset.target, 10) || 0;
+      const suffix = el.dataset.suffix || '';
+      if(reduceMotion){ el.textContent = target + suffix; return; }
+      const dur = 1300;
+      let start = null;
+      function step(ts){
+        if(start === null) start = ts;
+        const p = Math.min((ts - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    nums.forEach(countUp);
+    if(!reduceMotion){
+      setInterval(()=>{
+        nums.forEach(el=>{ el.textContent = '0'; });
+        nums.forEach(countUp);
+      }, 8000);
+    }
+  })();
+ 
   /* ---------- contact form (front-end only — wire to a form backend to receive submissions) ---------- */
   const contactForm = document.getElementById('contactForm');
   const formSuccess = document.getElementById('formSuccess');
@@ -2340,4 +2491,5 @@ Index · HTML
 </body>
 </html>
  
+
 
