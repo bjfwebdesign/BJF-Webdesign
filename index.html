@@ -14,6 +14,38 @@ Claude Desktop (macOS), Connected
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Index · HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -422,11 +454,20 @@ Index · HTML
     line-height:1.42;
     font-weight:500;
   }
+  #manifestoText{
+    transform-origin:0% 50%;
+    will-change:transform;
+  }
   .lit-text .w{
     display:inline-block;
     color:var(--text);
-    opacity:0.14;
-    transition:opacity .12s linear, text-shadow .12s linear;
+    opacity:0.1;
+    filter:blur(4px);
+    transition:opacity .12s linear, text-shadow .12s linear, filter .12s linear;
+  }
+  @media (prefers-reduced-motion: reduce){
+    #manifestoText{transform:none!important;}
+    .lit-text .w{opacity:1!important; filter:none!important;}
   }
  
   /* ---------- section shell ---------- */
@@ -456,6 +497,18 @@ Index · HTML
     transition:opacity .8s cubic-bezier(.16,.8,.24,1), transform .8s cubic-bezier(.16,.8,.24,1);
   }
   .reveal.in-view{opacity:1; transform:translateY(0);}
+ 
+  /* ---------- float-in headings (ScrollFloat-style bouncy per-word pop) ---------- */
+  .float-h2 .fwd{
+    display:inline-block;
+    opacity:0;
+    transform:translateY(60%) scale(0.92);
+    transition:opacity .5s cubic-bezier(.34,1.56,.64,1), transform .6s cubic-bezier(.34,1.56,.64,1);
+  }
+  .float-h2.in-view .fwd{opacity:1; transform:translateY(0) scale(1);}
+  @media (prefers-reduced-motion: reduce){
+    .float-h2 .fwd{opacity:1!important; transform:none!important; transition:none!important;}
+  }
  
   /* ---------- services (pinned) ---------- */
   .services{
@@ -1668,7 +1721,7 @@ Index · HTML
 <section class="manifesto">
   <div class="manifesto-inner">
     <div class="eyebrow">01 — Waarom Dit Werkt</div>
-    <p class="lit-text" id="manifestoText">De meeste bureaus vragen je te betalen voordat je iets hebt gezien. Wij draaien dat om. Je ontvangt eerst een op maat gemaakt homepage-concept — gratis — zodat je precies weet hoe je website eruitziet vóór je een euro uitgeeft. Geen ontwerprisico, geen verrassingen, geen bureaupitches waar je toch al voor betaald had. Alleen een besluit dat je met vertrouwen kunt nemen.</p>
+    <p class="lit-text" id="manifestoText">De meeste bureaus laten je betalen vóór je iets hebt gezien. Wij draaien dat om. Eerst een gratis, op maat gemaakt concept. Geen risico. Geen verrassingen. Alleen een besluit met vertrouwen.</p>
   </div>
 </section>
  
@@ -1933,7 +1986,7 @@ Index · HTML
 <section class="process section-pad" id="process">
   <div class="container">
     <div class="section-head reveal">
-      <h2>Hoe de gratis demo werkt.</h2>
+      <h2 class="float-h2">Hoe de gratis demo werkt.</h2>
       <p>Een risicovrije manier om een website te krijgen waar je trots op bent.</p>
     </div>
     <div class="process-grid reveal">
@@ -1959,7 +2012,7 @@ Index · HTML
 <section class="work section-pad" id="work">
   <div class="container">
     <div class="section-head reveal">
-      <h2>Ons werk.</h2>
+      <h2 class="float-h2">Ons werk.</h2>
       <p>Voorbeelden van websites die we hebben gebouwd — klik door naar de live site.</p>
     </div>
     <div class="work-grid reveal">
@@ -2015,7 +2068,7 @@ Index · HTML
 <section class="testimonials" id="testimonials">
   <div class="container">
     <div class="section-head reveal">
-      <h2>Wat klanten zeggen.</h2>
+      <h2 class="float-h2">Wat klanten zeggen.</h2>
       <p>Echte reacties van bedrijven die de gratis demo omzetten in een live website.</p>
     </div>
     <div class="testimonial-grid reveal">
@@ -2042,7 +2095,7 @@ Index · HTML
 <section class="pricing section-pad" id="pricing">
   <div class="container">
     <div class="section-head reveal">
-      <h2>Eenvoudige en<br>transparante prijzen.</h2>
+      <h2 class="float-h2">Eenvoudige en<br>transparante prijzen.</h2>
       <p>Je betaalt pas nadat je het gratis ontwerp hebt goedgekeurd. Bekijk de volledige prijslijst met alle pakketten.</p>
     </div>
     <div class="pricing-grid reveal">
@@ -2085,7 +2138,7 @@ Index · HTML
   <div class="container contact-grid">
     <div class="contact-intro reveal">
       <div class="eyebrow">Start Vandaag</div>
-      <h2>Start met een gratis<br>preview voor jouw bedrijf.</h2>
+      <h2 class="float-h2">Start met een gratis<br>preview voor jouw bedrijf.</h2>
       <p>Vertel ons kort over je bedrijf. Je ontvangt een op maat gemaakt homepage-concept — volledig gratis en vrijblijvend, meestal binnen 48 uur.</p>
       <div class="mini-stats">
         <div><div class="num">48u</div><div class="lbl">Reactietijd</div></div>
@@ -2124,7 +2177,7 @@ Index · HTML
   <div class="footer-glow" id="footerGlow"></div>
   <div class="container">
     <div class="footer-top">
-      <h2>Laten we praten<br>over je website.</h2>
+      <h2 class="float-h2">Laten we praten<br>over je website.</h2>
       <a href="mailto:hello@bjfwebdesign.com" class="btn btn-ghost">hello@bjfwebdesign.com</a>
     </div>
     <div class="footer-cols">
@@ -2352,17 +2405,21 @@ Index · HTML
   }
   requestAnimationFrame(drawHero);
  
-  /* ---------- manifesto: text lights up as you scroll/read ---------- */
+  /* ---------- manifesto: text lights up + blurs in as you scroll/read (ScrollReveal-style) ---------- */
   const manifestoEl = document.getElementById('manifestoText');
+  const manifestoReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const words = manifestoEl.textContent.trim().split(/\s+/);
   manifestoEl.innerHTML = words.map(word=>`<span class="w">${word}</span>`).join(' ');
   const wordEls = Array.from(manifestoEl.querySelectorAll('.w'));
+  const manifestoBaseRotation = 3; // deg — matches ScrollReveal's baseRotation
  
   function updateManifesto(){
-    const lineY = window.innerHeight * 0.58;
+    if(manifestoReduceMotion) return;
+    const vh = window.innerHeight;
+    const lineY = vh * 0.58;
     for(const wEl of wordEls){
       const rect = wEl.getBoundingClientRect();
-      if(rect.bottom < -200 || rect.top > window.innerHeight+200) continue; // skip far-off work
+      if(rect.bottom < -200 || rect.top > vh+200) continue; // skip far-off work
       const center = rect.top + rect.height/2;
       let progress;
       if(center > lineY){
@@ -2370,11 +2427,18 @@ Index · HTML
       } else {
         progress = 1;
       }
-      wEl.style.opacity = String(0.14 + progress*0.86);
+      wEl.style.opacity = String(0.1 + progress*0.9);
+      wEl.style.filter = progress > 0.98 ? 'none' : `blur(${((1-progress)*4).toFixed(2)}px)`;
       wEl.style.textShadow = progress > 0.35
         ? `0 0 ${(progress*16).toFixed(1)}px rgba(103,232,249,${(progress*0.55).toFixed(2)})`
         : 'none';
     }
+ 
+    // container-level unfold: rotate(baseRotation → 0) as the block scrolls in from the bottom,
+    // left-hinged — same mechanic as ScrollReveal's container rotate scrollTrigger.
+    const contRect = manifestoEl.getBoundingClientRect();
+    const unfold = Math.min(Math.max((vh - contRect.top) / Math.max(contRect.height, 1), 0), 1);
+    manifestoEl.style.transform = `rotate(${(manifestoBaseRotation * (1-unfold)).toFixed(2)}deg)`;
   }
  
   /* ---------- services pinned scroll-swap ---------- */
@@ -2404,6 +2468,51 @@ Index · HTML
     });
   }, {threshold:0.14});
   revealEls.forEach(el=>io.observe(el));
+ 
+  /* ---------- float-in headings (ScrollFloat-style bouncy per-word pop) ---------- */
+  (function(){
+    const floatHeadings = document.querySelectorAll('.float-h2');
+    if(!floatHeadings.length) return;
+ 
+    function wrapWords(el){
+      const frag = document.createDocumentFragment();
+      Array.from(el.childNodes).forEach(node=>{
+        if(node.nodeType === Node.TEXT_NODE){
+          node.textContent.split(/(\s+)/).forEach(part=>{
+            if(part === ''){ return; }
+            if(/^\s+$/.test(part)){
+              frag.appendChild(document.createTextNode(part));
+            } else {
+              const span = document.createElement('span');
+              span.className = 'fwd';
+              span.textContent = part;
+              frag.appendChild(span);
+            }
+          });
+        } else {
+          frag.appendChild(node.cloneNode(true));
+        }
+      });
+      el.innerHTML = '';
+      el.appendChild(frag);
+    }
+ 
+    floatHeadings.forEach(h2=>{
+      wrapWords(h2);
+      const wordEls = h2.querySelectorAll('.fwd');
+      wordEls.forEach((w,i)=>{ w.style.transitionDelay = (i*0.06)+'s'; });
+    });
+ 
+    const floatIo = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          floatIo.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.3});
+    floatHeadings.forEach(h2=>floatIo.observe(h2));
+  })();
  
   /* ---------- tilt on hover (work cards + industry visuals) ---------- */
   document.querySelectorAll('[data-tilt]').forEach(card=>{
