@@ -24,56 +24,14 @@ Claude Desktop (macOS), Connected
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Index · HTML
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BJF Web Design — Free Demo First. Pay Only If You Launch.</title>
-<meta name="description" content="BJF Web Design ontwerpt een gratis homepageconcept vóór je betaalt. Premium websites, SaaS-niveau afwerking, hosting en support inbegrepen.">
+<title id="pageTitle">BJF Web Design — Gratis Demo Eerst. Betaal Alleen Als Je Live Wilt.</title>
+<meta name="description" id="pageDesc" content="BJF Web Design ontwerpt een gratis homepageconcept vóór je betaalt. Premium websites, SaaS-niveau afwerking, hosting en support inbegrepen.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -265,6 +223,60 @@ Index · HTML
   .nav-links a:hover::after{width:100%;}
   .nav-cta{display:flex; align-items:center; gap:22px;}
   .nav .btn-primary{padding:11px 22px; font-size:13px;}
+ 
+  /* ---------- language toggle ---------- */
+  .lang-toggle{
+    position:relative;
+    display:flex;
+    align-items:center;
+    width:72px;
+    height:32px;
+    border-radius:100px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,0.03);
+    padding:3px;
+    flex-shrink:0;
+    transition:border-color .3s ease, background .3s ease;
+  }
+  .lang-toggle:hover{border-color:rgba(255,255,255,0.22);}
+  .lang-toggle .lang-thumb{
+    position:absolute;
+    top:3px; left:3px;
+    width:33px; height:24px;
+    border-radius:100px;
+    background:var(--grad);
+    box-shadow:0 2px 10px rgba(103,232,249,0.3);
+    transition:transform .4s cubic-bezier(.2,.8,.2,1);
+    z-index:0;
+  }
+  .lang-toggle.lang-en .lang-thumb{transform:translateX(33px);}
+  .lang-toggle .lang-opt{
+    position:relative;
+    z-index:1;
+    width:33px;
+    text-align:center;
+    font-family:var(--ff-head);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.03em;
+    color:var(--muted-2);
+    transition:color .35s ease;
+  }
+  .lang-toggle.lang-nl .lang-opt[data-lang="nl"],
+  .lang-toggle.lang-en .lang-opt[data-lang="en"]{color:#05060a;}
+  .mobile-menu .lang-toggle{
+    width:84px; height:38px;
+    margin-top:6px;
+  }
+  .mobile-menu .lang-toggle .lang-thumb{width:39px; height:30px;}
+  .mobile-menu .lang-toggle.lang-en .lang-thumb{transform:translateX(39px);}
+  .mobile-menu .lang-toggle .lang-opt{width:39px; font-size:13px;}
+  @media(max-width:860px){
+    .nav .lang-toggle{width:60px; height:28px;}
+    .nav .lang-toggle .lang-thumb{width:27px; height:22px;}
+    .nav .lang-toggle.lang-en .lang-thumb{transform:translateX(27px);}
+    .nav .lang-toggle .lang-opt{width:27px; font-size:10px;}
+  }
   .nav-toggle{
     display:none;
     flex-direction:column;
@@ -1691,21 +1703,31 @@ Index · HTML
 <nav class="nav" id="nav">
   <a href="#top" class="logo"><span class="logo-mark"></span>BJF WEB DESIGN</a>
   <div class="nav-links">
-    <a href="#work">Work</a>
-    <a href="#process">Werkwijze</a>
-    <a href="pricing.html">Bekijk Alle Pakketten</a>
+    <a href="#work" data-i18n="nav.work">Work</a>
+    <a href="#process" data-i18n="nav.process">Werkwijze</a>
+    <a href="pricing.html" data-i18n="nav.pricing">Bekijk Alle Pakketten</a>
   </div>
   <div class="nav-cta">
-    <a href="#contact" class="btn btn-primary">Gratis Demo Aanvragen <span class="btn-arrow">→</span></a>
+    <button class="lang-toggle lang-nl" id="langToggle" type="button" aria-label="Switch to English">
+      <span class="lang-thumb"></span>
+      <span class="lang-opt" data-lang="nl">NL</span>
+      <span class="lang-opt" data-lang="en">EN</span>
+    </button>
+    <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Gratis Demo Aanvragen <span class="btn-arrow">→</span></a>
   </div>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
 </nav>
  
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#work">Work</a>
-  <a href="#process">Werkwijze</a>
-  <a href="pricing.html">Bekijk Alle Pakketten</a>
-  <a href="#contact" class="btn btn-primary">Gratis Demo Aanvragen</a>
+  <a href="#work" data-i18n="nav.work">Work</a>
+  <a href="#process" data-i18n="nav.process">Werkwijze</a>
+  <a href="pricing.html" data-i18n="nav.pricing">Bekijk Alle Pakketten</a>
+  <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Gratis Demo Aanvragen</a>
+  <button class="lang-toggle lang-nl" id="langToggleMobile" type="button" aria-label="Switch to English">
+    <span class="lang-thumb"></span>
+    <span class="lang-opt" data-lang="nl">NL</span>
+    <span class="lang-opt" data-lang="en">EN</span>
+  </button>
 </div>
  
 <section class="hero" id="top">
@@ -1715,17 +1737,17 @@ Index · HTML
   </div>
   <div class="hero-vignette"></div>
   <div class="container hero-content" id="heroContent">
-    <div class="eyebrow" style="justify-content:center;">Free demo first. Pay only if you want to launch.</div>
-    <h1>Premium websites,<br><span class="hl">ontworpen voordat je beslist.</span></h1>
-    <p class="hero-sub">Een gratis, op maat gemaakt homepage-concept — vóór je ook maar íets betaalt. Eerste ontwerp binnen 48 uur, zonder ontwerprisico vooraf.</p>
+    <div class="eyebrow" style="justify-content:center;" data-i18n="hero.eyebrow">Eerst een gratis demo. Betaal alleen als je live wilt.</div>
+    <h1 data-i18n="hero.h1">Premium websites,<br><span class="hl">ontworpen voordat je beslist.</span></h1>
+    <p class="hero-sub" data-i18n="hero.sub">Een gratis, op maat gemaakt homepage-concept — vóór je ook maar íets betaalt. Eerste ontwerp binnen 48 uur, zonder ontwerprisico vooraf.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn btn-primary">Vraag Gratis Demo Aan <span class="btn-arrow">→</span></a>
-      <a href="#work" class="btn btn-ghost">Bekijk Ons Werk</a>
+      <a href="#contact" class="btn btn-primary" data-i18n="hero.cta1">Vraag Gratis Demo Aan <span class="btn-arrow">→</span></a>
+      <a href="#work" class="btn btn-ghost" data-i18n="hero.cta2">Bekijk Ons Werk</a>
     </div>
     <div class="hero-stats">
-      <div><div class="num">48u</div><div class="lbl">Eerste Ontwerp</div></div>
-      <div><div class="num">€0</div><div class="lbl">Risico Vooraf</div></div>
-      <div><div class="num">Incl.</div><div class="lbl">Hosting &amp; Support</div></div>
+      <div><div class="num" data-i18n="hero.stat1num">48u</div><div class="lbl" data-i18n="hero.stat1">Eerste Ontwerp</div></div>
+      <div><div class="num">€0</div><div class="lbl" data-i18n="hero.stat2">Risico Vooraf</div></div>
+      <div><div class="num">Incl.</div><div class="lbl" data-i18n="hero.stat3">Hosting &amp; Support</div></div>
     </div>
   </div>
   <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
@@ -1733,15 +1755,15 @@ Index · HTML
  
 <div class="marquee-band">
   <div class="marquee-track" id="marqueeTrack">
-    <span><i></i>Gratis Demo Eerst<i></i>Geen Risico Vooraf<i></i>Ontwerp Binnen 48 Uur<i></i>Hosting &amp; Support Inbegrepen<i></i>SaaS-Niveau Afwerking<i></i>Maandelijks Opzegbaar</span>
-    <span><i></i>Gratis Demo Eerst<i></i>Geen Risico Vooraf<i></i>Ontwerp Binnen 48 Uur<i></i>Hosting &amp; Support Inbegrepen<i></i>SaaS-Niveau Afwerking<i></i>Maandelijks Opzegbaar</span>
+    <span><i></i><span data-i18n="marquee.1">Gratis Demo Eerst</span><i></i><span data-i18n="marquee.2">Geen Risico Vooraf</span><i></i><span data-i18n="marquee.3">Ontwerp Binnen 48 Uur</span><i></i><span data-i18n="marquee.4">Hosting &amp; Support Inbegrepen</span><i></i><span data-i18n="marquee.5">SaaS-Niveau Afwerking</span><i></i><span data-i18n="marquee.6">Maandelijks Opzegbaar</span></span>
+    <span><i></i><span data-i18n="marquee.1">Gratis Demo Eerst</span><i></i><span data-i18n="marquee.2">Geen Risico Vooraf</span><i></i><span data-i18n="marquee.3">Ontwerp Binnen 48 Uur</span><i></i><span data-i18n="marquee.4">Hosting &amp; Support Inbegrepen</span><i></i><span data-i18n="marquee.5">SaaS-Niveau Afwerking</span><i></i><span data-i18n="marquee.6">Maandelijks Opzegbaar</span></span>
   </div>
 </div>
  
 <section class="manifesto">
   <div class="manifesto-inner">
-    <div class="eyebrow">01 — Waarom Dit Werkt</div>
-    <p class="lit-text" id="manifestoText">De meeste bureaus laten je betalen vóór je iets hebt gezien. Wij draaien dat om. Eerst een gratis, op maat gemaakt concept. Geen risico. Geen verrassingen. Alleen een besluit met vertrouwen.</p>
+    <div class="eyebrow" data-i18n="manifesto.eyebrow">01 — Waarom Dit Werkt</div>
+    <p class="lit-text" id="manifestoText" data-i18n="manifesto.text">De meeste bureaus laten je betalen vóór je iets hebt gezien. Wij draaien dat om. Eerst een gratis, op maat gemaakt concept. Geen risico. Geen verrassingen. Alleen een besluit met vertrouwen.</p>
   </div>
 </section>
  
@@ -1749,41 +1771,41 @@ Index · HTML
   <div class="services-inner">
     <div class="services-grid">
       <div>
-        <div class="eyebrow">02 — Voor Wie We Bouwen</div>
+        <div class="eyebrow" data-i18n="services.eyebrow">02 — Voor Wie We Bouwen</div>
         <ul class="services-items" id="servicesList">
           <li class="service-item active" data-index="0">
             <span class="num">01</span>
             <div>
-              <h3>Bouw &amp; Lokale Diensten</h3>
-              <p>De eerste indruk die van een bezoeker een offerteaanvraag maakt.</p>
+              <h3 data-i18n="services.0.title">Bouw &amp; Lokale Diensten</h3>
+              <p data-i18n="services.0.desc">De eerste indruk die van een bezoeker een offerteaanvraag maakt.</p>
             </div>
           </li>
           <li class="service-item" data-index="1">
             <span class="num">02</span>
             <div>
-              <h3>Sportscholen &amp; Beauty Salons</h3>
-              <p>Een boeking of aanmelding is nog maar één klik verwijderd van je homepage.</p>
+              <h3 data-i18n="services.1.title">Sportscholen &amp; Beauty Salons</h3>
+              <p data-i18n="services.1.desc">Een boeking of aanmelding is nog maar één klik verwijderd van je homepage.</p>
             </div>
           </li>
           <li class="service-item" data-index="2">
             <span class="num">03</span>
             <div>
-              <h3>Vastgoed &amp; Makelaars</h3>
-              <p>Laat een pand zich verkopen nog voordat de bezichtiging begint — met beeld dat vertrouwen wekt.</p>
+              <h3 data-i18n="services.2.title">Vastgoed &amp; Makelaars</h3>
+              <p data-i18n="services.2.desc">Laat een pand zich verkopen nog voordat de bezichtiging begint — met beeld dat vertrouwen wekt.</p>
             </div>
           </li>
           <li class="service-item" data-index="3">
             <span class="num">04</span>
             <div>
-              <h3>Restaurants &amp; Hotels</h3>
-              <p>Reserveringen die binnenkomen terwijl jij aan het werk bent, op elk apparaat foutloos.</p>
+              <h3 data-i18n="services.3.title">Restaurants &amp; Hotels</h3>
+              <p data-i18n="services.3.desc">Reserveringen die binnenkomen terwijl jij aan het werk bent, op elk apparaat foutloos.</p>
             </div>
           </li>
           <li class="service-item" data-index="4">
             <span class="num">05</span>
             <div>
-              <h3>Verzekeringen &amp; Financiële Diensten</h3>
-              <p>Vertrouwen wekken nog voordat het eerste gesprek begint — premium en professioneel.</p>
+              <h3 data-i18n="services.4.title">Verzekeringen &amp; Financiële Diensten</h3>
+              <p data-i18n="services.4.desc">Vertrouwen wekken nog voordat het eerste gesprek begint — premium en professioneel.</p>
             </div>
           </li>
         </ul>
@@ -1800,17 +1822,17 @@ Index · HTML
                   <div class="renov-divider"><div class="renov-handle">&harr;</div></div>
                 </div>
                 <div class="renov-scrim"></div>
-                <div class="renov-crumb">Bouw &amp; Verbouw &middot; Amsterdam</div>
-                <div class="renov-badge"><span class="renov-dot"></span>Massief Bouw &middot; Sinds 2014</div>
-                <div class="renov-tag renov-tag-before">Voor</div>
-                <div class="renov-tag renov-tag-after">Na</div>
+                <div class="renov-crumb" data-i18n="renov.crumb">Bouw &amp; Verbouw &middot; Amsterdam</div>
+                <div class="renov-badge"><span class="renov-dot"></span><span data-i18n="renov.badge">Massief Bouw &middot; Sinds 2014</span></div>
+                <div class="renov-tag renov-tag-before" data-i18n="renov.before">Voor</div>
+                <div class="renov-tag renov-tag-after" data-i18n="renov.after">Na</div>
                 <div class="renov-stats">
-                  <div class="renov-stat"><div class="renov-stat-num">120+</div><div class="renov-stat-label">Projecten</div></div>
-                  <div class="renov-stat"><div class="renov-stat-num">4.9</div><div class="renov-stat-label">Beoordeling</div></div>
-                  <div class="renov-stat"><div class="renov-stat-num">14</div><div class="renov-stat-label">Dgn Gem.</div></div>
-                  <div class="renov-stat"><div class="renov-stat-num">2014</div><div class="renov-stat-label">Sinds</div></div>
+                  <div class="renov-stat"><div class="renov-stat-num">120+</div><div class="renov-stat-label" data-i18n="renov.stat1">Projecten</div></div>
+                  <div class="renov-stat"><div class="renov-stat-num">4.9</div><div class="renov-stat-label" data-i18n="renov.stat2">Beoordeling</div></div>
+                  <div class="renov-stat"><div class="renov-stat-num">14</div><div class="renov-stat-label" data-i18n="renov.stat3">Dgn Gem.</div></div>
+                  <div class="renov-stat"><div class="renov-stat-num">2014</div><div class="renov-stat-label" data-i18n="renov.stat4">Sinds</div></div>
                 </div>
-                <a href="#contact" class="renov-cta">Plan Adviesgesprek <span class="btn-arrow">&rarr;</span></a>
+                <a href="#contact" class="renov-cta" data-i18n="renov.cta">Plan Adviesgesprek <span class="btn-arrow">&rarr;</span></a>
               </div>
             </div>
           </div>
@@ -1822,7 +1844,7 @@ Index · HTML
                 <div class="gym-photo"></div>
                 <div class="gym-scrim"></div>
                 <div class="gym-sweep"></div>
-                <div class="gym-crumb">Sportscholen &middot; Boksen</div>
+                <div class="gym-crumb" data-i18n="gym.crumb">Sportscholen &middot; Boksen</div>
                 <div class="gym-badge"><span class="gym-dot"></span>1Boxing Gym &middot; Est. 2016</div>
                 <div class="gym-marquee">
                   <div class="gym-marquee-track">
@@ -1833,12 +1855,12 @@ Index · HTML
                   </div>
                 </div>
                 <div class="gym-stats">
-                  <div class="gym-stat"><div class="gym-stat-num" data-target="2016">0</div><div class="gym-stat-label">Founded</div></div>
-                  <div class="gym-stat"><div class="gym-stat-num" data-target="1200" data-suffix="+">0</div><div class="gym-stat-label">Members</div></div>
-                  <div class="gym-stat"><div class="gym-stat-num" data-target="4">0</div><div class="gym-stat-label">Programma&#39;s</div></div>
-                  <div class="gym-stat"><div class="gym-stat-num" data-target="7">0</div><div class="gym-stat-label">Dagen/Wk</div></div>
+                  <div class="gym-stat"><div class="gym-stat-num" data-target="2016">0</div><div class="gym-stat-label" data-i18n="gym.stat1">Opgericht</div></div>
+                  <div class="gym-stat"><div class="gym-stat-num" data-target="1200" data-suffix="+">0</div><div class="gym-stat-label" data-i18n="gym.stat2">Leden</div></div>
+                  <div class="gym-stat"><div class="gym-stat-num" data-target="4">0</div><div class="gym-stat-label" data-i18n="gym.stat3">Programma&#39;s</div></div>
+                  <div class="gym-stat"><div class="gym-stat-num" data-target="7">0</div><div class="gym-stat-label" data-i18n="gym.stat4">Dagen/Wk</div></div>
                 </div>
-                <a href="#contact" class="gym-cta">Boek Gratis Proefles <span class="btn-arrow">&rarr;</span></a>
+                <a href="#contact" class="gym-cta" data-i18n="gym.cta">Boek Gratis Proefles <span class="btn-arrow">&rarr;</span></a>
               </div>
             </div>
           </div>
@@ -1851,7 +1873,7 @@ Index · HTML
                 <div class="realty-top">
                   <div class="realty-photo"></div>
                   <div class="realty-scrim"></div>
-                  <div class="realty-crumb">Vastgoed &middot; Amsterdam</div>
+                  <div class="realty-crumb" data-i18n="realty.crumb">Vastgoed &middot; Amsterdam</div>
                   <div class="realty-map">
                     <svg viewBox="0 0 60 44" aria-hidden="true">
                       <path d="M2 30 Q20 12 30 26 T58 16" stroke="rgba(255,255,255,0.28)" stroke-width="1.3" fill="none"/>
@@ -1863,14 +1885,14 @@ Index · HTML
                     <div class="realty-name">AMSTERDAMSEWEG 380<br>AMSTERDAM</div>
                     <div class="realty-sqm-row">
                       <span class="realty-sqm"><span class="realty-sqm-num" data-target="576">0</span><span class="realty-sqm-unit"> M&sup2;</span></span>
-                      <span class="realty-beds">6 Slaapkamers</span>
+                      <span class="realty-beds" data-i18n="realty.beds">6 Slaapkamers</span>
                     </div>
                   </div>
                 </div>
                 <div class="realty-panel">
                   <div class="realty-panel-head fl-fade-target">
                     <div>
-                      <div class="realty-floor-label">VERDIEPING <span class="fl-num">2</span></div>
+                      <div class="realty-floor-label"><span data-i18n="realty.floorLabel">VERDIEPING</span> <span class="fl-num">2</span></div>
                       <div class="realty-floor-sub fl-sub">Slaapkamer &middot; 2 personen</div>
                     </div>
                     <div class="realty-floor-area fl-area">140 M&sup2;</div>
@@ -1885,9 +1907,9 @@ Index · HTML
                     <circle class="fp-dot fp-dot-c" cx="165" cy="58" r="2.4"/>
                   </svg>
                   <div class="realty-stats fl-fade-target">
-                    <div class="stat"><span class="stat-dot" style="background:var(--cyan); box-shadow:0 0 6px rgba(103,232,249,0.7);"></span><span class="stat-txt"><b class="fl-s1">30 DB</b>Isolatie</span></div>
-                    <div class="stat"><span class="stat-dot" style="background:var(--violet); box-shadow:0 0 6px rgba(192,132,252,0.7);"></span><span class="stat-txt"><b class="fl-s2">6H/DAG</b>Daglicht</span></div>
-                    <div class="stat"><span class="stat-dot" style="background:var(--cyan); box-shadow:0 0 6px rgba(103,232,249,0.7);"></span><span class="stat-txt"><b class="fl-s3">3.1 M</b>Plafond</span></div>
+                    <div class="stat"><span class="stat-dot" style="background:var(--cyan); box-shadow:0 0 6px rgba(103,232,249,0.7);"></span><span class="stat-txt"><b class="fl-s1">30 DB</b><span data-i18n="realty.statLabel1">Isolatie</span></span></div>
+                    <div class="stat"><span class="stat-dot" style="background:var(--violet); box-shadow:0 0 6px rgba(192,132,252,0.7);"></span><span class="stat-txt"><b class="fl-s2">6H/DAG</b><span data-i18n="realty.statLabel2">Daglicht</span></span></div>
+                    <div class="stat"><span class="stat-dot" style="background:var(--cyan); box-shadow:0 0 6px rgba(103,232,249,0.7);"></span><span class="stat-txt"><b class="fl-s3">3.1 M</b><span data-i18n="realty.statLabel3">Plafond</span></span></div>
                   </div>
                   <div class="realty-controls">
                     <div class="arrows"><span class="realty-arrow">&lsaquo;</span><span class="realty-arrow">&rsaquo;</span></div>
@@ -1906,10 +1928,10 @@ Index · HTML
                 <div class="omakase-top">
                   <div class="omakase-photo"></div>
                   <div class="omakase-scrim"></div>
-                  <div class="omakase-crumb">Restaurants &middot; Reserveren</div>
+                  <div class="omakase-crumb" data-i18n="omakase.crumb">Restaurants &middot; Reserveren</div>
                   <div class="omakase-caption">
-                    <div class="omakase-tag">Vanavond beschikbaar</div>
-                    <div class="omakase-title">Reserve Your<br>Omakase Experience</div>
+                    <div class="omakase-tag" data-i18n="omakase.tag">Vanavond beschikbaar</div>
+                    <div class="omakase-title" data-i18n="omakase.title">Reserveer Je<br>Omakase Experience</div>
                   </div>
                 </div>
                 <div class="omakase-panel">
@@ -1934,9 +1956,9 @@ Index · HTML
                       </div>
                     </div>
                     <div class="omakase-state omakase-state-confirm">
-                      <div class="omakase-confirm-row"><span class="ocr-label">Datum</span><span class="ocr-value">Vanavond &middot; 19:30</span></div>
-                      <div class="omakase-confirm-row"><span class="ocr-label">Tafel</span><span class="ocr-value">#16 &middot; Omakase counter</span></div>
-                      <a href="#contact" class="omakase-cta">Reserveer Nu <span class="btn-arrow">&rarr;</span></a>
+                      <div class="omakase-confirm-row"><span class="ocr-label" data-i18n="omakase.dateLabel">Datum</span><span class="ocr-value" data-i18n="omakase.dateValue">Vanavond &middot; 19:30</span></div>
+                      <div class="omakase-confirm-row"><span class="ocr-label" data-i18n="omakase.tableLabel">Tafel</span><span class="ocr-value">#16 &middot; Omakase counter</span></div>
+                      <a href="#contact" class="omakase-cta" data-i18n="omakase.cta">Reserveer Nu <span class="btn-arrow">&rarr;</span></a>
                     </div>
                   </div>
                 </div>
@@ -1952,16 +1974,16 @@ Index · HTML
                 <div class="cover-top">
                   <div class="cover-photo"></div>
                   <div class="cover-scrim"></div>
-                  <div class="cover-crumb">Verzekeringen &middot; Wereldwijd</div>
+                  <div class="cover-crumb" data-i18n="cover.crumb">Verzekeringen &middot; Wereldwijd</div>
                   <div class="cover-caption">
-                    <div class="cover-tag">Offerte binnen 60 sec</div>
-                    <div class="cover-title">Insurance Without Borders.</div>
+                    <div class="cover-tag" data-i18n="cover.tag">Offerte binnen 60 sec</div>
+                    <div class="cover-title" data-i18n="cover.title">Verzekeringen Zonder Grenzen.</div>
                   </div>
                 </div>
                 <div class="cover-panel">
                   <div class="cover-panel-head cvr-fade-target">
                     <div>
-                      <div class="cover-step-label cv-label">Vergelijk Instellingen</div>
+                      <div class="cover-step-label cv-label">Vergelijk Opties</div>
                       <div class="cover-step-sub cv-sub">Thailand &middot; wereldwijde dekking</div>
                     </div>
                     <div class="cover-step-value cv-value">Stap 1/2</div>
@@ -1969,30 +1991,30 @@ Index · HTML
                   <div class="cover-stage">
                     <div class="cover-state cover-state-coverage active">
                       <div class="cover-field-grid">
-                        <div class="cover-field"><div class="cf-label">Land van verblijf</div><div class="cf-value">Thailand</div></div>
-                        <div class="cover-field"><div class="cf-label">Nationaliteit</div><div class="cf-value">Nederlands</div></div>
-                        <div class="cover-field"><div class="cf-label">Leeftijd</div><div class="cf-value">34 jaar</div></div>
-                        <div class="cover-field"><div class="cf-label">Dekking</div><div class="cf-value">Wereldwijd</div></div>
+                        <div class="cover-field"><div class="cf-label" data-i18n="cover.field1">Land van verblijf</div><div class="cf-value" data-i18n="cover.value1">Thailand</div></div>
+                        <div class="cover-field"><div class="cf-label" data-i18n="cover.field2">Nationaliteit</div><div class="cf-value" data-i18n="cover.value2">Nederlands</div></div>
+                        <div class="cover-field"><div class="cf-label" data-i18n="cover.field3">Leeftijd</div><div class="cf-value" data-i18n="cover.value3">34 jaar</div></div>
+                        <div class="cover-field"><div class="cf-label" data-i18n="cover.field4">Dekking</div><div class="cf-value" data-i18n="cover.value4">Wereldwijd</div></div>
                       </div>
                     </div>
                     <div class="cover-state cover-state-stats">
                       <div class="cover-results">
                         <div class="cover-result-row best">
-                          <div class="cr-name">Cigna <span class="cr-badge">Beste Match</span></div>
-                          <div class="cr-price">&euro;89<span>/mnd</span></div>
+                          <div class="cr-name">Cigna <span class="cr-badge" data-i18n="cover.bestMatch">Beste Match</span></div>
+                          <div class="cr-price">&euro;89<span data-i18n="cover.perMonth">/mnd</span></div>
                         </div>
                         <div class="cover-result-row">
                           <div class="cr-name">Allianz</div>
-                          <div class="cr-price">&euro;76<span>/mnd</span></div>
+                          <div class="cr-price">&euro;76<span data-i18n="cover.perMonth">/mnd</span></div>
                         </div>
                         <div class="cover-result-row">
                           <div class="cr-name">VUMI</div>
-                          <div class="cr-price">&euro;62<span>/mnd</span></div>
+                          <div class="cr-price">&euro;62<span data-i18n="cover.perMonth">/mnd</span></div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <a href="#contact" class="cover-cta">Vergelijk Nu <span class="btn-arrow">&rarr;</span></a>
+                  <a href="#contact" class="cover-cta" data-i18n="cover.cta">Vergelijk Nu <span class="btn-arrow">&rarr;</span></a>
                 </div>
               </div>
             </div>
@@ -2006,24 +2028,24 @@ Index · HTML
 <section class="process section-pad" id="process">
   <div class="container">
     <div class="section-head reveal">
-      <h2 class="float-h2">Hoe de gratis demo werkt.</h2>
-      <p>Een risicovrije manier om een website te krijgen waar je trots op bent.</p>
+      <h2 class="float-h2" data-i18n="process.h2">Hoe de gratis demo werkt.</h2>
+      <p data-i18n="process.sub">Een risicovrije manier om een website te krijgen waar je trots op bent.</p>
     </div>
     <div class="process-grid reveal">
       <div class="process-card">
         <div class="step-num">01</div>
-        <h3>Wij ontwerpen eerst</h3>
-        <p>Deel je bedrijf, doelen en gewenste stijl. Je ontvangt een op maat gemaakt homepage-concept, nog vóór je iets afspreekt.</p>
+        <h3 data-i18n="process.1.title">Wij ontwerpen eerst</h3>
+        <p data-i18n="process.1.desc">Deel je bedrijf, doelen en gewenste stijl. Je ontvangt een op maat gemaakt homepage-concept, nog vóór je iets afspreekt.</p>
       </div>
       <div class="process-card">
         <div class="step-num">02</div>
-        <h3>Jij keurt het goed</h3>
-        <p>Voelt het concept goed? Dan bouwen we de volledige site uit, optimaliseren we 'm voor mobiel, en bereiden we de lancering voor.</p>
+        <h3 data-i18n="process.2.title">Jij keurt het goed</h3>
+        <p data-i18n="process.2.desc">Voelt het concept goed? Dan bouwen we de volledige site uit, optimaliseren we 'm voor mobiel, en bereiden we de lancering voor.</p>
       </div>
       <div class="process-card">
         <div class="step-num">03</div>
-        <h3>Wij houden het draaiende</h3>
-        <p>Hosting, onderhoud, updates en support — inbegrepen in een overzichtelijk maandelijks abonnement.</p>
+        <h3 data-i18n="process.3.title">Wij houden het draaiende</h3>
+        <p data-i18n="process.3.desc">Hosting, onderhoud, updates en support — inbegrepen in een overzichtelijk maandelijks abonnement.</p>
       </div>
     </div>
   </div>
@@ -2032,17 +2054,17 @@ Index · HTML
 <section class="work section-pad" id="work">
   <div class="container">
     <div class="section-head reveal">
-      <h2 class="float-h2">Ons werk.</h2>
-      <p>Voorbeelden van websites die we hebben gebouwd — klik door naar de live site.</p>
+      <h2 class="float-h2" data-i18n="work.h2">Ons werk.</h2>
+      <p data-i18n="work.sub">Voorbeelden van websites die we hebben gebouwd — klik door naar de live site.</p>
     </div>
     <div class="work-grid reveal">
       <a class="work-card" data-tilt href="https://bjfwebdesign.github.io/Silverwood-Residences/" target="_blank" rel="noopener">
         <div class="work-card-inner">
           <div class="work-thumb">
-            <img class="bg" src="silverwood-residences.jpg" alt="Silverwood Residences — Bangkok vastgoedwebsite homepage" loading="lazy">
+            <img class="bg" src="silverwood-residences.jpg" data-i18n-alt="work.1.alt" alt="Silverwood Residences — Bangkok vastgoedwebsite homepage" loading="lazy">
           </div>
           <div class="work-meta">
-            <div><h4>Silverwood Residences</h4><span>Vastgoed &amp; Makelaars</span></div>
+            <div><h4>Silverwood Residences</h4><span data-i18n="work.1.tag">Vastgoed &amp; Makelaars</span></div>
             <span class="work-tag live">Live Site</span>
           </div>
         </div>
@@ -2050,10 +2072,10 @@ Index · HTML
       <a class="work-card" data-tilt href="https://bjfwebdesign.github.io/1boxing/" target="_blank" rel="noopener">
         <div class="work-card-inner">
           <div class="work-thumb">
-            <img class="bg" src="1boxing.jpg" alt="1Boxing — boksschool website homepage" loading="lazy">
+            <img class="bg" src="1boxing.jpg" data-i18n-alt="work.2.alt" alt="1Boxing — boksschool website homepage" loading="lazy">
           </div>
           <div class="work-meta">
-            <div><h4>1Boxing</h4><span>Sportschool &amp; Fitness</span></div>
+            <div><h4>1Boxing</h4><span data-i18n="work.2.tag">Sportschool &amp; Fitness</span></div>
             <span class="work-tag live">Live Site</span>
           </div>
         </div>
@@ -2061,10 +2083,10 @@ Index · HTML
       <a class="work-card" data-tilt href="https://borderless-insurance.com/" target="_blank" rel="noopener">
         <div class="work-card-inner">
           <div class="work-thumb">
-            <img class="bg" src="borderless-insurance.jpg" alt="Borderless Insurance — verzekeringswebsite homepage" loading="lazy">
+            <img class="bg" src="borderless-insurance.jpg" data-i18n-alt="work.3.alt" alt="Borderless Insurance — verzekeringswebsite homepage" loading="lazy">
           </div>
           <div class="work-meta">
-            <div><h4>Borderless Insurance</h4><span>Verzekeringen</span></div>
+            <div><h4>Borderless Insurance</h4><span data-i18n="work.3.tag">Verzekeringen</span></div>
             <span class="work-tag live">Live Site</span>
           </div>
         </div>
@@ -2076,8 +2098,8 @@ Index · HTML
             <div class="mock"><div class="l1"></div><div class="l2"></div><div class="l3"></div><div class="btnrow"></div></div>
           </div>
           <div class="work-meta">
-            <div><h4>Doglas Hair Studio</h4><span>Kapperszaak</span></div>
-            <span class="work-tag">Case Study</span>
+            <div><h4>Doglas Hair Studio</h4><span data-i18n="work.4.tag">Kapperszaak</span></div>
+            <span class="work-tag" data-i18n="work.caseStudy">Case Study</span>
           </div>
         </div>
       </div>
@@ -2088,13 +2110,13 @@ Index · HTML
 <section class="testimonials" id="testimonials">
   <div class="container">
     <div class="section-head reveal">
-      <h2 class="float-h2">Wat klanten zeggen.</h2>
-      <p>Echte reacties van bedrijven die de gratis demo omzetten in een live website.</p>
+      <h2 class="float-h2" data-i18n="testimonials.h2">Wat klanten zeggen.</h2>
+      <p data-i18n="testimonials.sub">Echte reacties van bedrijven die de gratis demo omzetten in een live website.</p>
     </div>
     <div class="testimonial-grid reveal">
       <div class="testimonial-card">
         <svg class="quote-mark" viewBox="0 0 32 24" fill="none"><path d="M0 24V14.4C0 6.4 4.8 1.2 12.8 0L14.4 3.6C9.6 4.8 7.2 7.6 7.2 12H14.4V24H0ZM17.6 24V14.4C17.6 6.4 22.4 1.2 30.4 0L32 3.6C27.2 4.8 24.8 7.6 24.8 12H32V24H17.6Z" fill="url(#qg)"/><defs><linearGradient id="qg" x1="0" y1="0" x2="32" y2="24"><stop offset="0" stop-color="#67e8f9"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs></svg>
-        <p class="quote-text">"Het gratis concept maakte de beslissing makkelijk. Het was beter dan de pitches van bureaus waar we al voor hadden betaald."</p>
+        <p class="quote-text" data-i18n="testimonials.1.quote">"Het gratis concept maakte de beslissing makkelijk. Het was beter dan de pitches van bureaus waar we al voor hadden betaald."</p>
         <div class="quote-author">
           <span class="name">Matteo G.</span>
           <span class="company">Borderless Insurance</span>
@@ -2102,7 +2124,7 @@ Index · HTML
       </div>
       <div class="testimonial-card">
         <svg class="quote-mark" viewBox="0 0 32 24" fill="none"><path d="M0 24V14.4C0 6.4 4.8 1.2 12.8 0L14.4 3.6C9.6 4.8 7.2 7.6 7.2 12H14.4V24H0ZM17.6 24V14.4C17.6 6.4 22.4 1.2 30.4 0L32 3.6C27.2 4.8 24.8 7.6 24.8 12H32V24H17.6Z" fill="url(#qg2)"/><defs><linearGradient id="qg2" x1="0" y1="0" x2="32" y2="24"><stop offset="0" stop-color="#c084fc"/><stop offset="1" stop-color="#67e8f9"/></linearGradient></defs></svg>
-        <p class="quote-text">"Door BJF Web Design hebben we eindelijk een website die premium aanvoelt, snel laadt en maand tot maand voor ons wordt beheerd."</p>
+        <p class="quote-text" data-i18n="testimonials.2.quote">"Door BJF Web Design hebben we eindelijk een website die premium aanvoelt, snel laadt en maand tot maand voor ons wordt beheerd."</p>
         <div class="quote-author">
           <span class="name">Dogla</span>
           <span class="company">Doglas Hair Studio</span>
@@ -2115,39 +2137,39 @@ Index · HTML
 <section class="pricing section-pad" id="pricing">
   <div class="container">
     <div class="section-head reveal">
-      <h2 class="float-h2">Eenvoudige en<br>transparante prijzen.</h2>
-      <p>Je betaalt pas nadat je het gratis ontwerp hebt goedgekeurd. Bekijk de volledige prijslijst met alle pakketten.</p>
+      <h2 class="float-h2" data-i18n="pricing.h2">Eenvoudige en<br>transparante prijzen.</h2>
+      <p data-i18n="pricing.sub">Je betaalt pas nadat je het gratis ontwerp hebt goedgekeurd. Bekijk de volledige prijslijst met alle pakketten.</p>
     </div>
     <div class="pricing-grid reveal">
       <div class="price-card">
-        <span class="tag">Stap 1</span>
-        <h3>Eenmalige Opzet</h3>
-        <div class="desc">Op maat geprijsd per pakket. Je betaalt pas na goedkeuring van je gratis ontwerp.</div>
-        <div class="price">Vanaf €499</div>
-        <div class="from">eenmalig</div>
+        <span class="tag" data-i18n="pricing.1.tag">Stap 1</span>
+        <h3 data-i18n="pricing.1.title">Eenmalige Opzet</h3>
+        <div class="desc" data-i18n="pricing.1.desc">Op maat geprijsd per pakket. Je betaalt pas na goedkeuring van je gratis ontwerp.</div>
+        <div class="price" data-i18n="pricing.1.price">Vanaf €499</div>
+        <div class="from" data-i18n="pricing.1.from">eenmalig</div>
         <ul class="price-feats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Volledige website build</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Responsive optimalisatie</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Lancering &amp; analytics setup</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Domeinoverdracht</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pricing.1.feat1">Volledige website build</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pricing.1.feat2">Responsive optimalisatie</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pricing.1.feat3">Lancering &amp; analytics setup</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pricing.1.feat4">Domeinoverdracht</span></li>
         </ul>
-        <a href="pricing.html#realisatie" class="btn btn-ghost" style="justify-content:center;">Bekijk Alle Pakketten <span class="btn-arrow">→</span></a>
+        <a href="pricing.html#realisatie" class="btn btn-ghost" style="justify-content:center;" data-i18n="pricing.viewAll">Bekijk Alle Pakketten <span class="btn-arrow">→</span></a>
       </div>
  
       <div class="price-connector" aria-hidden="true">+</div>
  
       <div class="price-card feat">
-        <span class="tag">Stap 2</span>
-        <h3>Maandelijkse Zorg</h3>
-        <div class="desc">Hosting + support, zodat je nergens meer naar hoeft om te kijken.</div>
-        <div class="price">Vanaf €49<span>/maand</span></div>
-        <div class="from">doorlopend, maandelijks opzegbaar</div>
+        <span class="tag" data-i18n="pricing.2.tag">Stap 2</span>
+        <h3 data-i18n="pricing.2.title">Maandelijkse Zorg</h3>
+        <div class="desc" data-i18n="pricing.2.desc">Hosting + support, zodat je nergens meer naar hoeft om te kijken.</div>
+        <div class="price" data-i18n="pricing.2.price">Vanaf €49<span>/maand</span></div>
+        <div class="from" data-i18n="pricing.2.from">doorlopend, maandelijks opzegbaar</div>
         <ul class="price-feats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Beveiligde hosting &amp; performance monitoring</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Onderhoud, back-ups &amp; updates</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Doorlopende support voor kleine aanpassingen</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pricing.2.feat1">Beveiligde hosting &amp; performance monitoring</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pricing.2.feat2">Onderhoud, back-ups &amp; updates</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pricing.2.feat3">Doorlopende support voor kleine aanpassingen</span></li>
         </ul>
-        <a href="pricing.html#zorg" class="btn btn-primary" style="justify-content:center;">Bekijk Alle Pakketten <span class="btn-arrow">→</span></a>
+        <a href="pricing.html#zorg" class="btn btn-primary" style="justify-content:center;" data-i18n="pricing.viewAll">Bekijk Alle Pakketten <span class="btn-arrow">→</span></a>
       </div>
     </div>
   </div>
@@ -2157,37 +2179,37 @@ Index · HTML
   <div class="cta-glow"></div>
   <div class="container contact-grid">
     <div class="contact-intro reveal">
-      <div class="eyebrow">Start Vandaag</div>
-      <h2 class="float-h2">Start met een gratis<br>preview voor jouw bedrijf.</h2>
-      <p>Vertel ons kort over je bedrijf. Je ontvangt een op maat gemaakt homepage-concept — volledig gratis en vrijblijvend, meestal binnen 48 uur.</p>
+      <div class="eyebrow" data-i18n="cta.eyebrow">Start Vandaag</div>
+      <h2 class="float-h2" data-i18n="cta.h2">Start met een gratis<br>preview voor jouw bedrijf.</h2>
+      <p data-i18n="cta.sub">Vertel ons kort over je bedrijf. Je ontvangt een op maat gemaakt homepage-concept — volledig gratis en vrijblijvend, meestal binnen 48 uur.</p>
       <div class="mini-stats">
-        <div><div class="num">48u</div><div class="lbl">Reactietijd</div></div>
-        <div><div class="num">€0</div><div class="lbl">Vrijblijvend</div></div>
-        <div><div class="num">100%</div><div class="lbl">Op Maat</div></div>
+        <div><div class="num" data-i18n="hero.stat1num">48u</div><div class="lbl" data-i18n="cta.stat1">Reactietijd</div></div>
+        <div><div class="num">€0</div><div class="lbl" data-i18n="cta.stat2">Vrijblijvend</div></div>
+        <div><div class="num">100%</div><div class="lbl" data-i18n="cta.stat3">Op Maat</div></div>
       </div>
     </div>
  
     <form class="contact-form reveal" id="contactForm">
       <div class="form-fields">
         <div class="form-row">
-          <label for="cf-name">Naam + Bedrijfsnaam</label>
-          <input id="cf-name" type="text" name="name" placeholder="Jan Jansen — Jansen B.V." required>
+          <label for="cf-name" data-i18n="form.nameLabel">Naam + Bedrijfsnaam</label>
+          <input id="cf-name" type="text" name="name" placeholder="Jan Jansen — Jansen B.V." data-i18n-placeholder="form.namePlaceholder" required>
         </div>
         <div class="form-row">
-          <label for="cf-email">Email</label>
-          <input id="cf-email" type="email" name="email" placeholder="jan@jansen.nl" required>
+          <label for="cf-email" data-i18n="form.emailLabel">Email</label>
+          <input id="cf-email" type="email" name="email" placeholder="jan@jansen.nl" data-i18n-placeholder="form.emailPlaceholder" required>
         </div>
         <div class="form-row">
-          <label for="cf-message">Wat wil je dat we voor je ontwerpen?</label>
-          <textarea id="cf-message" name="message" rows="4" placeholder="Vertel ons kort over je bedrijf en wat je zoekt..." required></textarea>
+          <label for="cf-message" data-i18n="form.messageLabel">Wat wil je dat we voor je ontwerpen?</label>
+          <textarea id="cf-message" name="message" rows="4" placeholder="Vertel ons kort over je bedrijf en wat je zoekt..." data-i18n-placeholder="form.messagePlaceholder" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="justify-content:center;">Vraag Gratis Demo Aan <span class="btn-arrow">→</span></button>
-        <p class="form-disclaimer">Geen verplichting. Je ontvangt van ons de volgende stappen voor je gratis websitevoorbeeld.</p>
+        <button type="submit" class="btn btn-primary" style="justify-content:center;" data-i18n="nav.cta">Vraag Gratis Demo Aan <span class="btn-arrow">→</span></button>
+        <p class="form-disclaimer" data-i18n="form.disclaimer">Geen verplichting. Je ontvangt van ons de volgende stappen voor je gratis websitevoorbeeld.</p>
       </div>
       <div class="form-success" id="formSuccess">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg>
-        <h4>Aanvraag verzonden.</h4>
-        <p>Bedankt! We nemen binnen 48 uur contact met je op met de volgende stappen voor je gratis websitevoorbeeld.</p>
+        <h4 data-i18n="form.successTitle">Aanvraag verzonden.</h4>
+        <p data-i18n="form.successBody">Bedankt! We nemen binnen 48 uur contact met je op met de volgende stappen voor je gratis websitevoorbeeld.</p>
       </div>
     </form>
   </div>
@@ -2197,24 +2219,24 @@ Index · HTML
   <div class="footer-glow" id="footerGlow"></div>
   <div class="container">
     <div class="footer-top">
-      <h2 class="float-h2">Laten we praten<br>over je website.</h2>
+      <h2 class="float-h2" data-i18n="footer.h2">Laten we praten<br>over je website.</h2>
       <a href="mailto:hello@bjfwebdesign.com" class="btn btn-ghost">hello@bjfwebdesign.com</a>
     </div>
     <div class="footer-cols">
       <div class="footer-col">
-        <h5>Studio</h5>
-        <a href="#work">Work</a>
-        <a href="#process">Werkwijze</a>
-        <a href="pricing.html">Bekijk Alle Pakketten</a>
-        <a href="#contact">Gratis Demo</a>
+        <h5 data-i18n="footer.studio">Studio</h5>
+        <a href="#work" data-i18n="nav.work">Work</a>
+        <a href="#process" data-i18n="nav.process">Werkwijze</a>
+        <a href="pricing.html" data-i18n="nav.pricing">Bekijk Alle Pakketten</a>
+        <a href="#contact" data-i18n="footer.freeDemo">Gratis Demo</a>
       </div>
       <div class="footer-col">
-        <h5>Industrieën</h5>
-        <a href="#services">Vastgoed</a>
-        <a href="#services">Restaurants &amp; Hotels</a>
-        <a href="#services">Verzekeringen</a>
-        <a href="#services">Sport &amp; Beauty</a>
-        <a href="#services">Bouw &amp; Lokaal</a>
+        <h5 data-i18n="footer.industries">Industrieën</h5>
+        <a href="#services" data-i18n="footer.realEstate">Vastgoed</a>
+        <a href="#services" data-i18n="services.3.title">Restaurants &amp; Hotels</a>
+        <a href="#services" data-i18n="footer.insurance">Verzekeringen</a>
+        <a href="#services" data-i18n="footer.sportBeauty">Sport &amp; Beauty</a>
+        <a href="#services" data-i18n="footer.constructionLocal">Bouw &amp; Lokaal</a>
       </div>
       <div class="footer-col">
         <h5>Connect</h5>
@@ -2223,14 +2245,14 @@ Index · HTML
         <a href="#">TikTok</a>
       </div>
       <div class="footer-col">
-        <h5>Studio</h5>
+        <h5 data-i18n="footer.studio">Studio</h5>
         <p>Amsterdam, NL</p>
-        <p>Werkzaam voor heel NL</p>
+        <p data-i18n="footer.servingNL">Werkzaam voor heel NL</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 BJF Web Design. Alle rechten voorbehouden.</span>
-      <span>Free demo first. Pay only if you want to launch.</span>
+      <span data-i18n="footer.rights">© 2026 BJF Web Design. Alle rechten voorbehouden.</span>
+      <span data-i18n="hero.eyebrow">Eerst een gratis demo. Betaal alleen als je live wilt.</span>
     </div>
   </div>
 </footer>
@@ -2238,6 +2260,10 @@ Index · HTML
 <script>
 (function(){
   "use strict";
+ 
+  /* ---------- i18n state (populated near bottom of script) ---------- */
+  let currentLang = 'nl';
+  const langRefreshers = []; // functions that re-render currently-visible dynamic widget text on language switch
  
   /* ---------- nav scroll state ---------- */
   const nav = document.getElementById('nav');
@@ -2428,10 +2454,14 @@ Index · HTML
   /* ---------- manifesto: text lights up + blurs in as you scroll/read (ScrollReveal-style) ---------- */
   const manifestoEl = document.getElementById('manifestoText');
   const manifestoReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const words = manifestoEl.textContent.trim().split(/\s+/);
-  manifestoEl.innerHTML = words.map(word=>`<span class="w">${word}</span>`).join(' ');
-  const wordEls = Array.from(manifestoEl.querySelectorAll('.w'));
   const manifestoBaseRotation = 3; // deg — matches ScrollReveal's baseRotation
+  let wordEls = [];
+  function setupManifestoWords(){
+    const words = manifestoEl.textContent.trim().split(/\s+/);
+    manifestoEl.innerHTML = words.map(word=>`<span class="w">${word}</span>`).join(' ');
+    wordEls = Array.from(manifestoEl.querySelectorAll('.w'));
+  }
+  setupManifestoWords();
  
   function updateManifesto(){
     if(manifestoReduceMotion) return;
@@ -2490,39 +2520,42 @@ Index · HTML
   revealEls.forEach(el=>io.observe(el));
  
   /* ---------- float-in headings (ScrollFloat-style bouncy per-word pop) ---------- */
-  (function(){
-    const floatHeadings = document.querySelectorAll('.float-h2');
-    if(!floatHeadings.length) return;
- 
-    function wrapWords(el){
-      const frag = document.createDocumentFragment();
-      Array.from(el.childNodes).forEach(node=>{
-        if(node.nodeType === Node.TEXT_NODE){
-          node.textContent.split(/(\s+)/).forEach(part=>{
-            if(part === ''){ return; }
-            if(/^\s+$/.test(part)){
-              frag.appendChild(document.createTextNode(part));
-            } else {
-              const span = document.createElement('span');
-              span.className = 'fwd';
-              span.textContent = part;
-              frag.appendChild(span);
-            }
-          });
-        } else {
-          frag.appendChild(node.cloneNode(true));
-        }
-      });
-      el.innerHTML = '';
-      el.appendChild(frag);
-    }
- 
-    floatHeadings.forEach(h2=>{
-      wrapWords(h2);
-      const wordEls = h2.querySelectorAll('.fwd');
-      wordEls.forEach((w,i)=>{ w.style.transitionDelay = (i*0.06)+'s'; });
+  const floatHeadings = document.querySelectorAll('.float-h2');
+  function wrapFloatWords(el){
+    const frag = document.createDocumentFragment();
+    Array.from(el.childNodes).forEach(node=>{
+      if(node.nodeType === Node.TEXT_NODE){
+        node.textContent.split(/(\s+)/).forEach(part=>{
+          if(part === ''){ return; }
+          if(/^\s+$/.test(part)){
+            frag.appendChild(document.createTextNode(part));
+          } else {
+            const span = document.createElement('span');
+            span.className = 'fwd';
+            span.textContent = part;
+            frag.appendChild(span);
+          }
+        });
+      } else {
+        frag.appendChild(node.cloneNode(true));
+      }
     });
- 
+    el.innerHTML = '';
+    el.appendChild(frag);
+  }
+  function setupFloatHeadings(){
+    // re-wrap each heading's current textContent into staggered word spans;
+    // CSS visibility is driven by the .in-view class already on the heading
+    // (set once by the IntersectionObserver below), so re-wrapping after a
+    // language switch is safe — new spans just inherit the visible end-state.
+    floatHeadings.forEach(h2=>{
+      wrapFloatWords(h2);
+      const wEls = h2.querySelectorAll('.fwd');
+      wEls.forEach((w,i)=>{ w.style.transitionDelay = (i*0.06)+'s'; });
+    });
+  }
+  if(floatHeadings.length){
+    setupFloatHeadings();
     const floatIo = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -2532,7 +2565,7 @@ Index · HTML
       });
     }, {threshold:0.3});
     floatHeadings.forEach(h2=>floatIo.observe(h2));
-  })();
+  }
  
   /* ---------- tilt on hover (work cards + industry visuals) ---------- */
   document.querySelectorAll('[data-tilt]').forEach(card=>{
@@ -2575,11 +2608,17 @@ Index · HTML
     }
  
     const fadeTargets = document.querySelectorAll('.fl-fade-target');
-    if(fadeTargets.length && !reduceMotion){
-      const floorStates = [
-        {num:'2', sub:'Slaapkamer · 2 personen', area:'140 M²', s1:'30 DB', s2:'6H/DAG', s3:'3.1 M'},
-        {num:'1', sub:'Woonkamer · 4 personen', area:'165 M²', s1:'28 DB', s2:'8H/DAG', s3:'3.4 M'}
-      ];
+    if(fadeTargets.length){
+      const FLOOR_STATES = {
+        nl: [
+          {num:'2', sub:'Slaapkamer · 2 personen', area:'140 M²', s1:'30 DB', s2:'6H/DAG', s3:'3.1 M'},
+          {num:'1', sub:'Woonkamer · 4 personen', area:'165 M²', s1:'28 DB', s2:'8H/DAG', s3:'3.4 M'}
+        ],
+        en: [
+          {num:'2', sub:'Bedroom · 2 people', area:'140 M²', s1:'30 DB', s2:'6H/DAY', s3:'3.1 M'},
+          {num:'1', sub:'Living room · 4 people', area:'165 M²', s1:'28 DB', s2:'8H/DAY', s3:'3.4 M'}
+        ]
+      };
       let floorIdx = 0;
       const fl = {
         num: document.querySelector('.fl-num'),
@@ -2589,20 +2628,27 @@ Index · HTML
         s2: document.querySelector('.fl-s2'),
         s3: document.querySelector('.fl-s3')
       };
-      setInterval(()=>{
-        floorIdx = (floorIdx + 1) % floorStates.length;
-        fadeTargets.forEach(el=>el.classList.add('realty-fade'));
-        setTimeout(()=>{
-          const s = floorStates[floorIdx];
-          if(fl.num) fl.num.textContent = s.num;
-          if(fl.sub) fl.sub.textContent = s.sub;
-          if(fl.area) fl.area.textContent = s.area;
-          if(fl.s1) fl.s1.textContent = s.s1;
-          if(fl.s2) fl.s2.textContent = s.s2;
-          if(fl.s3) fl.s3.textContent = s.s3;
-          fadeTargets.forEach(el=>el.classList.remove('realty-fade'));
-        }, 360);
-      }, 4800);
+      function renderFloor(){
+        const s = FLOOR_STATES[currentLang][floorIdx];
+        if(fl.num) fl.num.textContent = s.num;
+        if(fl.sub) fl.sub.textContent = s.sub;
+        if(fl.area) fl.area.textContent = s.area;
+        if(fl.s1) fl.s1.textContent = s.s1;
+        if(fl.s2) fl.s2.textContent = s.s2;
+        if(fl.s3) fl.s3.textContent = s.s3;
+      }
+      renderFloor();
+      langRefreshers.push(renderFloor);
+      if(!reduceMotion){
+        setInterval(()=>{
+          floorIdx = (floorIdx + 1) % FLOOR_STATES[currentLang].length;
+          fadeTargets.forEach(el=>el.classList.add('realty-fade'));
+          setTimeout(()=>{
+            renderFloor();
+            fadeTargets.forEach(el=>el.classList.remove('realty-fade'));
+          }, 360);
+        }, 4800);
+      }
     }
   })();
  
@@ -2615,25 +2661,36 @@ Index · HTML
     const selectState = root.querySelector('.omakase-state-select');
     const confirmState = root.querySelector('.omakase-state-confirm');
     if(!fadeTargets.length || !selectState || !confirmState) return;
-    const states = [
-      {label:'Tafel Kiezen', sub:'Binnen · 4 gasten', value:'19:30', cyan:false},
-      {label:'Gereserveerd', sub:'Tafel 16 · Omakase counter', value:'✓', cyan:true}
-    ];
+    const OM_STATES = {
+      nl: [
+        {label:'Tafel Kiezen', sub:'Binnen · 4 gasten', value:'19:30', cyan:false},
+        {label:'Gereserveerd', sub:'Tafel 16 · Omakase counter', value:'✓', cyan:true}
+      ],
+      en: [
+        {label:'Choose a Table', sub:'Indoor · 4 guests', value:'19:30', cyan:false},
+        {label:'Reserved', sub:'Table 16 · Omakase counter', value:'✓', cyan:true}
+      ]
+    };
     let idx = 0;
     const labelEl = root.querySelector('.om-label');
     const subEl = root.querySelector('.om-sub');
     const valueEl = root.querySelector('.om-value');
+    function renderOmakase(){
+      const s = OM_STATES[currentLang][idx];
+      if(labelEl) labelEl.textContent = s.label;
+      if(subEl) subEl.textContent = s.sub;
+      if(valueEl){
+        valueEl.textContent = s.value;
+        valueEl.classList.toggle('om-cyan', s.cyan);
+      }
+    }
+    renderOmakase();
+    langRefreshers.push(renderOmakase);
     setInterval(()=>{
-      idx = (idx + 1) % states.length;
+      idx = (idx + 1) % OM_STATES[currentLang].length;
       fadeTargets.forEach(el=>el.classList.add('om-fade'));
       setTimeout(()=>{
-        const s = states[idx];
-        if(labelEl) labelEl.textContent = s.label;
-        if(subEl) subEl.textContent = s.sub;
-        if(valueEl){
-          valueEl.textContent = s.value;
-          valueEl.classList.toggle('om-cyan', s.cyan);
-        }
+        renderOmakase();
         selectState.classList.toggle('active', idx === 0);
         confirmState.classList.toggle('active', idx === 1);
         fadeTargets.forEach(el=>el.classList.remove('om-fade'));
@@ -2650,25 +2707,36 @@ Index · HTML
     const coverageState = root.querySelector('.cover-state-coverage');
     const statsState = root.querySelector('.cover-state-stats');
     if(!fadeTargets.length || !coverageState || !statsState) return;
-    const states = [
-      {label:'Vergelijk Instellingen', sub:'Thailand · wereldwijde dekking', value:'Stap 1/2', cyan:false},
-      {label:'Top Verzekeraars', sub:'Gesorteerd op prijs', value:'Stap 2/2', cyan:true}
-    ];
+    const CV_STATES = {
+      nl: [
+        {label:'Vergelijk Opties', sub:'Thailand · wereldwijde dekking', value:'Stap 1/2', cyan:false},
+        {label:'Top Verzekeraars', sub:'Gesorteerd op prijs', value:'Stap 2/2', cyan:true}
+      ],
+      en: [
+        {label:'Compare Options', sub:'Thailand · worldwide coverage', value:'Step 1/2', cyan:false},
+        {label:'Top Insurers', sub:'Sorted by price', value:'Step 2/2', cyan:true}
+      ]
+    };
     let idx = 0;
     const labelEl = root.querySelector('.cv-label');
     const subEl = root.querySelector('.cv-sub');
     const valueEl = root.querySelector('.cv-value');
+    function renderCover(){
+      const s = CV_STATES[currentLang][idx];
+      if(labelEl) labelEl.textContent = s.label;
+      if(subEl) subEl.textContent = s.sub;
+      if(valueEl){
+        valueEl.textContent = s.value;
+        valueEl.classList.toggle('cv-cyan', s.cyan);
+      }
+    }
+    renderCover();
+    langRefreshers.push(renderCover);
     setInterval(()=>{
-      idx = (idx + 1) % states.length;
+      idx = (idx + 1) % CV_STATES[currentLang].length;
       fadeTargets.forEach(el=>el.classList.add('cvr-fade'));
       setTimeout(()=>{
-        const s = states[idx];
-        if(labelEl) labelEl.textContent = s.label;
-        if(subEl) subEl.textContent = s.sub;
-        if(valueEl){
-          valueEl.textContent = s.value;
-          valueEl.classList.toggle('cv-cyan', s.cyan);
-        }
+        renderCover();
         coverageState.classList.toggle('active', idx === 0);
         statsState.classList.toggle('active', idx === 1);
         fadeTargets.forEach(el=>el.classList.remove('cvr-fade'));
@@ -2744,6 +2812,223 @@ Index · HTML
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
+ 
+  /* ---------- i18n: NL / EN dictionary + toggle ---------- */
+  const I18N = {
+    nl: {
+      __title: 'BJF Web Design — Gratis Demo Eerst. Betaal Alleen Als Je Live Wilt.',
+      __desc: 'BJF Web Design ontwerpt een gratis homepageconcept vóór je betaalt. Premium websites, SaaS-niveau afwerking, hosting en support inbegrepen.',
+      'nav.work':'Work', 'nav.process':'Werkwijze', 'nav.pricing':'Bekijk Alle Pakketten',
+      'nav.cta':'Gratis Demo Aanvragen <span class="btn-arrow">→</span>',
+      'hero.eyebrow':'Eerst een gratis demo. Betaal alleen als je live wilt.',
+      'hero.h1':'Premium websites,<br><span class="hl">ontworpen voordat je beslist.</span>',
+      'hero.sub':'Een gratis, op maat gemaakt homepage-concept — vóór je ook maar íets betaalt. Eerste ontwerp binnen 48 uur, zonder ontwerprisico vooraf.',
+      'hero.cta1':'Vraag Gratis Demo Aan <span class="btn-arrow">→</span>',
+      'hero.cta2':'Bekijk Ons Werk',
+      'hero.stat1num':'48u', 'hero.stat1':'Eerste Ontwerp', 'hero.stat2':'Risico Vooraf', 'hero.stat3':'Hosting &amp; Support',
+      'marquee.1':'Gratis Demo Eerst', 'marquee.2':'Geen Risico Vooraf', 'marquee.3':'Ontwerp Binnen 48 Uur',
+      'marquee.4':'Hosting &amp; Support Inbegrepen', 'marquee.5':'SaaS-Niveau Afwerking', 'marquee.6':'Maandelijks Opzegbaar',
+      'manifesto.eyebrow':'01 — Waarom Dit Werkt',
+      'manifesto.text':'De meeste bureaus laten je betalen vóór je iets hebt gezien. Wij draaien dat om. Eerst een gratis, op maat gemaakt concept. Geen risico. Geen verrassingen. Alleen een besluit met vertrouwen.',
+      'services.eyebrow':'02 — Voor Wie We Bouwen',
+      'services.0.title':'Bouw &amp; Lokale Diensten', 'services.0.desc':'De eerste indruk die van een bezoeker een offerteaanvraag maakt.',
+      'services.1.title':'Sportscholen &amp; Beauty Salons', 'services.1.desc':'Een boeking of aanmelding is nog maar één klik verwijderd van je homepage.',
+      'services.2.title':'Vastgoed &amp; Makelaars', 'services.2.desc':'Laat een pand zich verkopen nog voordat de bezichtiging begint — met beeld dat vertrouwen wekt.',
+      'services.3.title':'Restaurants &amp; Hotels', 'services.3.desc':'Reserveringen die binnenkomen terwijl jij aan het werk bent, op elk apparaat foutloos.',
+      'services.4.title':'Verzekeringen &amp; Financiële Diensten', 'services.4.desc':'Vertrouwen wekken nog voordat het eerste gesprek begint — premium en professioneel.',
+      'renov.crumb':'Bouw &amp; Verbouw &middot; Amsterdam', 'renov.badge':'Massief Bouw &middot; Sinds 2014',
+      'renov.before':'Voor', 'renov.after':'Na',
+      'renov.stat1':'Projecten', 'renov.stat2':'Beoordeling', 'renov.stat3':'Dgn Gem.', 'renov.stat4':'Sinds',
+      'renov.cta':'Plan Adviesgesprek <span class="btn-arrow">&rarr;</span>',
+      'gym.crumb':'Sportscholen &middot; Boksen',
+      'gym.stat1':'Opgericht', 'gym.stat2':'Leden', 'gym.stat3':'Programma&#39;s', 'gym.stat4':'Dagen/Wk',
+      'gym.cta':'Boek Gratis Proefles <span class="btn-arrow">&rarr;</span>',
+      'realty.crumb':'Vastgoed &middot; Amsterdam', 'realty.beds':'6 Slaapkamers', 'realty.floorLabel':'VERDIEPING',
+      'realty.statLabel1':'Isolatie', 'realty.statLabel2':'Daglicht', 'realty.statLabel3':'Plafond',
+      'omakase.crumb':'Restaurants &middot; Reserveren', 'omakase.tag':'Vanavond beschikbaar',
+      'omakase.title':'Reserveer Je<br>Omakase Experience',
+      'omakase.dateLabel':'Datum', 'omakase.dateValue':'Vanavond &middot; 19:30', 'omakase.tableLabel':'Tafel',
+      'omakase.cta':'Reserveer Nu <span class="btn-arrow">&rarr;</span>',
+      'cover.crumb':'Verzekeringen &middot; Wereldwijd', 'cover.tag':'Offerte binnen 60 sec',
+      'cover.title':'Verzekeringen Zonder Grenzen.',
+      'cover.field1':'Land van verblijf', 'cover.value1':'Thailand',
+      'cover.field2':'Nationaliteit', 'cover.value2':'Nederlands',
+      'cover.field3':'Leeftijd', 'cover.value3':'34 jaar',
+      'cover.field4':'Dekking', 'cover.value4':'Wereldwijd',
+      'cover.bestMatch':'Beste Match', 'cover.perMonth':'/mnd',
+      'cover.cta':'Vergelijk Nu <span class="btn-arrow">&rarr;</span>',
+      'process.h2':'Hoe de gratis demo werkt.', 'process.sub':'Een risicovrije manier om een website te krijgen waar je trots op bent.',
+      'process.1.title':'Wij ontwerpen eerst', 'process.1.desc':'Deel je bedrijf, doelen en gewenste stijl. Je ontvangt een op maat gemaakt homepage-concept, nog vóór je iets afspreekt.',
+      'process.2.title':'Jij keurt het goed', 'process.2.desc':'Voelt het concept goed? Dan bouwen we de volledige site uit, optimaliseren we \'m voor mobiel, en bereiden we de lancering voor.',
+      'process.3.title':'Wij houden het draaiende', 'process.3.desc':'Hosting, onderhoud, updates en support — inbegrepen in een overzichtelijk maandelijks abonnement.',
+      'work.h2':'Ons werk.', 'work.sub':'Voorbeelden van websites die we hebben gebouwd — klik door naar de live site.',
+      'work.1.tag':'Vastgoed &amp; Makelaars', 'work.1.alt':'Silverwood Residences — Bangkok vastgoedwebsite homepage',
+      'work.2.tag':'Sportschool &amp; Fitness', 'work.2.alt':'1Boxing — boksschool website homepage',
+      'work.3.tag':'Verzekeringen', 'work.3.alt':'Borderless Insurance — verzekeringswebsite homepage',
+      'work.4.tag':'Kapperszaak', 'work.caseStudy':'Case Study',
+      'testimonials.h2':'Wat klanten zeggen.', 'testimonials.sub':'Echte reacties van bedrijven die de gratis demo omzetten in een live website.',
+      'testimonials.1.quote':'"Het gratis concept maakte de beslissing makkelijk. Het was beter dan de pitches van bureaus waar we al voor hadden betaald."',
+      'testimonials.2.quote':'"Door BJF Web Design hebben we eindelijk een website die premium aanvoelt, snel laadt en maand tot maand voor ons wordt beheerd."',
+      'pricing.h2':'Eenvoudige en<br>transparante prijzen.', 'pricing.sub':'Je betaalt pas nadat je het gratis ontwerp hebt goedgekeurd. Bekijk de volledige prijslijst met alle pakketten.',
+      'pricing.1.tag':'Stap 1', 'pricing.1.title':'Eenmalige Opzet', 'pricing.1.desc':'Op maat geprijsd per pakket. Je betaalt pas na goedkeuring van je gratis ontwerp.',
+      'pricing.1.price':'Vanaf €499', 'pricing.1.from':'eenmalig',
+      'pricing.1.feat1':'Volledige website build', 'pricing.1.feat2':'Responsive optimalisatie', 'pricing.1.feat3':'Lancering &amp; analytics setup', 'pricing.1.feat4':'Domeinoverdracht',
+      'pricing.viewAll':'Bekijk Alle Pakketten <span class="btn-arrow">→</span>',
+      'pricing.2.tag':'Stap 2', 'pricing.2.title':'Maandelijkse Zorg', 'pricing.2.desc':'Hosting + support, zodat je nergens meer naar hoeft om te kijken.',
+      'pricing.2.price':'Vanaf €49<span>/maand</span>', 'pricing.2.from':'doorlopend, maandelijks opzegbaar',
+      'pricing.2.feat1':'Beveiligde hosting &amp; performance monitoring', 'pricing.2.feat2':'Onderhoud, back-ups &amp; updates', 'pricing.2.feat3':'Doorlopende support voor kleine aanpassingen',
+      'cta.eyebrow':'Start Vandaag', 'cta.h2':'Start met een gratis<br>preview voor jouw bedrijf.',
+      'cta.sub':'Vertel ons kort over je bedrijf. Je ontvangt een op maat gemaakt homepage-concept — volledig gratis en vrijblijvend, meestal binnen 48 uur.',
+      'cta.stat1':'Reactietijd', 'cta.stat2':'Vrijblijvend', 'cta.stat3':'Op Maat',
+      'form.nameLabel':'Naam + Bedrijfsnaam', 'form.namePlaceholder':'Jan Jansen — Jansen B.V.',
+      'form.emailLabel':'Email', 'form.emailPlaceholder':'jan@jansen.nl',
+      'form.messageLabel':'Wat wil je dat we voor je ontwerpen?', 'form.messagePlaceholder':'Vertel ons kort over je bedrijf en wat je zoekt...',
+      'form.disclaimer':'Geen verplichting. Je ontvangt van ons de volgende stappen voor je gratis websitevoorbeeld.',
+      'form.successTitle':'Aanvraag verzonden.', 'form.successBody':'Bedankt! We nemen binnen 48 uur contact met je op met de volgende stappen voor je gratis websitevoorbeeld.',
+      'footer.h2':'Laten we praten<br>over je website.', 'footer.studio':'Studio', 'footer.freeDemo':'Gratis Demo',
+      'footer.industries':'Industrieën', 'footer.realEstate':'Vastgoed', 'footer.insurance':'Verzekeringen',
+      'footer.sportBeauty':'Sport &amp; Beauty', 'footer.constructionLocal':'Bouw &amp; Lokaal',
+      'footer.servingNL':'Werkzaam voor heel NL', 'footer.rights':'© 2026 BJF Web Design. Alle rechten voorbehouden.'
+    },
+    en: {
+      __title: 'BJF Web Design — Free Demo First. Pay Only If You Launch.',
+      __desc: 'BJF Web Design designs a free homepage concept before you pay. Premium websites, SaaS-level polish, hosting and support included.',
+      'nav.work':'Work', 'nav.process':'Process', 'nav.pricing':'View All Packages',
+      'nav.cta':'Request Free Demo <span class="btn-arrow">→</span>',
+      'hero.eyebrow':'Free demo first. Pay only if you want to launch.',
+      'hero.h1':'Premium websites,<br><span class="hl">designed before you decide.</span>',
+      'hero.sub':'A free, custom-made homepage concept — before you pay a single thing. First design within 48 hours, zero upfront design risk.',
+      'hero.cta1':'Request Free Demo <span class="btn-arrow">→</span>',
+      'hero.cta2':'View Our Work',
+      'hero.stat1num':'48h', 'hero.stat1':'First Design', 'hero.stat2':'Upfront Risk', 'hero.stat3':'Hosting &amp; Support',
+      'marquee.1':'Free Demo First', 'marquee.2':'No Risk Upfront', 'marquee.3':'Design Within 48 Hours',
+      'marquee.4':'Hosting &amp; Support Included', 'marquee.5':'SaaS-Level Polish', 'marquee.6':'Cancel Anytime',
+      'manifesto.eyebrow':'01 — Why This Works',
+      'manifesto.text':'Most agencies make you pay before you\'ve seen anything. We flip that. First, a free, tailor-made concept. No risk. No surprises. Just a confident decision.',
+      'services.eyebrow':'02 — Who We Build For',
+      'services.0.title':'Construction &amp; Local Services', 'services.0.desc':'The first impression that turns a visitor into a quote request.',
+      'services.1.title':'Gyms &amp; Beauty Salons', 'services.1.desc':'A booking or sign-up just one click away from your homepage.',
+      'services.2.title':'Real Estate &amp; Brokers', 'services.2.desc':'Let a property sell itself before the viewing even starts — with visuals that build trust.',
+      'services.3.title':'Restaurants &amp; Hotels', 'services.3.desc':'Reservations that come in while you\'re at work, flawless on every device.',
+      'services.4.title':'Insurance &amp; Financial Services', 'services.4.desc':'Build trust before the first conversation even starts — premium and professional.',
+      'renov.crumb':'Construction &amp; Renovation &middot; Amsterdam', 'renov.badge':'Massief Bouw &middot; Since 2014',
+      'renov.before':'Before', 'renov.after':'After',
+      'renov.stat1':'Projects', 'renov.stat2':'Rating', 'renov.stat3':'Days Avg.', 'renov.stat4':'Since',
+      'renov.cta':'Book a Consultation <span class="btn-arrow">&rarr;</span>',
+      'gym.crumb':'Gyms &middot; Boxing',
+      'gym.stat1':'Founded', 'gym.stat2':'Members', 'gym.stat3':'Programs', 'gym.stat4':'Days/Wk',
+      'gym.cta':'Book a Free Trial Class <span class="btn-arrow">&rarr;</span>',
+      'realty.crumb':'Real Estate &middot; Amsterdam', 'realty.beds':'6 Bedrooms', 'realty.floorLabel':'FLOOR',
+      'realty.statLabel1':'Insulation', 'realty.statLabel2':'Daylight', 'realty.statLabel3':'Ceiling',
+      'omakase.crumb':'Restaurants &middot; Reservations', 'omakase.tag':'Available tonight',
+      'omakase.title':'Reserve Your<br>Omakase Experience',
+      'omakase.dateLabel':'Date', 'omakase.dateValue':'Tonight &middot; 19:30', 'omakase.tableLabel':'Table',
+      'omakase.cta':'Reserve Now <span class="btn-arrow">&rarr;</span>',
+      'cover.crumb':'Insurance &middot; Worldwide', 'cover.tag':'Quote in 60 sec',
+      'cover.title':'Insurance Without Borders.',
+      'cover.field1':'Country of residence', 'cover.value1':'Thailand',
+      'cover.field2':'Nationality', 'cover.value2':'Dutch',
+      'cover.field3':'Age', 'cover.value3':'34 years',
+      'cover.field4':'Coverage', 'cover.value4':'Worldwide',
+      'cover.bestMatch':'Best Match', 'cover.perMonth':'/mo',
+      'cover.cta':'Compare Now <span class="btn-arrow">&rarr;</span>',
+      'process.h2':'How the free demo works.', 'process.sub':'A risk-free way to get a website you\'re proud of.',
+      'process.1.title':'We design first', 'process.1.desc':'Share your business, goals, and preferred style. You\'ll receive a tailor-made homepage concept before you commit to anything.',
+      'process.2.title':'You approve it', 'process.2.desc':'Happy with the concept? We build out the full site, optimize it for mobile, and prepare it for launch.',
+      'process.3.title':'We keep it running', 'process.3.desc':'Hosting, maintenance, updates, and support — all included in one simple monthly plan.',
+      'work.h2':'Our work.', 'work.sub':'Examples of websites we\'ve built — click through to the live site.',
+      'work.1.tag':'Real Estate &amp; Brokers', 'work.1.alt':'Silverwood Residences — Bangkok real estate website homepage',
+      'work.2.tag':'Gym &amp; Fitness', 'work.2.alt':'1Boxing — boxing gym website homepage',
+      'work.3.tag':'Insurance', 'work.3.alt':'Borderless Insurance — insurance website homepage',
+      'work.4.tag':'Hair Salon', 'work.caseStudy':'Case Study',
+      'testimonials.h2':'What clients say.', 'testimonials.sub':'Real feedback from businesses who turned the free demo into a live website.',
+      'testimonials.1.quote':'"The free concept made the decision easy. It was better than the pitches from agencies we\'d already paid for."',
+      'testimonials.2.quote':'"Thanks to BJF Web Design we finally have a website that feels premium, loads fast, and is managed for us month to month."',
+      'pricing.h2':'Simple and<br>transparent pricing.', 'pricing.sub':'You only pay after approving the free design. See the full price list with all packages.',
+      'pricing.1.tag':'Step 1', 'pricing.1.title':'One-Time Setup', 'pricing.1.desc':'Custom priced per package. You only pay after approving your free design.',
+      'pricing.1.price':'From €499', 'pricing.1.from':'one-time',
+      'pricing.1.feat1':'Full website build', 'pricing.1.feat2':'Responsive optimization', 'pricing.1.feat3':'Launch &amp; analytics setup', 'pricing.1.feat4':'Domain transfer',
+      'pricing.viewAll':'View All Packages <span class="btn-arrow">→</span>',
+      'pricing.2.tag':'Step 2', 'pricing.2.title':'Monthly Care', 'pricing.2.desc':'Hosting + support, so you never have to worry about it.',
+      'pricing.2.price':'From €49<span>/month</span>', 'pricing.2.from':'ongoing, cancel anytime',
+      'pricing.2.feat1':'Secure hosting &amp; performance monitoring', 'pricing.2.feat2':'Maintenance, backups &amp; updates', 'pricing.2.feat3':'Ongoing support for small changes',
+      'cta.eyebrow':'Start Today', 'cta.h2':'Start with a free<br>preview for your business.',
+      'cta.sub':'Tell us briefly about your business. You\'ll receive a tailor-made homepage concept — completely free and with no obligation, usually within 48 hours.',
+      'cta.stat1':'Response Time', 'cta.stat2':'No Obligation', 'cta.stat3':'Tailor-Made',
+      'form.nameLabel':'Name + Company Name', 'form.namePlaceholder':'John Smith — Smith Ltd.',
+      'form.emailLabel':'Email', 'form.emailPlaceholder':'john@smith.com',
+      'form.messageLabel':'What would you like us to design for you?', 'form.messagePlaceholder':'Tell us briefly about your business and what you\'re looking for...',
+      'form.disclaimer':'No obligation. We\'ll send you the next steps for your free website preview.',
+      'form.successTitle':'Request sent.', 'form.successBody':'Thank you! We\'ll contact you within 48 hours with the next steps for your free website preview.',
+      'footer.h2':'Let\'s talk<br>about your website.', 'footer.studio':'Studio', 'footer.freeDemo':'Free Demo',
+      'footer.industries':'Industries', 'footer.realEstate':'Real Estate', 'footer.insurance':'Insurance',
+      'footer.sportBeauty':'Sports &amp; Beauty', 'footer.constructionLocal':'Construction &amp; Local',
+      'footer.servingNL':'Serving all of the Netherlands', 'footer.rights':'© 2026 BJF Web Design. All rights reserved.'
+    }
+  };
+ 
+  const pageTitleEl = document.getElementById('pageTitle');
+  const pageDescEl = document.getElementById('pageDesc');
+  const langToggles = document.querySelectorAll('.lang-toggle');
+ 
+  function applyLanguage(lang, opts){
+    opts = opts || {};
+    const dict = I18N[lang];
+    if(!dict) return;
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    if(pageTitleEl) pageTitleEl.textContent = dict.__title;
+    if(pageDescEl) pageDescEl.setAttribute('content', dict.__desc);
+ 
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+      const key = el.getAttribute('data-i18n-placeholder');
+      if(dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+    });
+    document.querySelectorAll('[data-i18n-alt]').forEach(el=>{
+      const key = el.getAttribute('data-i18n-alt');
+      if(dict[key] !== undefined) el.setAttribute('alt', dict[key]);
+    });
+ 
+    langToggles.forEach(t=>{
+      t.classList.toggle('lang-en', lang === 'en');
+      t.classList.toggle('lang-nl', lang === 'nl');
+      t.setAttribute('aria-label', lang === 'nl' ? 'Switch to English' : 'Wissel naar Nederlands');
+    });
+ 
+    // rebuild dynamic word-split effects with the new text
+    setupManifestoWords();
+    updateManifesto();
+    setupFloatHeadings();
+ 
+    // re-render currently-visible cycling widget text (realty / omakase / cover)
+    langRefreshers.forEach(fn=>fn());
+ 
+    if(!opts.silent){
+      try{ localStorage.setItem('bjf-lang', lang); }catch(e){}
+    }
+  }
+ 
+  langToggles.forEach(t=>{
+    t.addEventListener('click', ()=>{
+      applyLanguage(currentLang === 'nl' ? 'en' : 'nl');
+    });
+  });
+ 
+  let initialLang = 'nl';
+  try{
+    const saved = localStorage.getItem('bjf-lang');
+    if(saved === 'nl' || saved === 'en') initialLang = saved;
+  }catch(e){}
+  if(initialLang !== 'nl'){
+    applyLanguage(initialLang, {silent:true});
+  } else {
+    // still run once so the toggle UI + dynamic widgets reflect the nl default consistently
+    applyLanguage('nl', {silent:true});
+  }
  
 })();
 </script>
