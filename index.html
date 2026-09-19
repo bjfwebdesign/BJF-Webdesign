@@ -18,6 +18,8 @@ Claude Desktop (macOS), Connected
 
 
 
+
+
 Index · HTML
 <!DOCTYPE html>
 <html lang="nl">
@@ -1697,9 +1699,9 @@ Index · HTML
 <nav class="nav" id="nav">
   <a href="#top" class="logo"><span class="logo-mark"></span>BJF WEB DESIGN</a>
   <div class="nav-links">
-    <a href="#work" data-i18n="nav.work">Work</a>
+    <a href="#work" data-i18n="nav.work">Werk</a>
     <a href="#process" data-i18n="nav.process">Werkwijze</a>
-    <a href="pricing.html" data-i18n="nav.pricing">Bekijk Alle Pakketten</a>
+    <a href="pricing.html" data-i18n="nav.pricing">Prijzen</a>
   </div>
   <div class="nav-cta">
     <button class="lang-toggle lang-nl" id="langToggle" type="button" aria-label="Switch to English">
@@ -1713,9 +1715,9 @@ Index · HTML
 </nav>
  
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#work" data-i18n="nav.work">Work</a>
+  <a href="#work" data-i18n="nav.work">Werk</a>
   <a href="#process" data-i18n="nav.process">Werkwijze</a>
-  <a href="pricing.html" data-i18n="nav.pricing">Bekijk Alle Pakketten</a>
+  <a href="pricing.html" data-i18n="nav.pricing">Prijzen</a>
   <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Gratis Demo Aanvragen</a>
   <button class="lang-toggle lang-nl" id="langToggleMobile" type="button" aria-label="Switch to English">
     <span class="lang-thumb"></span>
@@ -2183,6 +2185,11 @@ Index · HTML
     </div>
  
     <form class="contact-form reveal" id="contactForm">
+      <!-- Web3Forms (https://web3forms.com) — free, no backend needed. Paste your access key below.
+           Get one at https://web3forms.com by entering your email; they email you the key instantly. -->
+      <input type="hidden" name="access_key" value="6d84837c-e33d-457b-a264-df1e1ced0465">
+      <input type="hidden" name="subject" value="Nieuwe demo aanvraag — BJF Web Design">
+      <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off">
       <div class="form-fields">
         <div class="form-row">
           <label for="cf-name" data-i18n="form.nameLabel">Naam + Bedrijfsnaam</label>
@@ -2196,8 +2203,9 @@ Index · HTML
           <label for="cf-message" data-i18n="form.messageLabel">Wat wil je dat we voor je ontwerpen?</label>
           <textarea id="cf-message" name="message" rows="4" placeholder="Vertel ons kort over je bedrijf en wat je zoekt..." data-i18n-placeholder="form.messagePlaceholder" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="justify-content:center;" data-i18n="nav.cta">Vraag Gratis Demo Aan <span class="btn-arrow">→</span></button>
+        <button type="submit" class="btn btn-primary" style="justify-content:center;" id="cfSubmitBtn" data-i18n="nav.cta">Vraag Gratis Demo Aan <span class="btn-arrow">→</span></button>
         <p class="form-disclaimer" data-i18n="form.disclaimer">Geen verplichting. Je ontvangt van ons de volgende stappen voor je gratis websitevoorbeeld.</p>
+        <p class="form-disclaimer" id="formError" style="display:none; color:#f87171;" data-i18n="form.errorBody">Er ging iets mis bij het versturen. Probeer het opnieuw of mail ons direct.</p>
       </div>
       <div class="form-success" id="formSuccess">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg>
@@ -2218,9 +2226,9 @@ Index · HTML
     <div class="footer-cols">
       <div class="footer-col">
         <h5 data-i18n="footer.studio">Studio</h5>
-        <a href="#work" data-i18n="nav.work">Work</a>
+        <a href="#work" data-i18n="nav.work">Werk</a>
         <a href="#process" data-i18n="nav.process">Werkwijze</a>
-        <a href="pricing.html" data-i18n="nav.pricing">Bekijk Alle Pakketten</a>
+        <a href="pricing.html" data-i18n="nav.pricing">Prijzen</a>
         <a href="#contact" data-i18n="footer.freeDemo">Gratis Demo</a>
       </div>
       <div class="footer-col">
@@ -2766,18 +2774,38 @@ Index · HTML
     }
   })();
  
-  /* ---------- contact form (front-end only — wire to a form backend to receive submissions) ---------- */
+  /* ---------- contact form — submits to Web3Forms (web3forms.com), no backend needed ---------- */
   const contactForm = document.getElementById('contactForm');
   const formSuccess = document.getElementById('formSuccess');
+  const formError = document.getElementById('formError');
+  const cfSubmitBtn = document.getElementById('cfSubmitBtn');
   if(contactForm){
-    contactForm.addEventListener('submit', e=>{
+    contactForm.addEventListener('submit', async e=>{
       e.preventDefault();
       if(!contactForm.checkValidity()){
         contactForm.reportValidity();
         return;
       }
-      contactForm.classList.add('submitted');
-      formSuccess.classList.add('show');
+      if(formError) formError.style.display = 'none';
+      const submitBtnHTML = cfSubmitBtn ? cfSubmitBtn.innerHTML : '';
+      if(cfSubmitBtn){ cfSubmitBtn.disabled = true; cfSubmitBtn.style.opacity = '0.6'; }
+      try{
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(contactForm)))
+        });
+        const data = await res.json();
+        if(data.success){
+          contactForm.classList.add('submitted');
+          formSuccess.classList.add('show');
+        } else {
+          throw new Error(data.message || 'submit failed');
+        }
+      } catch(err){
+        if(formError) formError.style.display = 'block';
+        if(cfSubmitBtn){ cfSubmitBtn.disabled = false; cfSubmitBtn.style.opacity = ''; cfSubmitBtn.innerHTML = submitBtnHTML; }
+      }
     });
   }
  
@@ -2811,7 +2839,7 @@ Index · HTML
     nl: {
       __title: 'BJF Web Design — Gratis Demo Eerst. Betaal Alleen Als Je Live Wilt.',
       __desc: 'BJF Web Design ontwerpt een gratis homepageconcept vóór je betaalt. Premium websites, SaaS-niveau afwerking, hosting en support inbegrepen.',
-      'nav.work':'Work', 'nav.process':'Werkwijze', 'nav.pricing':'Bekijk Alle Pakketten',
+      'nav.work':'Werk', 'nav.process':'Werkwijze', 'nav.pricing':'Prijzen',
       'nav.cta':'Gratis Demo Aanvragen <span class="btn-arrow">→</span>',
       'hero.eyebrow':'Eerst een gratis demo. Betaal alleen als je live wilt.',
       'hero.h1':'Premium websites,<br><span class="hl">ontworpen voordat je beslist.</span>',
@@ -2878,6 +2906,7 @@ Index · HTML
       'form.messageLabel':'Wat wil je dat we voor je ontwerpen?', 'form.messagePlaceholder':'Vertel ons kort over je bedrijf en wat je zoekt...',
       'form.disclaimer':'Geen verplichting. Je ontvangt van ons de volgende stappen voor je gratis websitevoorbeeld.',
       'form.successTitle':'Aanvraag verzonden.', 'form.successBody':'Bedankt! We nemen binnen 48 uur contact met je op met de volgende stappen voor je gratis websitevoorbeeld.',
+      'form.errorBody':'Er ging iets mis bij het versturen. Probeer het opnieuw of mail ons direct.',
       'footer.h2':'Laten we praten<br>over je website.', 'footer.studio':'Studio', 'footer.freeDemo':'Gratis Demo',
       'footer.industries':'Industrieën', 'footer.realEstate':'Vastgoed', 'footer.insurance':'Verzekeringen',
       'footer.sportBeauty':'Sport &amp; Beauty', 'footer.constructionLocal':'Bouw &amp; Lokaal',
@@ -2953,6 +2982,7 @@ Index · HTML
       'form.messageLabel':'What would you like us to design for you?', 'form.messagePlaceholder':'Tell us briefly about your business and what you\'re looking for...',
       'form.disclaimer':'No obligation. We\'ll send you the next steps for your free website preview.',
       'form.successTitle':'Request sent.', 'form.successBody':'Thank you! We\'ll contact you within 48 hours with the next steps for your free website preview.',
+      'form.errorBody':'Something went wrong while sending. Please try again or email us directly.',
       'footer.h2':'Let\'s talk<br>about your website.', 'footer.studio':'Studio', 'footer.freeDemo':'Free Demo',
       'footer.industries':'Industries', 'footer.realEstate':'Real Estate', 'footer.insurance':'Insurance',
       'footer.sportBeauty':'Sports &amp; Beauty', 'footer.constructionLocal':'Construction &amp; Local',
@@ -3028,3 +3058,5 @@ Index · HTML
 </body>
 </html>
  
+
+
