@@ -1289,11 +1289,62 @@
   }
 
   @media(max-width:900px){
-    .services-grid{grid-template-columns:1fr; gap:36px;}
+    /* Mobile gets its own layout: no scroll-hijacking, no shared/swapped
+       visual — each industry gets its text AND its own visual, one after
+       another, in normal document flow. `display:contents` on the three
+       wrapper elements below removes them from the box model so their
+       children (eyebrow, the 5 <li>, the 5 .visual-image cards) become
+       direct flex children of .services-grid, letting `order` interleave
+       them: eyebrow, item0, visual0, item1, visual1, ... item4, visual4. */
     .services{height:auto;}
-    .services-inner{position:relative; height:auto; padding:100px 0;}
-    .service-item, .service-item p{opacity:1; display:block;}
-    .services-visual{aspect-ratio:16/10;}
+    .services-inner{position:relative; height:auto; padding:90px 0;}
+    .services-grid{
+      display:flex;
+      flex-direction:column;
+      gap:0;
+      padding:0 24px;
+    }
+    .services-text-col{display:contents;}
+    .services-items{display:contents;}
+    .services-visual{display:contents;}
+
+    .service-item[data-index="0"]{order:1;}
+    .visual-image[data-index="0"]{order:2;}
+    .service-item[data-index="1"]{order:3;}
+    .visual-image[data-index="1"]{order:4;}
+    .service-item[data-index="2"]{order:5;}
+    .visual-image[data-index="2"]{order:6;}
+    .service-item[data-index="3"]{order:7;}
+    .visual-image[data-index="3"]{order:8;}
+    .service-item[data-index="4"]{order:9;}
+    .visual-image[data-index="4"]{order:10;}
+
+    .service-item{
+      opacity:1!important;
+      padding:0 0 18px 0!important;
+      border-bottom:none;
+    }
+    .service-item .num{color:var(--cyan)!important;}
+    .service-item p{display:block!important; opacity:1;}
+
+    .visual-image{
+      position:static!important;
+      opacity:1!important;
+      transform:none!important;
+      height:480px;
+      padding:16px;
+      margin-bottom:52px;
+      border-radius:22px;
+      border:1px solid var(--border);
+      background:linear-gradient(155deg, #10131d 0%, #0a0c13 100%);
+      overflow:hidden;
+    }
+    .visual-image:last-of-type{margin-bottom:0;}
+    /* .visual-card / .visual-card-inner keep their desktop height:100% rule —
+       it now resolves against .visual-image's explicit 480px instead of the
+       aspect-ratio box, so every internal flex proportion (cover-top vs.
+       cover-panel, realty-top vs. its stats bar, etc.) still has a real
+       height to distribute and nothing collapses or overlaps. */
   }
 
   /* ---------- process ---------- */
@@ -1470,6 +1521,39 @@
   }
   .price-card .price span{font-size:14px; color:var(--muted); font-weight:400; font-family:var(--ff-body);}
   .price-card .from{font-size:12px; color:var(--muted-2); margin-bottom:28px;}
+
+  /* ---------- first-time setup discount (499 -> 399), scroll-triggered ---------- */
+  .price-discount{display:flex; align-items:baseline; flex-wrap:wrap; gap:8px 10px;}
+  #setupPriceOld{
+    font-family:var(--ff-head); font-size:19px; font-weight:600; color:var(--muted-3);
+    text-decoration:line-through; text-decoration-thickness:1.5px; text-decoration-color:transparent;
+    opacity:0; transform:translateY(-3px);
+    transition:opacity .4s ease, transform .4s ease, text-decoration-color .5s ease .15s;
+  }
+  #setupPriceOld.struck{opacity:1; transform:none; text-decoration-color:var(--muted-3);}
+  #setupPriceNum{
+    font-family:var(--ff-head); font-size:38px; font-weight:700; color:var(--text);
+    transition:color .35s ease;
+  }
+  #setupPriceNum.landed{color:var(--cyan);}
+  .discount-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:6px 12px 6px 9px;
+    border-radius:100px;
+    background:var(--grad);
+    color:#05060a;
+    font-size:11.5px; font-weight:700; letter-spacing:0.01em;
+    margin-bottom:14px;
+    box-shadow:0 8px 20px rgba(103,232,249,0.25);
+    opacity:0; transform:scale(0.7) translateY(6px);
+    transition:opacity .45s cubic-bezier(.2,.8,.2,1), transform .5s cubic-bezier(.34,1.56,.64,1);
+  }
+  .discount-badge svg{width:13px; height:13px; flex-shrink:0;}
+  .discount-badge.pop-in{opacity:1; transform:scale(1) translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    #setupPriceOld, #setupPriceNum, .discount-badge{transition:none!important;}
+  }
+
   .price-feats{margin-bottom:32px; flex:1;}
   .price-feats li{
     display:flex; align-items:center; gap:10px;
@@ -1743,7 +1827,7 @@
 <section class="services" id="services">
   <div class="services-inner">
     <div class="services-grid">
-      <div>
+      <div class="services-text-col">
         <div class="eyebrow" data-i18n="services.eyebrow">02 — Voor Wie We Bouwen</div>
         <ul class="services-items" id="servicesList">
           <li class="service-item active" data-index="0">
@@ -2113,11 +2197,19 @@
       <p data-i18n="pricing.sub">Je betaalt pas nadat je het gratis ontwerp hebt goedgekeurd. Bekijk de volledige prijslijst met alle pakketten.</p>
     </div>
     <div class="pricing-grid reveal">
-      <div class="price-card">
+      <div class="price-card" id="setupPriceCard">
         <span class="tag" data-i18n="pricing.1.tag">Stap 1</span>
         <h3 data-i18n="pricing.1.title">Eenmalige Opzet</h3>
         <div class="desc" data-i18n="pricing.1.desc">Op maat geprijsd per pakket. Je betaalt pas na goedkeuring van je gratis ontwerp.</div>
-        <div class="price" data-i18n="pricing.1.price">Vanaf €499</div>
+        <div class="discount-badge" id="setupDiscountBadge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M13 2 3 14h7l-1 8 11-13h-7l1-7z"/></svg>
+          <span data-i18n="pricing.1.badge">Eerste Klant Korting</span>
+        </div>
+        <div class="price price-discount">
+          <span data-i18n="pricing.1.prefix">Vanaf</span>
+          <span id="setupPriceOld">€499</span>
+          <span id="setupPriceNum" data-target="399">€499</span>
+        </div>
         <div class="from" data-i18n="pricing.1.from">eenmalig</div>
         <ul class="price-feats">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pricing.1.feat1">Volledige website build</span></li>
@@ -2134,7 +2226,7 @@
         <span class="tag" data-i18n="pricing.2.tag">Stap 2</span>
         <h3 data-i18n="pricing.2.title">Maandelijkse Zorg</h3>
         <div class="desc" data-i18n="pricing.2.desc">Hosting + support, zodat je nergens meer naar hoeft om te kijken.</div>
-        <div class="price" data-i18n="pricing.2.price">Vanaf €49<span>/maand</span></div>
+        <div class="price" data-i18n="pricing.2.price">Vanaf €14,99<span>/maand</span></div>
         <div class="from" data-i18n="pricing.2.from">doorlopend, maandelijks opzegbaar</div>
         <ul class="price-feats">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pricing.2.feat1">Beveiligde hosting &amp; performance monitoring</span></li>
@@ -2474,7 +2566,12 @@
   const serviceItems = Array.from(document.querySelectorAll('.service-item'));
   const visualImages = Array.from(document.querySelectorAll('.visual-image'));
 
+  const servicesIsPinned = ()=> window.matchMedia('(min-width:901px)').matches;
   function updateServices(){
+    // below 900px the section isn't scroll-jacked — every panel has its own
+    // visual and is simply visible in normal flow (see the mobile CSS block),
+    // so there's no "active" swap to compute.
+    if(!servicesIsPinned()) return;
     const rect = servicesSection.getBoundingClientRect();
     const vh = window.innerHeight;
     const total = rect.height - vh;
@@ -2560,6 +2657,58 @@
       inner.style.transform = 'rotateY(0deg) rotateX(0deg)';
     });
   });
+
+  /* ---------- setup price: first-time discount reveal (499 -> 399) ---------- */
+  (function(){
+    const priceCard = document.getElementById('setupPriceCard');
+    const priceNumEl = document.getElementById('setupPriceNum');
+    const priceOldEl = document.getElementById('setupPriceOld');
+    const badgeEl = document.getElementById('setupDiscountBadge');
+    if(!priceCard || !priceNumEl || !priceOldEl || !badgeEl) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const startVal = 499;
+    const targetVal = parseInt(priceNumEl.dataset.target, 10) || 399;
+    let played = false;
+
+    function playDiscount(){
+      if(played) return;
+      played = true;
+      badgeEl.classList.add('pop-in');
+      priceOldEl.classList.add('struck');
+      if(reduceMotion){
+        priceNumEl.textContent = '€' + targetVal;
+        return;
+      }
+      const dur = 900;
+      let start = null;
+      function step(ts){
+        if(start === null) start = ts;
+        const p = Math.min((ts - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const current = Math.round(startVal - (startVal - targetVal) * eased);
+        priceNumEl.textContent = '€' + current;
+        if(p < 1){
+          requestAnimationFrame(step);
+        } else {
+          priceNumEl.textContent = '€' + targetVal;
+          priceNumEl.classList.add('landed');
+          setTimeout(()=> priceNumEl.classList.remove('landed'), 700);
+        }
+      }
+      // small delay so the badge/strikethrough register a beat before the number starts ticking down
+      setTimeout(()=> requestAnimationFrame(step), 200);
+    }
+
+    const priceIo = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          playDiscount();
+          priceIo.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.5});
+    priceIo.observe(priceCard);
+  })();
 
   /* ---------- realty scene animation (Vastgoed panel) ---------- */
   (function(){
@@ -2870,10 +3019,11 @@
       'pricing.h2':'Eenvoudige en<br>transparante prijzen.', 'pricing.sub':'Je betaalt pas nadat je het gratis ontwerp hebt goedgekeurd. Bekijk de volledige prijslijst met alle pakketten.',
       'pricing.1.tag':'Stap 1', 'pricing.1.title':'Eenmalige Opzet', 'pricing.1.desc':'Op maat geprijsd per pakket. Je betaalt pas na goedkeuring van je gratis ontwerp.',
       'pricing.1.price':'Vanaf €499', 'pricing.1.from':'eenmalig',
+      'pricing.1.badge':'Eerste Klant Korting', 'pricing.1.prefix':'Vanaf',
       'pricing.1.feat1':'Volledige website build', 'pricing.1.feat2':'Responsive optimalisatie', 'pricing.1.feat3':'Lancering &amp; analytics setup', 'pricing.1.feat4':'Domeinoverdracht',
       'pricing.viewAll':'Bekijk Alle Pakketten <span class="btn-arrow">→</span>',
       'pricing.2.tag':'Stap 2', 'pricing.2.title':'Maandelijkse Zorg', 'pricing.2.desc':'Hosting + support, zodat je nergens meer naar hoeft om te kijken.',
-      'pricing.2.price':'Vanaf €49<span>/maand</span>', 'pricing.2.from':'doorlopend, maandelijks opzegbaar',
+      'pricing.2.price':'Vanaf €14,99<span>/maand</span>', 'pricing.2.from':'doorlopend, maandelijks opzegbaar',
       'pricing.2.feat1':'Beveiligde hosting &amp; performance monitoring', 'pricing.2.feat2':'Onderhoud, back-ups &amp; updates', 'pricing.2.feat3':'Doorlopende support voor kleine aanpassingen',
       'cta.eyebrow':'Start Vandaag', 'cta.h2':'Start met een gratis<br>preview voor jouw bedrijf.',
       'cta.sub':'Vertel ons kort over je bedrijf. Je ontvangt een op maat gemaakt homepage-concept — volledig gratis en vrijblijvend, meestal binnen 48 uur.',
@@ -2946,10 +3096,11 @@
       'pricing.h2':'Simple and<br>transparent pricing.', 'pricing.sub':'You only pay after approving the free design. See the full price list with all packages.',
       'pricing.1.tag':'Step 1', 'pricing.1.title':'One-Time Setup', 'pricing.1.desc':'Custom priced per package. You only pay after approving your free design.',
       'pricing.1.price':'From €499', 'pricing.1.from':'one-time',
+      'pricing.1.badge':'First-Time Discount', 'pricing.1.prefix':'From',
       'pricing.1.feat1':'Full website build', 'pricing.1.feat2':'Responsive optimization', 'pricing.1.feat3':'Launch &amp; analytics setup', 'pricing.1.feat4':'Domain transfer',
       'pricing.viewAll':'View All Packages <span class="btn-arrow">→</span>',
       'pricing.2.tag':'Step 2', 'pricing.2.title':'Monthly Care', 'pricing.2.desc':'Hosting + support, so you never have to worry about it.',
-      'pricing.2.price':'From €49<span>/month</span>', 'pricing.2.from':'ongoing, cancel anytime',
+      'pricing.2.price':'From €14.99<span>/month</span>', 'pricing.2.from':'ongoing, cancel anytime',
       'pricing.2.feat1':'Secure hosting &amp; performance monitoring', 'pricing.2.feat2':'Maintenance, backups &amp; updates', 'pricing.2.feat3':'Ongoing support for small changes',
       'cta.eyebrow':'Start Today', 'cta.h2':'Start with a free<br>preview for your business.',
       'cta.sub':'Tell us briefly about your business. You\'ll receive a tailor-made homepage concept — completely free and with no obligation, usually within 48 hours.',
