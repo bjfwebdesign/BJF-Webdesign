@@ -1,26 +1,3 @@
-
-Claude Desktop (macOS), Connected
-/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Index · HTML
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -54,7 +31,7 @@ Index · HTML
     --ff-head:'Bricolage Grotesque', sans-serif;
     --ff-body:'Inter', sans-serif;
   }
- 
+
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
@@ -67,24 +44,24 @@ Index · HTML
     -webkit-font-smoothing:antialiased;
   }
   ::selection{background:rgba(103,232,249,0.25); color:#fff;}
- 
+
   a{color:inherit; text-decoration:none;}
   ul{list-style:none;}
   img,svg{display:block; max-width:100%;}
   button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit;}
- 
+
   .container{
     max-width:1240px;
     margin:0 auto;
     padding:0 32px;
   }
- 
+
   h1,h2,h3,h4{
     font-family:var(--ff-head);
     font-weight:600;
     letter-spacing:-0.01em;
   }
- 
+
   .eyebrow{
     display:flex;
     align-items:center;
@@ -105,7 +82,7 @@ Index · HTML
     box-shadow:0 0 12px rgba(103,232,249,0.7);
     flex-shrink:0;
   }
- 
+
   .btn{
     display:inline-flex;
     align-items:center;
@@ -137,7 +114,7 @@ Index · HTML
   }
   .btn-arrow{transition:transform .35s cubic-bezier(.2,.8,.2,1);}
   .btn:hover .btn-arrow{transform:translate(3px,-3px);}
- 
+
   /* ---------- custom cursor ---------- */
   #cursor-dot, #cursor-ring{
     position:fixed;
@@ -167,7 +144,7 @@ Index · HTML
   @media(hover:hover) and (pointer:fine){
     #cursor-dot,#cursor-ring{display:block;}
   }
- 
+
   /* ---------- nav ---------- */
   .nav{
     position:fixed;
@@ -219,7 +196,7 @@ Index · HTML
   .nav-links a:hover::after{width:100%;}
   .nav-cta{display:flex; align-items:center; gap:22px;}
   .nav .btn-primary{padding:11px 22px; font-size:13px;}
- 
+
   /* ---------- language toggle ---------- */
   .lang-toggle{
     position:relative;
@@ -291,7 +268,7 @@ Index · HTML
   .nav-toggle.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
   .nav-toggle.open span:nth-child(2){opacity:0;}
   .nav-toggle.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
- 
+
   .mobile-menu{
     position:fixed;
     inset:0;
@@ -309,7 +286,7 @@ Index · HTML
   .mobile-menu.open{transform:translateY(0);}
   .mobile-menu a{font-family:var(--ff-head); font-size:26px; font-weight:600; color:var(--text);}
   .mobile-menu a.btn{margin-top:14px; font-size:15px; color:#05060a;}
- 
+
   @media(max-width:860px){
     .nav-links{display:none;}
     .nav-cta .btn-primary{display:none;}
@@ -318,7 +295,7 @@ Index · HTML
     .nav{padding:20px 22px;}
     .nav.scrolled{padding:14px 22px;}
   }
- 
+
   /* ---------- hero ---------- */
   .hero{
     position:relative;
@@ -428,7 +405,7 @@ Index · HTML
     51%{transform-origin:bottom;}
     100%{transform:scaleY(0); transform-origin:bottom;}
   }
- 
+
   /* ---------- marquee ---------- */
   .marquee-band{
     position:relative;
@@ -465,7 +442,7 @@ Index · HTML
     from{transform:translateX(0);}
     to{transform:translateX(-50%);}
   }
- 
+
   /* ---------- manifesto (scroll-lit text) ---------- */
   .manifesto{
     padding:180px 0;
@@ -497,7 +474,7 @@ Index · HTML
     #manifestoText{transform:none!important;}
     .lit-text .w{opacity:1!important; filter:none!important;}
   }
- 
+
   /* ---------- section shell ---------- */
   .section-head{
     display:flex;
@@ -518,14 +495,14 @@ Index · HTML
     font-size:15px;
     line-height:1.6;
   }
- 
+
   .reveal{
     opacity:0;
     transform:translateY(34px);
     transition:opacity .8s cubic-bezier(.16,.8,.24,1), transform .8s cubic-bezier(.16,.8,.24,1);
   }
   .reveal.in-view{opacity:1; transform:translateY(0);}
- 
+
   /* ---------- float-in headings (ScrollFloat-style bouncy per-word pop) ---------- */
   .float-h2 .fwd{
     display:inline-block;
@@ -537,7 +514,7 @@ Index · HTML
   @media (prefers-reduced-motion: reduce){
     .float-h2 .fwd{opacity:1!important; transform:none!important; transition:none!important;}
   }
- 
+
   /* ---------- services (pinned) ---------- */
   .services{
     position:relative;
@@ -666,7 +643,7 @@ Index · HTML
     font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
     color:var(--muted-2);
   }
- 
+
   /* ---------- realty scene (Vastgoed panel — animated property-viewer mockup) ---------- */
   .visual-card .screen.realty-screen{
     flex-direction:column;
@@ -740,7 +717,7 @@ Index · HTML
   .realty-sqm{font-family:var(--ff-head); font-weight:600; font-size:25px; color:var(--text);}
   .realty-sqm-unit{font-size:13px; color:var(--muted-3); margin-left:2px; font-weight:400;}
   .realty-beds{font-size:10px; color:var(--muted-3); letter-spacing:0.02em; font-weight:400;}
- 
+
   .realty-panel{
     position:relative;
     flex:1;
@@ -758,7 +735,7 @@ Index · HTML
   .realty-floor-label .fl-num{color:var(--cyan);}
   .realty-floor-sub{font-size:9.5px; color:var(--muted-3); margin-top:2px;}
   .realty-floor-area{font-size:11px; font-weight:600; color:var(--text);}
- 
+
   .realty-fp{
     position:relative!important;
     flex:1;
@@ -779,13 +756,13 @@ Index · HTML
   .realty-fp .fp-dot{fill:var(--cyan); animation:realty-dot 2.4s ease-in-out infinite;}
   .realty-fp .fp-dot-b{fill:var(--violet); animation-delay:.5s;}
   .realty-fp .fp-dot-c{animation-delay:1s;}
- 
+
   .realty-stats{display:flex; gap:10px;}
   .stat{display:flex; align-items:center; gap:6px; flex:1; min-width:0;}
   .stat-dot{width:5px; height:5px; border-radius:50%; flex-shrink:0;}
   .stat-txt{display:flex; flex-direction:column; font-size:9px; color:var(--muted-3); line-height:1.35; min-width:0; white-space:nowrap;}
   .stat-txt b{font-size:10.5px; color:var(--text); font-weight:600;}
- 
+
   .realty-controls{display:flex; align-items:center; justify-content:space-between;}
   .realty-controls .arrows{display:flex; gap:6px;}
   .realty-arrow, .realty-dl{
@@ -795,7 +772,7 @@ Index · HTML
     font-size:10px; color:var(--muted-3);
     line-height:1;
   }
- 
+
   @keyframes realty-kenburns{ 0%{ transform:scale(1); } 100%{ transform:scale(1.06); } }
   @keyframes realty-ping{ 0%{ transform:scale(0.5); opacity:0.9; } 100%{ transform:scale(2.2); opacity:0; } }
   @keyframes realty-draw{
@@ -807,14 +784,14 @@ Index · HTML
     100%{ stroke-dashoffset:1; opacity:0; }
   }
   @keyframes realty-dot{ 0%,100%{ transform:scale(1); opacity:0.6; } 50%{ transform:scale(1.55); opacity:1; } }
- 
+
   @media (prefers-reduced-motion: reduce){
     .realty-photo, .realty-pin .ping, .realty-fp .fp-l, .realty-fp .fp-dot{
       animation:none!important;
     }
     .realty-fp .fp-l{stroke-dashoffset:0; opacity:1;}
   }
- 
+
   /* ---------- omakase scene (Restaurants & Hotels panel — real photo + booking widget mockup) ---------- */
   .visual-card .screen.omakase-screen{
     flex-direction:column;
@@ -874,13 +851,13 @@ Index · HTML
     color:var(--text);
     text-shadow:0 2px 10px rgba(0,0,0,0.55);
   }
- 
+
   @keyframes omakase-kenburns{ 0%{ transform:scale(1); } 100%{ transform:scale(1.05); } }
- 
+
   @media (prefers-reduced-motion: reduce){
     .omakase-photo{ animation:none!important; }
   }
- 
+
   .omakase-panel{
     position:relative;
     flex:1;
@@ -898,7 +875,7 @@ Index · HTML
   .omakase-step-sub{font-size:9.5px; color:var(--muted-3); margin-top:2px;}
   .omakase-step-value{font-size:11px; font-weight:600; color:var(--text); transition:color .35s ease;}
   .omakase-step-value.om-cyan{color:var(--cyan);}
- 
+
   .omakase-stage{position:relative; flex:1; min-height:0;}
   .omakase-state{
     position:absolute; inset:0;
@@ -910,7 +887,7 @@ Index · HTML
   .omakase-state.active{opacity:1; pointer-events:auto;}
   .omakase-state-select{justify-content:center;}
   .omakase-state-confirm{justify-content:space-between;}
- 
+
   .omakase-grid{display:flex; flex-wrap:wrap; align-content:center; justify-content:center; gap:7px;}
   .om-table{
     position:relative;
@@ -937,7 +914,7 @@ Index · HTML
     display:flex; align-items:center; justify-content:center;
     box-shadow:0 0 6px rgba(103,232,249,0.7);
   }
- 
+
   .omakase-confirm-row{display:flex; align-items:baseline; justify-content:space-between; gap:10px;}
   .ocr-label{font-size:9.5px; color:var(--muted-3); letter-spacing:0.02em;}
   .ocr-value{font-size:11px; font-weight:600; color:var(--text); text-align:right;}
@@ -951,7 +928,7 @@ Index · HTML
     font-size:11px; font-weight:600; letter-spacing:0.01em;
     box-shadow:0 8px 20px rgba(103,232,249,0.28);
   }
- 
+
   /* ---------- cover scene (Verzekeringen panel — Borderless Insurance real photo + compare widget) ---------- */
   .visual-card .screen.cover-screen{
     flex-direction:column;
@@ -1012,13 +989,13 @@ Index · HTML
     color:var(--text);
     text-shadow:0 2px 10px rgba(0,0,0,0.55);
   }
- 
+
   @keyframes cover-kenburns{ 0%{ transform:scale(1); } 100%{ transform:scale(1.05); } }
- 
+
   @media (prefers-reduced-motion: reduce){
     .cover-photo{ animation:none!important; }
   }
- 
+
   .cover-panel{
     position:relative;
     flex:1;
@@ -1036,7 +1013,7 @@ Index · HTML
   .cover-step-sub{font-size:9.5px; color:var(--muted-3); margin-top:2px;}
   .cover-step-value{font-size:11px; font-weight:600; color:var(--text); transition:color .35s ease;}
   .cover-step-value.cv-cyan{color:var(--cyan);}
- 
+
   .cover-stage{position:relative; flex:1; min-height:0;}
   .cover-state{
     position:absolute; inset:0;
@@ -1048,7 +1025,7 @@ Index · HTML
   .cover-state.active{opacity:1; pointer-events:auto;}
   .cover-state-coverage{justify-content:center;}
   .cover-state-stats{justify-content:space-between;}
- 
+
   .cover-cta{
     display:flex; align-items:center; justify-content:center; gap:7px;
     width:100%;
@@ -1060,7 +1037,7 @@ Index · HTML
     box-shadow:0 8px 20px rgba(103,232,249,0.28);
     flex-shrink:0;
   }
- 
+
   .cover-field-grid{display:grid; grid-template-columns:1fr 1fr; gap:6px; width:100%;}
   .cover-field{
     background:rgba(255,255,255,0.035);
@@ -1070,7 +1047,7 @@ Index · HTML
   }
   .cover-field .cf-label{font-size:7.5px; letter-spacing:0.05em; text-transform:uppercase; color:var(--muted-3);}
   .cover-field .cf-value{font-size:11.5px; font-weight:600; color:var(--text); margin-top:2px;}
- 
+
   .cover-results{display:flex; flex-direction:column; gap:4px; width:100%;}
   .cover-result-row{
     display:flex; align-items:center; justify-content:space-between;
@@ -1091,7 +1068,7 @@ Index · HTML
     padding:2px 6px; border-radius:20px;
     background:var(--grad); color:#05060a;
   }
- 
+
   /* ---------- gym scene (Sportscholen panel — full-bleed cinematic, deliberately different layout) ---------- */
   .gym-card{background:#000;}
   .visual-card .screen.gym-screen{
@@ -1108,7 +1085,7 @@ Index · HTML
     will-change:transform;
   }
   @keyframes gym-kenburns{ 0%{transform:scale(1) translateX(0);} 100%{transform:scale(1.1) translateX(-1.5%);} }
- 
+
   .gym-scrim{
     position:absolute; inset:0; z-index:1;
     background:
@@ -1124,7 +1101,7 @@ Index · HTML
     mix-blend-mode:screen;
   }
   @keyframes gym-sweep-move{ 0%,100%{transform:translateX(-60%);} 50%{transform:translateX(60%);} }
- 
+
   .gym-crumb{
     position:absolute; top:13px; left:15px; z-index:3;
     font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase;
@@ -1145,7 +1122,7 @@ Index · HTML
   }
   .gym-dot{width:5px; height:5px; border-radius:50%; background:#ff5468; box-shadow:0 0 6px rgba(255,84,104,0.85); flex-shrink:0; animation:gym-pulse 1.8s ease-in-out infinite;}
   @keyframes gym-pulse{ 0%,100%{opacity:1;} 50%{opacity:0.3;} }
- 
+
   .gym-marquee{
     position:absolute; left:-8%; right:-8%; top:52%; z-index:3;
     transform:translateY(-50%) rotate(-3.5deg);
@@ -1168,7 +1145,7 @@ Index · HTML
     text-transform:uppercase;
   }
   @keyframes gym-marquee-scroll{ 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
- 
+
   .gym-stats{
     position:absolute; left:15px; right:15px; bottom:52px; z-index:3;
     display:grid; grid-template-columns:repeat(4,1fr); gap:6px;
@@ -1183,7 +1160,7 @@ Index · HTML
   }
   .gym-stat-num{font-family:var(--ff-head); font-weight:700; font-size:13.5px; color:var(--text); line-height:1.1;}
   .gym-stat-label{font-size:6.5px; letter-spacing:0.04em; text-transform:uppercase; color:var(--muted-3); margin-top:2px;}
- 
+
   .gym-cta{
     position:absolute; right:15px; bottom:15px; z-index:4;
     display:flex; align-items:center; gap:6px;
@@ -1197,11 +1174,11 @@ Index · HTML
     animation:gym-cta-in 0.6s cubic-bezier(.2,.8,.2,1) 0.5s forwards;
   }
   @keyframes gym-cta-in{ to{opacity:1; transform:translateY(0);} }
- 
+
   @media (prefers-reduced-motion: reduce){
     .gym-photo, .gym-sweep, .gym-marquee-track, .gym-dot{ animation:none!important; }
   }
- 
+
   /* ---------- renovation before/after slider (Bouw & Lokale Diensten panel) ---------- */
   .renov-card{background:#000;}
   .visual-card .screen.renov-screen{display:block; overflow:hidden;}
@@ -1276,7 +1253,7 @@ Index · HTML
   }
   .renov-tag-before{ bottom:112px; left:15px; }
   .renov-tag-after{ bottom:112px; right:15px; }
- 
+
   .renov-stats{
     position:absolute; left:15px; right:15px; bottom:52px; z-index:3;
     display:grid; grid-template-columns:repeat(4,1fr); gap:6px;
@@ -1291,7 +1268,7 @@ Index · HTML
   }
   .renov-stat-num{font-family:var(--ff-head); font-weight:700; font-size:13.5px; color:var(--text); line-height:1.1;}
   .renov-stat-label{font-size:6.5px; letter-spacing:0.04em; text-transform:uppercase; color:var(--muted-3); margin-top:2px;}
- 
+
   .renov-cta{
     position:absolute; right:15px; bottom:15px; z-index:4;
     display:flex; align-items:center; gap:6px;
@@ -1304,13 +1281,13 @@ Index · HTML
     opacity:0; transform:translateY(8px);
     animation:gym-cta-in 0.6s cubic-bezier(.2,.8,.2,1) 0.5s forwards;
   }
- 
+
   @media (prefers-reduced-motion: reduce){
     .renov-before, .renov-after, .renov-divider{ animation:none!important; }
     .renov-before{ clip-path:inset(0 50% 0 0); }
     .renov-divider{ left:50%; }
   }
- 
+
   @media(max-width:900px){
     .services-grid{grid-template-columns:1fr; gap:36px;}
     .services{height:auto;}
@@ -1318,7 +1295,7 @@ Index · HTML
     .service-item, .service-item p{opacity:1; display:block;}
     .services-visual{aspect-ratio:16/10;}
   }
- 
+
   /* ---------- process ---------- */
   .process{padding:180px 0; background:var(--bg);}
   .process-grid{
@@ -1344,14 +1321,14 @@ Index · HTML
   }
   .process-card h3{font-size:19px; margin-bottom:10px;}
   .process-card p{font-size:14px; color:var(--muted); line-height:1.6;}
- 
+
   @media(max-width:900px){
     .process-grid{grid-template-columns:1fr 1fr;}
   }
   @media(max-width:560px){
     .process-grid{grid-template-columns:1fr;}
   }
- 
+
   /* ---------- work ---------- */
   .work{padding:180px 0; background:var(--bg-alt);}
   .work-grid{
@@ -1410,11 +1387,11 @@ Index · HTML
     color:var(--muted);
     letter-spacing:0.03em;
   }
- 
+
   @media(max-width:800px){
     .work-grid{grid-template-columns:1fr;}
   }
- 
+
   /* ---------- testimonials ---------- */
   .testimonials{padding:0 0 180px; background:var(--bg-alt);}
   .testimonial-grid{
@@ -1439,11 +1416,11 @@ Index · HTML
   .quote-author{display:flex; flex-direction:column; gap:2px;}
   .quote-author .name{font-size:14px; font-weight:600;}
   .quote-author .company{font-size:13px; color:var(--muted-2);}
- 
+
   @media(max-width:800px){
     .testimonial-grid{grid-template-columns:1fr;}
   }
- 
+
   /* ---------- pricing ---------- */
   .pricing{padding:180px 0; background:var(--bg);}
   .pricing-grid{
@@ -1502,12 +1479,12 @@ Index · HTML
   }
   .price-feats li:first-child{border-top:none;}
   .price-feats li svg{flex-shrink:0; width:14px; height:14px; color:var(--cyan);}
- 
+
   @media(max-width:900px){
     .pricing-grid{grid-template-columns:1fr; max-width:440px; margin:0 auto;}
     .price-connector{margin:2px auto; transform:rotate(90deg);}
   }
- 
+
   /* ---------- CTA band ---------- */
   .cta-band{
     position:relative;
@@ -1531,7 +1508,7 @@ Index · HTML
     transform:translate(-50%,-50%);
     pointer-events:none;
   }
- 
+
   .contact-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -1557,7 +1534,7 @@ Index · HTML
   .contact-intro .mini-stats div{text-align:left;}
   .contact-intro .mini-stats .num{font-family:var(--ff-head); font-size:22px; font-weight:700;}
   .contact-intro .mini-stats .lbl{font-size:11.5px; color:var(--muted-2); margin-top:2px;}
- 
+
   .contact-form{
     background:var(--surface);
     border:1px solid var(--border);
@@ -1601,14 +1578,14 @@ Index · HTML
   .form-success svg{width:44px; height:44px; color:var(--cyan);}
   .form-success h4{font-family:var(--ff-head); font-size:20px;}
   .form-success p{font-size:14px; color:var(--muted); max-width:320px;}
- 
+
   @media(max-width:900px){
     .contact-grid{grid-template-columns:1fr; gap:44px; text-align:center;}
     .contact-intro p{margin:0 auto;}
     .contact-intro .mini-stats{justify-content:center;}
     .contact-intro .mini-stats div{text-align:center;}
   }
- 
+
   /* ---------- footer ---------- */
   footer{
     position:relative;
@@ -1671,14 +1648,14 @@ Index · HTML
     flex-wrap:wrap;
     gap:10px;
   }
- 
+
   @media(max-width:700px){
     .footer-cols{grid-template-columns:1fr 1fr;}
   }
- 
+
   /* ---------- reveal utility for section headers etc ---------- */
   .section-pad{padding:180px 0;}
- 
+
   @media(max-width:640px){
     .container{padding:0 22px;}
     .hero-actions{flex-direction:column; align-items:stretch; width:80%; margin:0 auto 32px;}
@@ -1692,10 +1669,10 @@ Index · HTML
 </style>
 </head>
 <body>
- 
+
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
- 
+
 <nav class="nav" id="nav">
   <a href="#top" class="logo"><span class="logo-mark"></span>BJF WEB DESIGN</a>
   <div class="nav-links">
@@ -1713,7 +1690,7 @@ Index · HTML
   </div>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
 </nav>
- 
+
 <div class="mobile-menu" id="mobileMenu">
   <a href="#work" data-i18n="nav.work">Werk</a>
   <a href="#process" data-i18n="nav.process">Werkwijze</a>
@@ -1725,7 +1702,7 @@ Index · HTML
     <span class="lang-opt" data-lang="en">EN</span>
   </button>
 </div>
- 
+
 <section class="hero" id="top">
   <div class="hero-canvas-wrap" id="heroCanvasWrap">
     <canvas id="heroCanvas"></canvas>
@@ -1748,21 +1725,21 @@ Index · HTML
   </div>
   <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
 </section>
- 
+
 <div class="marquee-band">
   <div class="marquee-track" id="marqueeTrack">
     <span><i></i><span data-i18n="marquee.1">Gratis Demo Eerst</span><i></i><span data-i18n="marquee.2">Geen Risico Vooraf</span><i></i><span data-i18n="marquee.3">Ontwerp Binnen 48 Uur</span><i></i><span data-i18n="marquee.4">Hosting &amp; Support Inbegrepen</span><i></i><span data-i18n="marquee.5">SaaS-Niveau Afwerking</span><i></i><span data-i18n="marquee.6">Maandelijks Opzegbaar</span></span>
     <span><i></i><span data-i18n="marquee.1">Gratis Demo Eerst</span><i></i><span data-i18n="marquee.2">Geen Risico Vooraf</span><i></i><span data-i18n="marquee.3">Ontwerp Binnen 48 Uur</span><i></i><span data-i18n="marquee.4">Hosting &amp; Support Inbegrepen</span><i></i><span data-i18n="marquee.5">SaaS-Niveau Afwerking</span><i></i><span data-i18n="marquee.6">Maandelijks Opzegbaar</span></span>
   </div>
 </div>
- 
+
 <section class="manifesto">
   <div class="manifesto-inner">
     <div class="eyebrow" data-i18n="manifesto.eyebrow">01 — Waarom Dit Werkt</div>
     <p class="lit-text" id="manifestoText" data-i18n="manifesto.text">De meeste bureaus laten je betalen vóór je iets hebt gezien. Wij draaien dat om. Eerst een gratis, op maat gemaakt concept. Geen risico. Geen verrassingen. Alleen een besluit met vertrouwen.</p>
   </div>
 </section>
- 
+
 <section class="services" id="services">
   <div class="services-inner">
     <div class="services-grid">
@@ -1806,7 +1783,7 @@ Index · HTML
           </li>
         </ul>
       </div>
- 
+
       <div class="services-visual">
         <div class="visual-image active" data-index="0">
           <div class="visual-card renov-card" data-tilt>
@@ -2020,7 +1997,7 @@ Index · HTML
     </div>
   </div>
 </section>
- 
+
 <section class="process section-pad" id="process">
   <div class="container">
     <div class="section-head reveal">
@@ -2046,7 +2023,7 @@ Index · HTML
     </div>
   </div>
 </section>
- 
+
 <section class="work section-pad" id="work">
   <div class="container">
     <div class="section-head reveal">
@@ -2101,7 +2078,7 @@ Index · HTML
     </div>
   </div>
 </section>
- 
+
 <section class="testimonials" id="testimonials">
   <div class="container">
     <div class="section-head reveal">
@@ -2128,7 +2105,7 @@ Index · HTML
     </div>
   </div>
 </section>
- 
+
 <section class="pricing section-pad" id="pricing">
   <div class="container">
     <div class="section-head reveal">
@@ -2150,9 +2127,9 @@ Index · HTML
         </ul>
         <a href="pricing.html#realisatie" class="btn btn-ghost" style="justify-content:center;" data-i18n="pricing.viewAll">Bekijk Alle Pakketten <span class="btn-arrow">→</span></a>
       </div>
- 
+
       <div class="price-connector" aria-hidden="true">+</div>
- 
+
       <div class="price-card feat">
         <span class="tag" data-i18n="pricing.2.tag">Stap 2</span>
         <h3 data-i18n="pricing.2.title">Maandelijkse Zorg</h3>
@@ -2169,7 +2146,7 @@ Index · HTML
     </div>
   </div>
 </section>
- 
+
 <section class="cta-band" id="contact">
   <div class="cta-glow"></div>
   <div class="container contact-grid">
@@ -2183,7 +2160,7 @@ Index · HTML
         <div><div class="num">100%</div><div class="lbl" data-i18n="cta.stat3">Op Maat</div></div>
       </div>
     </div>
- 
+
     <form class="contact-form reveal" id="contactForm">
       <!-- Web3Forms (https://web3forms.com) — free, no backend needed. Paste your access key below.
            Get one at https://web3forms.com by entering your email; they email you the key instantly. -->
@@ -2215,7 +2192,7 @@ Index · HTML
     </form>
   </div>
 </section>
- 
+
 <footer>
   <div class="footer-glow" id="footerGlow"></div>
   <div class="container">
@@ -2257,21 +2234,21 @@ Index · HTML
     </div>
   </div>
 </footer>
- 
+
 <script>
 (function(){
   "use strict";
- 
+
   /* ---------- i18n state (populated near bottom of script) ---------- */
   let currentLang = 'nl';
   const langRefreshers = []; // functions that re-render currently-visible dynamic widget text on language switch
- 
+
   /* ---------- nav scroll state ---------- */
   const nav = document.getElementById('nav');
   function updateNav(){
     nav.classList.toggle('scrolled', window.scrollY > 30);
   }
- 
+
   /* ---------- custom cursor ---------- */
   const dot = document.getElementById('cursor-dot');
   const ring = document.getElementById('cursor-ring');
@@ -2291,7 +2268,7 @@ Index · HTML
     requestAnimationFrame(ringLoop);
   }
   requestAnimationFrame(ringLoop);
- 
+
   /* ---------- mobile menu ---------- */
   const navToggle = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -2306,7 +2283,7 @@ Index · HTML
     document.body.style.overflow = isOpen ? 'hidden' : '';
   });
   mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMobileMenu));
- 
+
   /* ---------- hero canvas: flowing ribbons + particles + ripple ---------- */
   const canvas = document.getElementById('heroCanvas');
   const ctx = canvas.getContext('2d');
@@ -2320,7 +2297,7 @@ Index · HTML
   }
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
- 
+
   const RIBBONS = Array.from({length:5}, (_,i)=>({
     offset: Math.random()*1000,
     speed: 0.5 + Math.random()*0.6,
@@ -2329,7 +2306,7 @@ Index · HTML
     rgb: i%2===0 ? '103,232,249' : '192,132,252',
     width: 1.1 + Math.random()*1.3,
   }));
- 
+
   const PARTICLES = Array.from({length:64}, ()=>({
     x: Math.random(), y: Math.random(),
     r: 0.6 + Math.random()*1.6,
@@ -2337,7 +2314,7 @@ Index · HTML
     vy: (Math.random()-0.5)*0.00035,
     a: 0.2 + Math.random()*0.5,
   }));
- 
+
   let ripples = [];
   function spawnRipple(x,y){
     ripples.push({x,y,r:0,a:0.5});
@@ -2351,7 +2328,7 @@ Index · HTML
   setInterval(()=>{
     spawnRipple(w*(0.25+Math.random()*0.5), h*(0.3+Math.random()*0.4));
   }, 3400);
- 
+
   const mouse = {x:0.5,y:0.5,tx:0.5,ty:0.5,active:false};
   window.addEventListener('pointermove', e=>{
     const r = canvas.getBoundingClientRect();
@@ -2361,7 +2338,7 @@ Index · HTML
       mouse.active = true;
     }
   });
- 
+
   const heroEl = document.querySelector('.hero');
   const heroContent = document.getElementById('heroContent');
   const heroCanvasWrap = document.getElementById('heroCanvasWrap');
@@ -2374,22 +2351,22 @@ Index · HTML
     heroContent.style.opacity = String(1 - heroProgress*1.25);
     heroCanvasWrap.style.transform = `scale(${1+heroProgress*0.18}) rotate(${heroProgress*3.2}deg)`;
   }
- 
+
   let t = 0;
   function drawHero(){
     t += 1;
     mouse.x += (mouse.tx-mouse.x)*0.045;
     mouse.y += (mouse.ty-mouse.y)*0.045;
- 
+
     ctx.clearRect(0,0,w,h);
- 
+
     // cursor-follow ambient glow
     const g = ctx.createRadialGradient(w*mouse.x, h*mouse.y, 0, w*mouse.x, h*mouse.y, Math.max(w,h)*0.55);
     g.addColorStop(0, 'rgba(103,232,249,0.07)');
     g.addColorStop(1, 'rgba(103,232,249,0)');
     ctx.fillStyle = g;
     ctx.fillRect(0,0,w,h);
- 
+
     // flowing ribbons
     RIBBONS.forEach(rb=>{
       ctx.beginPath();
@@ -2410,7 +2387,7 @@ Index · HTML
       ctx.stroke();
     });
     ctx.shadowBlur = 0;
- 
+
     // particles with cursor repulsion (touch-reactive)
     PARTICLES.forEach(p=>{
       p.x += p.vx; p.y += p.vy;
@@ -2428,7 +2405,7 @@ Index · HTML
       ctx.fillStyle = `rgba(232,238,255,${p.a})`;
       ctx.fill();
     });
- 
+
     // ripples ("hand touches water")
     ripples.forEach(rp=>{
       rp.r += 3.6;
@@ -2447,11 +2424,11 @@ Index · HTML
       ctx.lineWidth = 1;
       ctx.stroke();
     });
- 
+
     requestAnimationFrame(drawHero);
   }
   requestAnimationFrame(drawHero);
- 
+
   /* ---------- manifesto: text lights up + blurs in as you scroll/read (ScrollReveal-style) ---------- */
   const manifestoEl = document.getElementById('manifestoText');
   const manifestoReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2463,7 +2440,7 @@ Index · HTML
     wordEls = Array.from(manifestoEl.querySelectorAll('.w'));
   }
   setupManifestoWords();
- 
+
   function updateManifesto(){
     if(manifestoReduceMotion) return;
     const vh = window.innerHeight;
@@ -2484,19 +2461,19 @@ Index · HTML
         ? `0 0 ${(progress*16).toFixed(1)}px rgba(103,232,249,${(progress*0.55).toFixed(2)})`
         : 'none';
     }
- 
+
     // container-level unfold: rotate(baseRotation → 0) as the block scrolls in from the bottom,
     // left-hinged — same mechanic as ScrollReveal's container rotate scrollTrigger.
     const contRect = manifestoEl.getBoundingClientRect();
     const unfold = Math.min(Math.max((vh - contRect.top) / Math.max(contRect.height, 1), 0), 1);
     manifestoEl.style.transform = `rotate(${(manifestoBaseRotation * (1-unfold)).toFixed(2)}deg)`;
   }
- 
+
   /* ---------- services pinned scroll-swap ---------- */
   const servicesSection = document.getElementById('services');
   const serviceItems = Array.from(document.querySelectorAll('.service-item'));
   const visualImages = Array.from(document.querySelectorAll('.visual-image'));
- 
+
   function updateServices(){
     const rect = servicesSection.getBoundingClientRect();
     const vh = window.innerHeight;
@@ -2507,7 +2484,7 @@ Index · HTML
     serviceItems.forEach((el,i)=> el.classList.toggle('active', i===idx));
     visualImages.forEach((el,i)=> el.classList.toggle('active', i===idx));
   }
- 
+
   /* ---------- generic reveal-on-scroll ---------- */
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
@@ -2519,7 +2496,7 @@ Index · HTML
     });
   }, {threshold:0.14});
   revealEls.forEach(el=>io.observe(el));
- 
+
   /* ---------- float-in headings (ScrollFloat-style bouncy per-word pop) ---------- */
   const floatHeadings = document.querySelectorAll('.float-h2');
   function wrapFloatWords(el){
@@ -2567,7 +2544,7 @@ Index · HTML
     }, {threshold:0.3});
     floatHeadings.forEach(h2=>floatIo.observe(h2));
   }
- 
+
   /* ---------- tilt on hover (work cards + industry visuals) ---------- */
   document.querySelectorAll('[data-tilt]').forEach(card=>{
     const inner = card.querySelector('.work-card-inner') || card.querySelector('.visual-card-inner');
@@ -2583,11 +2560,11 @@ Index · HTML
       inner.style.transform = 'rotateY(0deg) rotateX(0deg)';
     });
   });
- 
+
   /* ---------- realty scene animation (Vastgoed panel) ---------- */
   (function(){
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- 
+
     const sqmEl = document.querySelector('.realty-sqm-num');
     if(sqmEl){
       const target = parseInt(sqmEl.dataset.target, 10) || 0;
@@ -2607,7 +2584,7 @@ Index · HTML
       countUp();
       if(!reduceMotion) setInterval(()=>{ sqmEl.textContent = '0'; countUp(); }, 7000);
     }
- 
+
     const fadeTargets = document.querySelectorAll('.fl-fade-target');
     if(fadeTargets.length){
       const FLOOR_STATES = {
@@ -2652,7 +2629,7 @@ Index · HTML
       }
     }
   })();
- 
+
   /* ---------- omakase booking widget state-swap (Restaurants panel) ---------- */
   (function(){
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2698,7 +2675,7 @@ Index · HTML
       }, 360);
     }, 4800);
   })();
- 
+
   /* ---------- cover compare-plans widget state-swap (Verzekeringen panel) ---------- */
   (function(){
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2744,7 +2721,7 @@ Index · HTML
       }, 360);
     }, 4800);
   })();
- 
+
   /* ---------- gym stat HUD count-up (Sportscholen panel) ---------- */
   (function(){
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2773,7 +2750,7 @@ Index · HTML
       }, 8000);
     }
   })();
- 
+
   /* ---------- contact form — submits to Web3Forms (web3forms.com), no backend needed ---------- */
   const contactForm = document.getElementById('contactForm');
   const formSuccess = document.getElementById('formSuccess');
@@ -2808,7 +2785,7 @@ Index · HTML
       }
     });
   }
- 
+
   /* ---------- footer magnetic glow ---------- */
   const footerGlow = document.getElementById('footerGlow');
   document.querySelector('footer').addEventListener('mousemove', e=>{
@@ -2816,7 +2793,7 @@ Index · HTML
     footerGlow.style.setProperty('--fx', (e.clientX-r.left)+'px');
     footerGlow.style.setProperty('--fy', (e.clientY-r.top)+'px');
   });
- 
+
   /* ---------- master scroll loop (throttled) ---------- */
   let ticking = false;
   function onScroll(){
@@ -2833,7 +2810,7 @@ Index · HTML
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
- 
+
   /* ---------- i18n: NL / EN dictionary + toggle ---------- */
   const I18N = {
     nl: {
@@ -2989,11 +2966,11 @@ Index · HTML
       'footer.servingNL':'Serving all of the Netherlands', 'footer.rights':'© 2026 BJF Web Design. All rights reserved.'
     }
   };
- 
+
   const pageTitleEl = document.getElementById('pageTitle');
   const pageDescEl = document.getElementById('pageDesc');
   const langToggles = document.querySelectorAll('.lang-toggle');
- 
+
   function applyLanguage(lang, opts){
     opts = opts || {};
     const dict = I18N[lang];
@@ -3002,7 +2979,7 @@ Index · HTML
     document.documentElement.lang = lang;
     if(pageTitleEl) pageTitleEl.textContent = dict.__title;
     if(pageDescEl) pageDescEl.setAttribute('content', dict.__desc);
- 
+
     document.querySelectorAll('[data-i18n]').forEach(el=>{
       const key = el.getAttribute('data-i18n');
       if(dict[key] !== undefined) el.innerHTML = dict[key];
@@ -3015,32 +2992,32 @@ Index · HTML
       const key = el.getAttribute('data-i18n-alt');
       if(dict[key] !== undefined) el.setAttribute('alt', dict[key]);
     });
- 
+
     langToggles.forEach(t=>{
       t.classList.toggle('lang-en', lang === 'en');
       t.classList.toggle('lang-nl', lang === 'nl');
       t.setAttribute('aria-label', lang === 'nl' ? 'Switch to English' : 'Wissel naar Nederlands');
     });
- 
+
     // rebuild dynamic word-split effects with the new text
     setupManifestoWords();
     updateManifesto();
     setupFloatHeadings();
- 
+
     // re-render currently-visible cycling widget text (realty / omakase / cover)
     langRefreshers.forEach(fn=>fn());
- 
+
     if(!opts.silent){
       try{ localStorage.setItem('bjf-lang', lang); }catch(e){}
     }
   }
- 
+
   langToggles.forEach(t=>{
     t.addEventListener('click', ()=>{
       applyLanguage(currentLang === 'nl' ? 'en' : 'nl');
     });
   });
- 
+
   let initialLang = 'nl';
   try{
     const saved = localStorage.getItem('bjf-lang');
@@ -3052,11 +3029,8 @@ Index · HTML
     // still run once so the toggle UI + dynamic widgets reflect the nl default consistently
     applyLanguage('nl', {silent:true});
   }
- 
+
 })();
 </script>
 </body>
 </html>
- 
-
-
