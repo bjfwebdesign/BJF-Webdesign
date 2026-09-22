@@ -460,6 +460,38 @@
     .tier-grid{grid-template-columns:1fr; max-width:460px; margin:0 auto;}
   }
 
+  /* ---------- first-time setup discount (-€100), scroll-triggered ---------- */
+  .price-discount{display:flex; align-items:baseline; flex-wrap:wrap; gap:6px 10px;}
+  .tier-price-old{
+    font-family:var(--ff-head); font-size:17px; font-weight:600; color:var(--muted-3);
+    text-decoration:line-through; text-decoration-thickness:1.5px; text-decoration-color:transparent;
+    opacity:0; transform:translateY(-3px);
+    transition:opacity .4s ease, transform .4s ease, text-decoration-color .5s ease .15s;
+  }
+  .tier-price-old.struck{opacity:1; transform:none; text-decoration-color:var(--muted-3);}
+  .tier-price-num{
+    font-family:var(--ff-head); font-size:36px; font-weight:700; color:var(--text);
+    transition:color .35s ease;
+  }
+  .tier-price-num.landed{color:var(--cyan);}
+  .discount-chip{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:5px 11px 5px 8px;
+    border-radius:100px;
+    background:var(--grad);
+    color:#05060a;
+    font-size:10.5px; font-weight:700; letter-spacing:0.01em;
+    margin-bottom:12px;
+    box-shadow:0 8px 18px rgba(103,232,249,0.25);
+    opacity:0; transform:scale(0.7) translateY(6px);
+    transition:opacity .45s cubic-bezier(.2,.8,.2,1), transform .5s cubic-bezier(.34,1.56,.64,1);
+  }
+  .discount-chip svg{width:12px; height:12px; flex-shrink:0;}
+  .discount-chip.pop-in{opacity:1; transform:scale(1) translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .tier-price-old, .tier-price-num, .discount-chip{transition:none!important;}
+  }
+
   /* ---------- comparison (reuses price-card surface language) ---------- */
   .compare-grid{
     display:grid;
@@ -641,32 +673,6 @@
   </div>
 </section>
 
-<section class="process section-pad">
-  <div class="container">
-    <div class="section-head reveal">
-      <h2>Hoe de gratis demo werkt.</h2>
-      <p>Een risicovrije manier om een website te krijgen waar je trots op bent.</p>
-    </div>
-    <div class="process-grid reveal">
-      <div class="process-card">
-        <div class="step-num">01</div>
-        <h3>Wij ontwerpen eerst</h3>
-        <p>Deel je bedrijf, doelen en gewenste stijl. Je ontvangt een op maat gemaakt homepage-concept, nog vóór je iets afspreekt.</p>
-      </div>
-      <div class="process-card">
-        <div class="step-num">02</div>
-        <h3>Jij keurt het goed</h3>
-        <p>Voelt het concept goed? Dan kies je hieronder het pakket dat past en bouwen we de volledige site uit, geoptimaliseerd voor mobiel.</p>
-      </div>
-      <div class="process-card">
-        <div class="step-num">03</div>
-        <h3>Wij houden het draaiende</h3>
-        <p>Hosting, onderhoud, updates en support — inbegrepen in een overzichtelijk maandelijks abonnement.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="pricing" id="realisatie">
   <div class="container">
     <div class="section-head centered reveal">
@@ -674,10 +680,17 @@
       <h2>Kies het realisatiepakket nadat je het ontwerp hebt goedgekeurd.</h2>
       <p>Eenmalige bouwkosten, op maat per pakket. Je betaalt pas na goedkeuring van je gratis ontwerp.</p>
     </div>
-    <div class="tier-grid reveal">
+    <div class="tier-grid reveal" id="realisatieTierGrid">
       <div class="price-card">
         <span class="tag">Starter+</span>
-        <h3>€499</h3>
+        <div class="discount-chip" id="chip1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M13 2 3 14h7l-1 8 11-13h-7l1-7z"/></svg>
+          <span>Eerste Klant Korting</span>
+        </div>
+        <h3 class="price price-discount">
+          <span class="tier-price-old" id="tierOld1">€499</span>
+          <span class="tier-price-num" id="tierNum1" data-target="399">€499</span>
+        </h3>
         <div class="desc">Voor professionele websites die snel online moeten.</div>
         <div class="from">eenmalig</div>
         <ul class="price-feats">
@@ -695,7 +708,14 @@
       <div class="price-card feat">
         <span class="badge">Meest Gekozen</span>
         <span class="tag">Professional</span>
-        <h3>€1.099</h3>
+        <div class="discount-chip" id="chip2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M13 2 3 14h7l-1 8 11-13h-7l1-7z"/></svg>
+          <span>Eerste Klant Korting</span>
+        </div>
+        <h3 class="price price-discount">
+          <span class="tier-price-old" id="tierOld2">€849</span>
+          <span class="tier-price-num" id="tierNum2" data-target="749">€849</span>
+        </h3>
         <div class="desc">Meest populair bij groeiende bedrijven.</div>
         <div class="from">eenmalig</div>
         <ul class="price-feats">
@@ -711,7 +731,14 @@
 
       <div class="price-card">
         <span class="tag">Business</span>
-        <h3>€2.099</h3>
+        <div class="discount-chip" id="chip3">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M13 2 3 14h7l-1 8 11-13h-7l1-7z"/></svg>
+          <span>Eerste Klant Korting</span>
+        </div>
+        <h3 class="price price-discount">
+          <span class="tier-price-old" id="tierOld3">€1.599</span>
+          <span class="tier-price-num" id="tierNum3" data-target="1499">€1.599</span>
+        </h3>
         <div class="desc">Voor bedrijven met meer pagina's en een uitgebreide website.</div>
         <div class="from">eenmalig</div>
         <ul class="price-feats">
@@ -738,7 +765,7 @@
     <div class="tier-grid reveal">
       <div class="price-card">
         <span class="tag">Basic</span>
-        <h3>€49<span> /mnd</span></h3>
+        <h3 class="price">€14,99<span> /mnd</span></h3>
         <div class="desc">Basisonderhoud voor een stabiele, veilige website.</div>
         <div class="from">doorlopend, maandelijks opzegbaar</div>
         <ul class="price-feats">
@@ -752,7 +779,7 @@
 
       <div class="price-card">
         <span class="tag">Professional</span>
-        <h3>€79<span> /mnd</span></h3>
+        <h3 class="price">€49,99<span> /mnd</span></h3>
         <div class="desc">Alles uit Basic, plus meer aandacht voor groei.</div>
         <div class="from">doorlopend, maandelijks opzegbaar</div>
         <ul class="price-feats">
@@ -767,7 +794,7 @@
 
       <div class="price-card">
         <span class="tag">Business+</span>
-        <h3>€109<span> /mnd</span></h3>
+        <h3 class="price">€69,99<span> /mnd</span></h3>
         <div class="desc">Voor bedrijven die maximale zorg en strategisch advies willen.</div>
         <div class="from">doorlopend, maandelijks opzegbaar</div>
         <ul class="price-feats">
@@ -1068,6 +1095,66 @@
     });
   }, {threshold:0.14});
   revealEls.forEach(el=>io.observe(el));
+
+  /* ---------- realisatie packages: first-time discount reveal (-€100), scroll-triggered ---------- */
+  (function(){
+    const grid = document.getElementById('realisatieTierGrid');
+    if(!grid) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cards = [
+      {chip:'chip1', old:'tierOld1', num:'tierNum1', start:499},
+      {chip:'chip2', old:'tierOld2', num:'tierNum2', start:849},
+      {chip:'chip3', old:'tierOld3', num:'tierNum3', start:1599},
+    ].map(c=>({
+      chipEl: document.getElementById(c.chip),
+      oldEl: document.getElementById(c.old),
+      numEl: document.getElementById(c.num),
+      start: c.start,
+      target: parseInt(document.getElementById(c.num)?.dataset.target, 10) || c.start,
+    })).filter(c=>c.chipEl && c.oldEl && c.numEl);
+
+    function fmt(n){ return '€' + Math.round(n).toLocaleString('nl-NL'); }
+
+    function playOne(c, delay){
+      c.chipEl.classList.add('pop-in');
+      c.oldEl.classList.add('struck');
+      if(reduceMotion){
+        c.numEl.textContent = fmt(c.target);
+        return;
+      }
+      const dur = 900;
+      setTimeout(()=>{
+        let start = null;
+        function step(ts){
+          if(start === null) start = ts;
+          const p = Math.min((ts - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const current = c.start - (c.start - c.target) * eased;
+          c.numEl.textContent = fmt(current);
+          if(p < 1){
+            requestAnimationFrame(step);
+          } else {
+            c.numEl.textContent = fmt(c.target);
+            c.numEl.classList.add('landed');
+            setTimeout(()=> c.numEl.classList.remove('landed'), 700);
+          }
+        }
+        requestAnimationFrame(step);
+      }, delay);
+    }
+
+    let played = false;
+    const priceIo = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting && !played){
+          played = true;
+          cards.forEach((c,i)=> playOne(c, 200 + i*150));
+          priceIo.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.4});
+    priceIo.observe(grid);
+  })();
 
   /* ---------- footer magnetic glow ---------- */
   const footerGlow = document.getElementById('footerGlow');
