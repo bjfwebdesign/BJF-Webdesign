@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prijzen — BJF Web Design</title>
-<meta name="description" content="Bekijk eerst hoe je website eruit kan zien, kies daarna pas een pakket. Transparante prijzen voor eenmalige realisatie en maandelijkse zorg. Gratis demo, geen risico vooraf.">
+<title id="pageTitle">Prijzen — BJF Web Design</title>
+<meta name="description" id="pageDesc" content="Bekijk eerst hoe je website eruit kan zien, kies daarna pas een pakket. Transparante prijzen voor eenmalige realisatie en maandelijkse zorg. Gratis demo, geen risico vooraf.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -194,6 +194,60 @@
   .nav-links a.active::after{width:100%;}
   .nav-cta{display:flex; align-items:center; gap:22px;}
   .nav .btn-primary{padding:11px 22px; font-size:13px;}
+
+  /* ---------- language toggle ---------- */
+  .lang-toggle{
+    position:relative;
+    display:flex;
+    align-items:center;
+    width:72px;
+    height:32px;
+    border-radius:100px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,0.03);
+    padding:3px;
+    flex-shrink:0;
+    transition:border-color .3s ease, background .3s ease;
+  }
+  .lang-toggle:hover{border-color:rgba(255,255,255,0.22);}
+  .lang-toggle .lang-thumb{
+    position:absolute;
+    top:3px; left:3px;
+    width:33px; height:24px;
+    border-radius:100px;
+    background:var(--grad);
+    box-shadow:0 2px 10px rgba(103,232,249,0.3);
+    transition:transform .4s cubic-bezier(.2,.8,.2,1);
+    z-index:0;
+  }
+  .lang-toggle.lang-en .lang-thumb{transform:translateX(33px);}
+  .lang-toggle .lang-opt{
+    position:relative;
+    z-index:1;
+    width:33px;
+    text-align:center;
+    font-family:var(--ff-head);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.03em;
+    color:var(--muted-2);
+    transition:color .35s ease;
+  }
+  .lang-toggle.lang-nl .lang-opt[data-lang="nl"],
+  .lang-toggle.lang-en .lang-opt[data-lang="en"]{color:#05060a;}
+  .mobile-menu .lang-toggle{
+    width:84px; height:38px;
+    margin-top:6px;
+  }
+  .mobile-menu .lang-toggle .lang-thumb{width:39px; height:30px;}
+  .mobile-menu .lang-toggle.lang-en .lang-thumb{transform:translateX(39px);}
+  .mobile-menu .lang-toggle .lang-opt{width:39px; font-size:13px;}
+  @media(max-width:860px){
+    .nav .lang-toggle{width:60px; height:28px;}
+    .nav .lang-toggle .lang-thumb{width:27px; height:22px;}
+    .nav .lang-toggle.lang-en .lang-thumb{transform:translateX(27px);}
+    .nav .lang-toggle .lang-opt{width:27px; font-size:10px;}
+  }
   .nav-toggle{
     display:none;
     flex-direction:column;
@@ -634,21 +688,31 @@
 <nav class="nav" id="nav">
   <a href="index.html#top" class="logo"><span class="logo-mark"></span>BJF WEB DESIGN</a>
   <div class="nav-links">
-    <a href="index.html#work">Work</a>
-    <a href="index.html#process">Werkwijze</a>
-    <a href="pricing.html" class="active">Bekijk Alle Pakketten</a>
+    <a href="index.html#work" data-i18n="nav.work">Werk</a>
+    <a href="index.html#process" data-i18n="nav.process">Werkwijze</a>
+    <a href="pricing.html" class="active" data-i18n="nav.pricing">Bekijk Alle Pakketten</a>
   </div>
   <div class="nav-cta">
-    <a href="index.html#contact" class="btn btn-primary">Gratis Demo Aanvragen <span class="btn-arrow">→</span></a>
+    <button class="lang-toggle lang-nl" id="langToggle" type="button" aria-label="Switch to English">
+      <span class="lang-thumb"></span>
+      <span class="lang-opt" data-lang="nl">NL</span>
+      <span class="lang-opt" data-lang="en">EN</span>
+    </button>
+    <a href="index.html#contact" class="btn btn-primary" data-i18n="nav.cta">Gratis Demo Aanvragen <span class="btn-arrow">→</span></a>
   </div>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html#work">Work</a>
-  <a href="index.html#process">Werkwijze</a>
-  <a href="pricing.html">Bekijk Alle Pakketten</a>
-  <a href="index.html#contact" class="btn btn-primary">Gratis Demo Aanvragen</a>
+  <a href="index.html#work" data-i18n="nav.work">Werk</a>
+  <a href="index.html#process" data-i18n="nav.process">Werkwijze</a>
+  <a href="pricing.html" data-i18n="nav.pricing">Bekijk Alle Pakketten</a>
+  <a href="index.html#contact" class="btn btn-primary" data-i18n="nav.cta">Gratis Demo Aanvragen</a>
+  <button class="lang-toggle lang-nl" id="langToggleMobile" type="button" aria-label="Switch to English">
+    <span class="lang-thumb"></span>
+    <span class="lang-opt" data-lang="nl">NL</span>
+    <span class="lang-opt" data-lang="en">EN</span>
+  </button>
 </div>
 
 <section class="hero" id="top">
@@ -658,17 +722,17 @@
   </div>
   <div class="hero-vignette"></div>
   <div class="container hero-content" id="heroContent">
-    <div class="eyebrow" style="justify-content:center;">Eerst vertrouwen, dan de prijzen</div>
-    <h1>Bekijk eerst hoe <span class="hl">je website eruit kan zien.</span></h1>
-    <p class="hero-sub">Je ziet en keurt eerst een gratis ontwerpconcept goed. Pas daarna kies je het realisatiepakket dat bij je bedrijf past — geen verrassingen, geen risico vooraf.</p>
+    <div class="eyebrow" style="justify-content:center;" data-i18n="hero.eyebrow">Eerst vertrouwen, dan de prijzen</div>
+    <h1 data-i18n="hero.h1">Bekijk eerst hoe <span class="hl">je website eruit kan zien.</span></h1>
+    <p class="hero-sub" data-i18n="hero.sub">Je ziet en keurt eerst een gratis ontwerpconcept goed. Pas daarna kies je het realisatiepakket dat bij je bedrijf past — geen verrassingen, geen risico vooraf.</p>
     <div class="hero-actions">
-      <a href="index.html#contact" class="btn btn-primary">Vraag Gratis Demo Aan <span class="btn-arrow">→</span></a>
-      <a href="index.html#work" class="btn btn-ghost">Bekijk Ons Werk</a>
+      <a href="index.html#contact" class="btn btn-primary" data-i18n="hero.cta1">Vraag Gratis Demo Aan <span class="btn-arrow">→</span></a>
+      <a href="index.html#work" class="btn btn-ghost" data-i18n="hero.cta2">Bekijk Ons Werk</a>
     </div>
     <div class="hero-stats">
-      <div><div class="num">48u</div><div class="lbl">Eerste Ontwerp</div></div>
-      <div><div class="num">€0</div><div class="lbl">Risico Vooraf</div></div>
-      <div><div class="num">Incl.</div><div class="lbl">Hosting &amp; Support</div></div>
+      <div><div class="num" data-i18n="hero.stat1num">48u</div><div class="lbl" data-i18n="hero.stat1">Eerste Ontwerp</div></div>
+      <div><div class="num">€0</div><div class="lbl" data-i18n="hero.stat2">Risico Vooraf</div></div>
+      <div><div class="num">Incl.</div><div class="lbl" data-i18n="hero.stat3">Hosting &amp; Support</div></div>
     </div>
   </div>
 </section>
@@ -676,80 +740,80 @@
 <section class="pricing" id="realisatie">
   <div class="container">
     <div class="section-head centered reveal">
-      <div class="eyebrow">Eenmalige Website-Realisatie</div>
-      <h2>Kies het realisatiepakket nadat je het ontwerp hebt goedgekeurd.</h2>
-      <p>Eenmalige bouwkosten, op maat per pakket. Je betaalt pas na goedkeuring van je gratis ontwerp.</p>
+      <div class="eyebrow" data-i18n="realisatie.eyebrow">Eenmalige Website-Realisatie</div>
+      <h2 data-i18n="realisatie.h2">Kies het realisatiepakket nadat je het ontwerp hebt goedgekeurd.</h2>
+      <p data-i18n="realisatie.sub">Eenmalige bouwkosten, op maat per pakket. Je betaalt pas na goedkeuring van je gratis ontwerp.</p>
     </div>
     <div class="tier-grid reveal" id="realisatieTierGrid">
       <div class="price-card">
         <span class="tag">Starter+</span>
         <div class="discount-chip" id="chip1">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M13 2 3 14h7l-1 8 11-13h-7l1-7z"/></svg>
-          <span>Eerste Klant Korting</span>
+          <span data-i18n="realisatie.discountBadge">Eerste Klant Korting</span>
         </div>
         <h3 class="price price-discount">
           <span class="tier-price-old" id="tierOld1">€499</span>
           <span class="tier-price-num" id="tierNum1" data-target="399">€499</span>
         </h3>
-        <div class="desc">Voor professionele websites die snel online moeten.</div>
-        <div class="from">eenmalig</div>
+        <div class="desc" data-i18n="realisatie.tier1.desc">Voor professionele websites die snel online moeten.</div>
+        <div class="from" data-i18n="realisatie.fromLabel">eenmalig</div>
         <ul class="price-feats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Gratis designvoorbeeld</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Website op maat, one-page</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Responsive design</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Contactformulier</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Basis SEO &amp; analytics</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>SSL, hosting gereed &amp; livegang</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>30 dagen support</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier1.feat.0">Gratis designvoorbeeld</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier1.feat.1">Website op maat, one-page</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier1.feat.2">Responsive design</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier1.feat.3">Contactformulier</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier1.feat.4">Basis SEO &amp; analytics</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier1.feat.5">SSL, hosting gereed &amp; livegang</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier1.feat.6">30 dagen support</span></li>
         </ul>
-        <a href="index.html#contact" class="btn btn-ghost">Begin met Starter+</a>
+        <a href="index.html#contact" class="btn btn-ghost" data-i18n="realisatie.tier1.cta">Begin met Starter+</a>
       </div>
 
       <div class="price-card feat">
-        <span class="badge">Meest Gekozen</span>
+        <span class="badge" data-i18n="realisatie.tier2.badge">Meest Gekozen</span>
         <span class="tag">Professional</span>
         <div class="discount-chip" id="chip2">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M13 2 3 14h7l-1 8 11-13h-7l1-7z"/></svg>
-          <span>Eerste Klant Korting</span>
+          <span data-i18n="realisatie.discountBadge">Eerste Klant Korting</span>
         </div>
         <h3 class="price price-discount">
           <span class="tier-price-old" id="tierOld2">€849</span>
           <span class="tier-price-num" id="tierNum2" data-target="749">€849</span>
         </h3>
-        <div class="desc">Meest populair bij groeiende bedrijven.</div>
-        <div class="from">eenmalig</div>
+        <div class="desc" data-i18n="realisatie.tier2.desc">Meest populair bij groeiende bedrijven.</div>
+        <div class="from" data-i18n="realisatie.fromLabel">eenmalig</div>
         <ul class="price-feats">
-          <li class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Alle functies van Starter+, plus</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Meerdere pagina's &amp; CMS</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Blog / portfolio</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Conversiegerichte structuur</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Geavanceerde responsive optimalisatie</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Integraties &amp; prioriteitssupport</li>
+          <li class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier2.feat.0">Alle functies van Starter+, plus</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier2.feat.1">Meerdere pagina's &amp; CMS</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier2.feat.2">Blog / portfolio</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier2.feat.3">Conversiegerichte structuur</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier2.feat.4">Geavanceerde responsive optimalisatie</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier2.feat.5">Integraties &amp; prioriteitssupport</span></li>
         </ul>
-        <a href="index.html#contact" class="btn btn-primary">Kies voor Professional</a>
+        <a href="index.html#contact" class="btn btn-primary" data-i18n="realisatie.tier2.cta">Kies voor Professional</a>
       </div>
 
       <div class="price-card">
         <span class="tag">Business</span>
         <div class="discount-chip" id="chip3">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M13 2 3 14h7l-1 8 11-13h-7l1-7z"/></svg>
-          <span>Eerste Klant Korting</span>
+          <span data-i18n="realisatie.discountBadge">Eerste Klant Korting</span>
         </div>
         <h3 class="price price-discount">
           <span class="tier-price-old" id="tierOld3">€1.599</span>
           <span class="tier-price-num" id="tierNum3" data-target="1499">€1.599</span>
         </h3>
-        <div class="desc">Voor bedrijven met meer pagina's en een uitgebreide website.</div>
-        <div class="from">eenmalig</div>
+        <div class="desc" data-i18n="realisatie.tier3.desc">Voor bedrijven met meer pagina's en een uitgebreide website.</div>
+        <div class="from" data-i18n="realisatie.fromLabel">eenmalig</div>
         <ul class="price-feats">
-          <li class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Alle functies van Professional, plus</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Volledig maatwerk &amp; animaties</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Complexe CMS-oplossingen</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Automatiseringen &amp; externe integraties</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Performance-optimalisatie</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Persoonlijke begeleiding</li>
+          <li class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier3.feat.0">Alle functies van Professional, plus</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier3.feat.1">Volledig maatwerk &amp; animaties</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier3.feat.2">Complexe CMS-oplossingen</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier3.feat.3">Automatiseringen &amp; externe integraties</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier3.feat.4">Performance-optimalisatie</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="realisatie.tier3.feat.5">Persoonlijke begeleiding</span></li>
         </ul>
-        <a href="index.html#contact" class="btn btn-ghost">Bouw met Business</a>
+        <a href="index.html#contact" class="btn btn-ghost" data-i18n="realisatie.tier3.cta">Bouw met Business</a>
       </div>
     </div>
   </div>
@@ -758,53 +822,53 @@
 <section class="pricing alt section-pad" id="zorg">
   <div class="container">
     <div class="section-head centered reveal">
-      <div class="eyebrow">Maandelijkse Zorg</div>
-      <h2>Onderhoud dat je website snel, veilig en up-to-date houdt.</h2>
-      <p>Doorlopend, maandelijks opzegbaar. Begint zodra je website live gaat.</p>
+      <div class="eyebrow" data-i18n="zorg.eyebrow">Maandelijkse Zorg</div>
+      <h2 data-i18n="zorg.h2">Onderhoud dat je website snel, veilig en up-to-date houdt.</h2>
+      <p data-i18n="zorg.sub">Doorlopend, maandelijks opzegbaar. Begint zodra je website live gaat.</p>
     </div>
     <div class="tier-grid reveal">
       <div class="price-card">
         <span class="tag">Basic</span>
-        <h3 class="price">€14,99<span> /mnd</span></h3>
-        <div class="desc">Basisonderhoud voor een stabiele, veilige website.</div>
-        <div class="from">doorlopend, maandelijks opzegbaar</div>
+        <h3 class="price">€14,99<span data-i18n="zorg.perMonth"> /mnd</span></h3>
+        <div class="desc" data-i18n="zorg.tier1.desc">Basisonderhoud voor een stabiele, veilige website.</div>
+        <div class="from" data-i18n="zorg.fromLabel">doorlopend, maandelijks opzegbaar</div>
         <ul class="price-feats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Veilige en snelle premium hosting</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Regelmatige beveiligingsupdates</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Doorlopend technisch onderhoud</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Persoonlijke support via e-mail</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="zorg.tier1.feat.0">Veilige en snelle premium hosting</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="zorg.tier1.feat.1">Regelmatige beveiligingsupdates</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="zorg.tier1.feat.2">Doorlopend technisch onderhoud</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="zorg.tier1.feat.3">Persoonlijke support via e-mail</span></li>
         </ul>
-        <a href="index.html#contact" class="btn btn-ghost">Kies Basic</a>
+        <a href="index.html#contact" class="btn btn-ghost" data-i18n="zorg.tier1.cta">Kies Basic</a>
       </div>
 
       <div class="price-card">
         <span class="tag">Professional</span>
-        <h3 class="price">€49,99<span> /mnd</span></h3>
-        <div class="desc">Alles uit Basic, plus meer aandacht voor groei.</div>
-        <div class="from">doorlopend, maandelijks opzegbaar</div>
+        <h3 class="price">€49,99<span data-i18n="zorg.perMonth"> /mnd</span></h3>
+        <div class="desc" data-i18n="zorg.tier2.desc">Alles uit Basic, plus meer aandacht voor groei.</div>
+        <div class="from" data-i18n="zorg.fromLabel">doorlopend, maandelijks opzegbaar</div>
         <ul class="price-feats">
-          <li class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Alles uit het Basic-pakket</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Regelmatige contentaanpassingen</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Prioriteit bij supportverzoeken</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Doorlopende performance monitoring</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Maandelijkse controle &amp; optimalisatie</li>
+          <li class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="zorg.tier2.feat.0">Alles uit het Basic-pakket</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="zorg.tier2.feat.1">Regelmatige contentaanpassingen</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="zorg.tier2.feat.2">Prioriteit bij supportverzoeken</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="zorg.tier2.feat.3">Doorlopende performance monitoring</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="zorg.tier2.feat.4">Maandelijkse controle &amp; optimalisatie</span></li>
         </ul>
-        <a href="index.html#contact" class="btn btn-ghost">Kies Professional</a>
+        <a href="index.html#contact" class="btn btn-ghost" data-i18n="zorg.tier2.cta">Kies Professional</a>
       </div>
 
       <div class="price-card">
         <span class="tag">Business+</span>
-        <h3 class="price">€69,99<span> /mnd</span></h3>
-        <div class="desc">Voor bedrijven die maximale zorg en strategisch advies willen.</div>
-        <div class="from">doorlopend, maandelijks opzegbaar</div>
+        <h3 class="price">€69,99<span data-i18n="zorg.perMonth"> /mnd</span></h3>
+        <div class="desc" data-i18n="zorg.tier3.desc">Voor bedrijven die maximale zorg en strategisch advies willen.</div>
+        <div class="from" data-i18n="zorg.fromLabel">doorlopend, maandelijks opzegbaar</div>
         <ul class="price-feats">
-          <li class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Alles uit het Professional-pakket</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Prioriteit bij updates en onderhoud</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Advies voor conversieverbetering</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Per kwartaal website-evaluatie</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Strategisch overleg voor verdere groei</li>
+          <li class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="zorg.tier3.feat.0">Alles uit het Professional-pakket</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="zorg.tier3.feat.1">Prioriteit bij updates en onderhoud</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="zorg.tier3.feat.2">Advies voor conversieverbetering</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="zorg.tier3.feat.3">Per kwartaal website-evaluatie</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="zorg.tier3.feat.4">Strategisch overleg voor verdere groei</span></li>
         </ul>
-        <a href="index.html#contact" class="btn btn-ghost">Kies Business+</a>
+        <a href="index.html#contact" class="btn btn-ghost" data-i18n="zorg.tier3.cta">Kies Business+</a>
       </div>
     </div>
   </div>
@@ -813,25 +877,25 @@
 <section class="section-pad" style="padding-top:0;">
   <div class="container">
     <div class="section-head centered reveal">
-      <h2>Een zorgeloze weg naar een professionele website.</h2>
+      <h2 data-i18n="compare.h2">Een zorgeloze weg naar een professionele website.</h2>
     </div>
     <div class="compare-grid reveal">
       <div class="price-card">
-        <h3 style="font-size:18px;">Traditionele werkwijze</h3>
+        <h3 style="font-size:18px;" data-i18n="compare.old.title">Traditionele werkwijze</h3>
         <ul class="compare-list no">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>Eerst betalen, daarna pas het ontwerp</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>Wekenlange trajecten voordat er iets zichtbaar is</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>Na de oplevering sta je er vaak alleen voor</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>Onderhoud kost extra tijd en aandacht</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg><span data-i18n="compare.old.item.0">Eerst betalen, daarna pas het ontwerp</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg><span data-i18n="compare.old.item.1">Wekenlange trajecten voordat er iets zichtbaar is</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg><span data-i18n="compare.old.item.2">Na de oplevering sta je er vaak alleen voor</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg><span data-i18n="compare.old.item.3">Onderhoud kost extra tijd en aandacht</span></li>
         </ul>
       </div>
       <div class="price-card">
-        <h3 style="font-size:18px;">Waarom onze werkwijze anders is</h3>
+        <h3 style="font-size:18px;" data-i18n="compare.new.title">Waarom onze werkwijze anders is</h3>
         <ul class="compare-list yes">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Eerst een gratis websiteconcept, daarna pas beslissen</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Binnen korte tijd een duidelijke designrichting</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Volledige oplevering inclusief hosting en onderhoud</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Een vaste partner voor support en toekomstige groei</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="compare.new.item.0">Eerst een gratis websiteconcept, daarna pas beslissen</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="compare.new.item.1">Binnen korte tijd een duidelijke designrichting</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="compare.new.item.2">Volledige oplevering inclusief hosting en onderhoud</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="compare.new.item.3">Een vaste partner voor support en toekomstige groei</span></li>
         </ul>
       </div>
     </div>
@@ -841,9 +905,9 @@
 <section class="section-pad" style="padding-top:0;">
   <div class="container">
     <div class="callout reveal">
-      <div class="eyebrow">Eerst het ontwerp, daarna pas betalen</div>
-      <h2>Je hoeft niet te gokken hoe je nieuwe website eruit zal zien.</h2>
-      <p>Met een gratis ontwerpconcept zie je direct de uitstraling, structuur en kwaliteit van je toekomstige website. Pas wanneer je overtuigd bent van de richting, starten wij met de volledige realisatie en bouwen we een professionele website die klaar is voor livegang.</p>
+      <div class="eyebrow" data-i18n="callout.eyebrow">Eerst het ontwerp, daarna pas betalen</div>
+      <h2 data-i18n="callout.h2">Je hoeft niet te gokken hoe je nieuwe website eruit zal zien.</h2>
+      <p data-i18n="callout.p">Met een gratis ontwerpconcept zie je direct de uitstraling, structuur en kwaliteit van je toekomstige website. Pas wanneer je overtuigd bent van de richting, starten wij met de volledige realisatie en bouwen we een professionele website die klaar is voor livegang.</p>
     </div>
   </div>
 </section>
@@ -851,10 +915,10 @@
 <section class="cta-band">
   <div class="cta-glow"></div>
   <div class="container">
-    <div class="eyebrow" style="justify-content:center;">Start Vandaag</div>
-    <h2>Benieuwd hoe jouw<br>website eruit kan zien?</h2>
-    <p>Vertel ons kort over je bedrijf en wij ontwikkelen een premium websiteconcept — volledig gratis en vrijblijvend, voordat je ergens aan vastzit.</p>
-    <a href="index.html#contact" class="btn btn-primary">Vraag Gratis Demo Aan <span class="btn-arrow">→</span></a>
+    <div class="eyebrow" style="justify-content:center;" data-i18n="cta.eyebrow">Start Vandaag</div>
+    <h2 data-i18n="cta.h2">Benieuwd hoe jouw<br>website eruit kan zien?</h2>
+    <p data-i18n="cta.sub">Vertel ons kort over je bedrijf en wij ontwikkelen een premium websiteconcept — volledig gratis en vrijblijvend, voordat je ergens aan vastzit.</p>
+    <a href="index.html#contact" class="btn btn-primary" data-i18n="cta.button">Vraag Gratis Demo Aan <span class="btn-arrow">→</span></a>
   </div>
 </section>
 
@@ -862,40 +926,40 @@
   <div class="footer-glow" id="footerGlow"></div>
   <div class="container">
     <div class="footer-top">
-      <h2>Laten we praten<br>over je website.</h2>
+      <h2 data-i18n="footer.h2">Laten we praten<br>over je website.</h2>
       <a href="mailto:hello@bjfwebdesign.com" class="btn btn-ghost">hello@bjfwebdesign.com</a>
     </div>
     <div class="footer-cols">
       <div class="footer-col">
-        <h5>Studio</h5>
-        <a href="index.html#work">Work</a>
-        <a href="index.html#process">Werkwijze</a>
-        <a href="pricing.html">Bekijk Alle Pakketten</a>
-        <a href="index.html#contact">Gratis Demo</a>
+        <h5 data-i18n="footer.col1.title">Studio</h5>
+        <a href="index.html#work" data-i18n="nav.work">Werk</a>
+        <a href="index.html#process" data-i18n="nav.process">Werkwijze</a>
+        <a href="pricing.html" data-i18n="footer.col1.pricing">Bekijk Alle Pakketten</a>
+        <a href="index.html#contact" data-i18n="footer.col1.freeDemo">Gratis Demo</a>
       </div>
       <div class="footer-col">
-        <h5>Industrieën</h5>
-        <a href="index.html#services">Vastgoed</a>
-        <a href="index.html#services">Restaurants &amp; Hotels</a>
-        <a href="index.html#services">Verzekeringen</a>
-        <a href="index.html#services">Sport &amp; Beauty</a>
-        <a href="index.html#services">Bouw &amp; Lokaal</a>
+        <h5 data-i18n="footer.col2.title">Industrieën</h5>
+        <a href="index.html#services" data-i18n="footer.col2.realEstate">Vastgoed</a>
+        <a href="index.html#services" data-i18n="footer.col2.restaurants">Restaurants &amp; Hotels</a>
+        <a href="index.html#services" data-i18n="footer.col2.insurance">Verzekeringen</a>
+        <a href="index.html#services" data-i18n="footer.col2.sportBeauty">Sport &amp; Beauty</a>
+        <a href="index.html#services" data-i18n="footer.col2.constructionLocal">Bouw &amp; Lokaal</a>
       </div>
       <div class="footer-col">
-        <h5>Connect</h5>
+        <h5 data-i18n="footer.col3.title">Connect</h5>
         <a href="#">Instagram</a>
         <a href="#">LinkedIn</a>
         <a href="#">TikTok</a>
       </div>
       <div class="footer-col">
-        <h5>Studio</h5>
+        <h5 data-i18n="footer.col4.title">Studio</h5>
         <p>Amsterdam, NL</p>
-        <p>Werkzaam voor heel NL</p>
+        <p data-i18n="footer.col4.servingNL">Werkzaam voor heel NL</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 BJF Web Design. Alle rechten voorbehouden.</span>
-      <span>Free demo first. Pay only if you want to launch.</span>
+      <span data-i18n="footer.rights">© 2026 BJF Web Design. Alle rechten voorbehouden.</span>
+      <span data-i18n="footer.tagline">Free demo first. Pay only if you want to launch.</span>
     </div>
   </div>
 </footer>
@@ -903,6 +967,8 @@
 <script>
 (function(){
   "use strict";
+
+  let currentLang = 'nl';
 
   /* ---------- nav scroll state ---------- */
   const nav = document.getElementById('nav');
@@ -1178,6 +1244,253 @@
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
+
+  /* ---------- i18n: NL / EN dictionary + toggle ---------- */
+  const I18N = {
+    nl: {
+      __title: 'Prijzen — BJF Web Design',
+      __desc: 'Bekijk eerst hoe je website eruit kan zien, kies daarna pas een pakket. Transparante prijzen voor eenmalige realisatie en maandelijkse zorg. Gratis demo, geen risico vooraf.',
+      'nav.work':'Werk', 'nav.process':'Werkwijze', 'nav.pricing':'Bekijk Alle Pakketten',
+      'nav.cta':'Gratis Demo Aanvragen <span class="btn-arrow">→</span>',
+      'hero.eyebrow':'Eerst vertrouwen, dan de prijzen',
+      'hero.h1':'Bekijk eerst hoe <span class="hl">je website eruit kan zien.</span>',
+      'hero.sub':'Je ziet en keurt eerst een gratis ontwerpconcept goed. Pas daarna kies je het realisatiepakket dat bij je bedrijf past — geen verrassingen, geen risico vooraf.',
+      'hero.cta1':'Vraag Gratis Demo Aan <span class="btn-arrow">→</span>',
+      'hero.cta2':'Bekijk Ons Werk',
+      'hero.stat1num':'48u', 'hero.stat1':'Eerste Ontwerp', 'hero.stat2':'Risico Vooraf', 'hero.stat3':'Hosting &amp; Support',
+      'realisatie.eyebrow':'Eenmalige Website-Realisatie',
+      'realisatie.h2':'Kies het realisatiepakket nadat je het ontwerp hebt goedgekeurd.',
+      'realisatie.sub':'Eenmalige bouwkosten, op maat per pakket. Je betaalt pas na goedkeuring van je gratis ontwerp.',
+      'realisatie.discountBadge':'Eerste Klant Korting',
+      'realisatie.fromLabel':'eenmalig',
+      'realisatie.tier1.desc':'Voor professionele websites die snel online moeten.',
+      'realisatie.tier1.feat.0':'Gratis designvoorbeeld',
+      'realisatie.tier1.feat.1':'Website op maat, one-page',
+      'realisatie.tier1.feat.2':'Responsive design',
+      'realisatie.tier1.feat.3':'Contactformulier',
+      'realisatie.tier1.feat.4':'Basis SEO &amp; analytics',
+      'realisatie.tier1.feat.5':'SSL, hosting gereed &amp; livegang',
+      'realisatie.tier1.feat.6':'30 dagen support',
+      'realisatie.tier1.cta':'Begin met Starter+',
+      'realisatie.tier2.badge':'Meest Gekozen',
+      'realisatie.tier2.desc':'Meest populair bij groeiende bedrijven.',
+      'realisatie.tier2.feat.0':'Alle functies van Starter+, plus',
+      'realisatie.tier2.feat.1':'Meerdere pagina&#39;s &amp; CMS',
+      'realisatie.tier2.feat.2':'Blog / portfolio',
+      'realisatie.tier2.feat.3':'Conversiegerichte structuur',
+      'realisatie.tier2.feat.4':'Geavanceerde responsive optimalisatie',
+      'realisatie.tier2.feat.5':'Integraties &amp; prioriteitssupport',
+      'realisatie.tier2.cta':'Kies voor Professional',
+      'realisatie.tier3.desc':'Voor bedrijven met meer pagina&#39;s en een uitgebreide website.',
+      'realisatie.tier3.feat.0':'Alle functies van Professional, plus',
+      'realisatie.tier3.feat.1':'Volledig maatwerk &amp; animaties',
+      'realisatie.tier3.feat.2':'Complexe CMS-oplossingen',
+      'realisatie.tier3.feat.3':'Automatiseringen &amp; externe integraties',
+      'realisatie.tier3.feat.4':'Performance-optimalisatie',
+      'realisatie.tier3.feat.5':'Persoonlijke begeleiding',
+      'realisatie.tier3.cta':'Bouw met Business',
+      'zorg.eyebrow':'Maandelijkse Zorg',
+      'zorg.h2':'Onderhoud dat je website snel, veilig en up-to-date houdt.',
+      'zorg.sub':'Doorlopend, maandelijks opzegbaar. Begint zodra je website live gaat.',
+      'zorg.perMonth':' /mnd',
+      'zorg.fromLabel':'doorlopend, maandelijks opzegbaar',
+      'zorg.tier1.desc':'Basisonderhoud voor een stabiele, veilige website.',
+      'zorg.tier1.feat.0':'Veilige en snelle premium hosting',
+      'zorg.tier1.feat.1':'Regelmatige beveiligingsupdates',
+      'zorg.tier1.feat.2':'Doorlopend technisch onderhoud',
+      'zorg.tier1.feat.3':'Persoonlijke support via e-mail',
+      'zorg.tier1.cta':'Kies Basic',
+      'zorg.tier2.desc':'Alles uit Basic, plus meer aandacht voor groei.',
+      'zorg.tier2.feat.0':'Alles uit het Basic-pakket',
+      'zorg.tier2.feat.1':'Regelmatige contentaanpassingen',
+      'zorg.tier2.feat.2':'Prioriteit bij supportverzoeken',
+      'zorg.tier2.feat.3':'Doorlopende performance monitoring',
+      'zorg.tier2.feat.4':'Maandelijkse controle &amp; optimalisatie',
+      'zorg.tier2.cta':'Kies Professional',
+      'zorg.tier3.desc':'Voor bedrijven die maximale zorg en strategisch advies willen.',
+      'zorg.tier3.feat.0':'Alles uit het Professional-pakket',
+      'zorg.tier3.feat.1':'Prioriteit bij updates en onderhoud',
+      'zorg.tier3.feat.2':'Advies voor conversieverbetering',
+      'zorg.tier3.feat.3':'Per kwartaal website-evaluatie',
+      'zorg.tier3.feat.4':'Strategisch overleg voor verdere groei',
+      'zorg.tier3.cta':'Kies Business+',
+      'compare.h2':'Een zorgeloze weg naar een professionele website.',
+      'compare.old.title':'Traditionele werkwijze',
+      'compare.old.item.0':'Eerst betalen, daarna pas het ontwerp',
+      'compare.old.item.1':'Wekenlange trajecten voordat er iets zichtbaar is',
+      'compare.old.item.2':'Na de oplevering sta je er vaak alleen voor',
+      'compare.old.item.3':'Onderhoud kost extra tijd en aandacht',
+      'compare.new.title':'Waarom onze werkwijze anders is',
+      'compare.new.item.0':'Eerst een gratis websiteconcept, daarna pas beslissen',
+      'compare.new.item.1':'Binnen korte tijd een duidelijke designrichting',
+      'compare.new.item.2':'Volledige oplevering inclusief hosting en onderhoud',
+      'compare.new.item.3':'Een vaste partner voor support en toekomstige groei',
+      'callout.eyebrow':'Eerst het ontwerp, daarna pas betalen',
+      'callout.h2':'Je hoeft niet te gokken hoe je nieuwe website eruit zal zien.',
+      'callout.p':'Met een gratis ontwerpconcept zie je direct de uitstraling, structuur en kwaliteit van je toekomstige website. Pas wanneer je overtuigd bent van de richting, starten wij met de volledige realisatie en bouwen we een professionele website die klaar is voor livegang.',
+      'cta.eyebrow':'Start Vandaag',
+      'cta.h2':'Benieuwd hoe jouw<br>website eruit kan zien?',
+      'cta.sub':'Vertel ons kort over je bedrijf en wij ontwikkelen een premium websiteconcept — volledig gratis en vrijblijvend, voordat je ergens aan vastzit.',
+      'cta.button':'Vraag Gratis Demo Aan <span class="btn-arrow">→</span>',
+      'footer.h2':'Laten we praten<br>over je website.',
+      'footer.col1.title':'Studio', 'footer.col1.pricing':'Bekijk Alle Pakketten', 'footer.col1.freeDemo':'Gratis Demo',
+      'footer.col2.title':'Industrieën', 'footer.col2.realEstate':'Vastgoed', 'footer.col2.restaurants':'Restaurants &amp; Hotels',
+      'footer.col2.insurance':'Verzekeringen', 'footer.col2.sportBeauty':'Sport &amp; Beauty', 'footer.col2.constructionLocal':'Bouw &amp; Lokaal',
+      'footer.col3.title':'Connect',
+      'footer.col4.title':'Studio', 'footer.col4.servingNL':'Werkzaam voor heel NL',
+      'footer.rights':'© 2026 BJF Web Design. Alle rechten voorbehouden.',
+      'footer.tagline':'Eerst een gratis demo. Betaal alleen als je live wilt.'
+    },
+    en: {
+      __title: 'Pricing — BJF Web Design',
+      __desc: 'See first what your website can look like, then choose a package. Transparent pricing for one-time setup and monthly care. Free demo, zero risk upfront.',
+      'nav.work':'Work', 'nav.process':'Process', 'nav.pricing':'View All Packages',
+      'nav.cta':'Request Free Demo <span class="btn-arrow">→</span>',
+      'hero.eyebrow':'Trust first, pricing second',
+      'hero.h1':'See first what <span class="hl">your website can look like.</span>',
+      'hero.sub':'You review and approve a free design concept first. Only then do you pick the setup package that fits your business — no surprises, no risk upfront.',
+      'hero.cta1':'Request Free Demo <span class="btn-arrow">→</span>',
+      'hero.cta2':'View Our Work',
+      'hero.stat1num':'48h', 'hero.stat1':'First Design', 'hero.stat2':'Upfront Risk', 'hero.stat3':'Hosting &amp; Support',
+      'realisatie.eyebrow':'One-Time Website Setup',
+      'realisatie.h2':'Choose your setup package after you\'ve approved the design.',
+      'realisatie.sub':'One-time build cost, custom priced per package. You only pay after approving your free design.',
+      'realisatie.discountBadge':'First-Time Discount',
+      'realisatie.fromLabel':'one-time',
+      'realisatie.tier1.desc':'For professional websites that need to go live fast.',
+      'realisatie.tier1.feat.0':'Free design preview',
+      'realisatie.tier1.feat.1':'Custom-built, one-page website',
+      'realisatie.tier1.feat.2':'Responsive design',
+      'realisatie.tier1.feat.3':'Contact form',
+      'realisatie.tier1.feat.4':'Basic SEO &amp; analytics',
+      'realisatie.tier1.feat.5':'SSL, hosting-ready &amp; launch',
+      'realisatie.tier1.feat.6':'30 days of support',
+      'realisatie.tier1.cta':'Start with Starter+',
+      'realisatie.tier2.badge':'Most Popular',
+      'realisatie.tier2.desc':'The top pick for growing businesses.',
+      'realisatie.tier2.feat.0':'Everything in Starter+, plus',
+      'realisatie.tier2.feat.1':'Multiple pages &amp; CMS',
+      'realisatie.tier2.feat.2':'Blog / portfolio',
+      'realisatie.tier2.feat.3':'Conversion-focused structure',
+      'realisatie.tier2.feat.4':'Advanced responsive optimization',
+      'realisatie.tier2.feat.5':'Integrations &amp; priority support',
+      'realisatie.tier2.cta':'Choose Professional',
+      'realisatie.tier3.desc':'For businesses with more pages and a more extensive website.',
+      'realisatie.tier3.feat.0':'Everything in Professional, plus',
+      'realisatie.tier3.feat.1':'Fully custom builds &amp; animations',
+      'realisatie.tier3.feat.2':'Complex CMS solutions',
+      'realisatie.tier3.feat.3':'Automations &amp; third-party integrations',
+      'realisatie.tier3.feat.4':'Performance optimization',
+      'realisatie.tier3.feat.5':'Personal guidance',
+      'realisatie.tier3.cta':'Build with Business',
+      'zorg.eyebrow':'Monthly Care',
+      'zorg.h2':'Maintenance that keeps your website fast, secure and up to date.',
+      'zorg.sub':'Ongoing, cancel anytime. Starts as soon as your website goes live.',
+      'zorg.perMonth':' /mo',
+      'zorg.fromLabel':'ongoing, cancel anytime',
+      'zorg.tier1.desc':'Basic maintenance for a stable, secure website.',
+      'zorg.tier1.feat.0':'Secure, fast premium hosting',
+      'zorg.tier1.feat.1':'Regular security updates',
+      'zorg.tier1.feat.2':'Ongoing technical maintenance',
+      'zorg.tier1.feat.3':'Personal support by email',
+      'zorg.tier1.cta':'Choose Basic',
+      'zorg.tier2.desc':'Everything in Basic, plus more attention for growth.',
+      'zorg.tier2.feat.0':'Everything in the Basic package',
+      'zorg.tier2.feat.1':'Regular content updates',
+      'zorg.tier2.feat.2':'Priority on support requests',
+      'zorg.tier2.feat.3':'Ongoing performance monitoring',
+      'zorg.tier2.feat.4':'Monthly check-up &amp; optimization',
+      'zorg.tier2.cta':'Choose Professional',
+      'zorg.tier3.desc':'For businesses that want maximum care and strategic advice.',
+      'zorg.tier3.feat.0':'Everything in the Professional package',
+      'zorg.tier3.feat.1':'Priority on updates and maintenance',
+      'zorg.tier3.feat.2':'Advice on improving conversion',
+      'zorg.tier3.feat.3':'Quarterly website review',
+      'zorg.tier3.feat.4':'Strategic consulting for further growth',
+      'zorg.tier3.cta':'Choose Business+',
+      'compare.h2':'A worry-free path to a professional website.',
+      'compare.old.title':'The traditional approach',
+      'compare.old.item.0':'Pay first, see the design later',
+      'compare.old.item.1':'Weeks-long timelines before anything is visible',
+      'compare.old.item.2':'You\'re often on your own once it\'s delivered',
+      'compare.old.item.3':'Maintenance costs extra time and attention',
+      'compare.new.title':'Why our approach is different',
+      'compare.new.item.0':'A free website concept first, then you decide',
+      'compare.new.item.1':'A clear design direction in a short amount of time',
+      'compare.new.item.2':'Full delivery including hosting and maintenance',
+      'compare.new.item.3':'One steady partner for support and future growth',
+      'callout.eyebrow':'Design first, pay later',
+      'callout.h2':'You don\'t have to guess what your new website will look like.',
+      'callout.p':'With a free design concept, you see the look, structure, and quality of your future website right away. Once you\'re confident in the direction, we start the full build and create a professional website that\'s ready to launch.',
+      'cta.eyebrow':'Start Today',
+      'cta.h2':'Curious what your<br>website could look like?',
+      'cta.sub':'Tell us briefly about your business and we\'ll develop a premium website concept — completely free and with no obligation, before you commit to anything.',
+      'cta.button':'Request Free Demo <span class="btn-arrow">→</span>',
+      'footer.h2':'Let\'s talk<br>about your website.',
+      'footer.col1.title':'Studio', 'footer.col1.pricing':'View All Packages', 'footer.col1.freeDemo':'Free Demo',
+      'footer.col2.title':'Industries', 'footer.col2.realEstate':'Real Estate', 'footer.col2.restaurants':'Restaurants &amp; Hotels',
+      'footer.col2.insurance':'Insurance', 'footer.col2.sportBeauty':'Sports &amp; Beauty', 'footer.col2.constructionLocal':'Construction &amp; Local',
+      'footer.col3.title':'Connect',
+      'footer.col4.title':'Studio', 'footer.col4.servingNL':'Serving all of the Netherlands',
+      'footer.rights':'© 2026 BJF Web Design. All rights reserved.',
+      'footer.tagline':'Free demo first. Pay only if you want to launch.'
+    }
+  };
+
+  const pageTitleEl = document.getElementById('pageTitle');
+  const pageDescEl = document.getElementById('pageDesc');
+  const langToggles = document.querySelectorAll('.lang-toggle');
+
+  function applyLanguage(lang, opts){
+    opts = opts || {};
+    const dict = I18N[lang];
+    if(!dict) return;
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    if(pageTitleEl) pageTitleEl.textContent = dict.__title;
+    if(pageDescEl) pageDescEl.setAttribute('content', dict.__desc);
+
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+      const key = el.getAttribute('data-i18n-placeholder');
+      if(dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+    });
+    document.querySelectorAll('[data-i18n-alt]').forEach(el=>{
+      const key = el.getAttribute('data-i18n-alt');
+      if(dict[key] !== undefined) el.setAttribute('alt', dict[key]);
+    });
+
+    langToggles.forEach(t=>{
+      t.classList.toggle('lang-en', lang === 'en');
+      t.classList.toggle('lang-nl', lang === 'nl');
+      t.setAttribute('aria-label', lang === 'nl' ? 'Switch to English' : 'Wissel naar Nederlands');
+    });
+
+    if(!opts.silent){
+      try{ localStorage.setItem('bjf-lang', lang); }catch(e){}
+    }
+  }
+
+  langToggles.forEach(t=>{
+    t.addEventListener('click', ()=>{
+      applyLanguage(currentLang === 'nl' ? 'en' : 'nl');
+    });
+  });
+
+  let initialLang = 'nl';
+  try{
+    const saved = localStorage.getItem('bjf-lang');
+    if(saved === 'nl' || saved === 'en') initialLang = saved;
+  }catch(e){}
+  if(initialLang !== 'nl'){
+    applyLanguage(initialLang, {silent:true});
+  } else {
+    // still run once so the toggle UI reflects the nl default consistently
+    applyLanguage('nl', {silent:true});
+  }
 
 })();
 </script>
