@@ -575,6 +575,7 @@
     opacity:1;
     padding:26px 0;
   }
+  .panel-toggle{display:none;} /* mobile-only drop-down arrow, see the max-width:900px block */
   .service-item.active .num{color:var(--cyan);}
   .service-item.active p{display:block;}
   .services-progress-rail{
@@ -1327,11 +1328,48 @@
     .service-item .num{color:var(--cyan)!important;}
     .service-item p{display:block!important; opacity:1;}
 
+    /* text row + drop-down arrow: collapsed by default on mobile, tap to reveal the visual below */
+    .service-item-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .panel-toggle{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:30px; height:30px;
+      flex-shrink:0;
+      margin-top:1px;
+      border-radius:50%;
+      border:1px solid var(--border);
+      background:var(--surface-2);
+      color:var(--muted);
+      transition:transform .4s cubic-bezier(.4,0,.2,1), border-color .3s ease, color .3s ease, background .3s ease;
+    }
+    .panel-toggle svg{width:15px; height:15px;}
+    .panel-toggle.open{
+      transform:rotate(180deg);
+      border-color:rgba(103,232,249,0.4);
+      color:var(--cyan);
+      background:rgba(103,232,249,0.1);
+    }
+
+    /* visual card: hidden entirely by default (display:none), shown only
+       once its arrow is tapped. Using display (not an animated height)
+       means the card's real aspect-ratio box is computed instantly and
+       statically the moment it's shown — so every internal flex proportion
+       (cover-top vs. cover-panel, etc.) resolves correctly right away,
+       matching the desktop .services-visual sizing (aspect-ratio:1/1.05)
+       exactly instead of an arbitrary fixed pixel height. A short opacity
+       fade-in is used for the reveal instead of a height transition. */
     .visual-image{
+      display:none!important;
       position:static!important;
-      opacity:1!important;
       transform:none!important;
-      height:480px;
+      width:100%;
+      aspect-ratio:1/1.05;
       padding:16px;
       margin-bottom:52px;
       border-radius:22px;
@@ -1339,12 +1377,20 @@
       background:linear-gradient(155deg, #10131d 0%, #0a0c13 100%);
       overflow:hidden;
     }
-    .visual-image:last-of-type{margin-bottom:0;}
-    /* .visual-card / .visual-card-inner keep their desktop height:100% rule —
-       it now resolves against .visual-image's explicit 480px instead of the
-       aspect-ratio box, so every internal flex proportion (cover-top vs.
-       cover-panel, realty-top vs. its stats bar, etc.) still has a real
-       height to distribute and nothing collapses or overlaps. */
+    .visual-image.open{
+      display:flex!important;
+      opacity:0;
+      animation:panel-fade-in .45s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    .visual-image.open:last-of-type{margin-bottom:0;}
+    @keyframes panel-fade-in{
+      from{opacity:0;}
+      to{opacity:1;}
+    }
+    @media (prefers-reduced-motion: reduce){
+      .visual-image.open{animation:none!important; opacity:1;}
+      .panel-toggle{transition:none!important;}
+    }
   }
 
   /* ---------- process ---------- */
@@ -1833,35 +1879,50 @@
           <li class="service-item active" data-index="0">
             <span class="num">01</span>
             <div>
-              <h3 data-i18n="services.0.title">Bouw &amp; Lokale Diensten</h3>
+              <div class="service-item-head">
+                <h3 data-i18n="services.0.title">Bouw &amp; Lokale Diensten</h3>
+                <button class="panel-toggle" type="button" data-index="0" aria-expanded="false" aria-label="Toon voorbeeld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button>
+              </div>
               <p data-i18n="services.0.desc">De eerste indruk die van een bezoeker een offerteaanvraag maakt.</p>
             </div>
           </li>
           <li class="service-item" data-index="1">
             <span class="num">02</span>
             <div>
-              <h3 data-i18n="services.1.title">Sportscholen &amp; Beauty Salons</h3>
+              <div class="service-item-head">
+                <h3 data-i18n="services.1.title">Sportscholen &amp; Beauty Salons</h3>
+                <button class="panel-toggle" type="button" data-index="1" aria-expanded="false" aria-label="Toon voorbeeld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button>
+              </div>
               <p data-i18n="services.1.desc">Een boeking of aanmelding is nog maar één klik verwijderd van je homepage.</p>
             </div>
           </li>
           <li class="service-item" data-index="2">
             <span class="num">03</span>
             <div>
-              <h3 data-i18n="services.2.title">Vastgoed &amp; Makelaars</h3>
+              <div class="service-item-head">
+                <h3 data-i18n="services.2.title">Vastgoed &amp; Makelaars</h3>
+                <button class="panel-toggle" type="button" data-index="2" aria-expanded="false" aria-label="Toon voorbeeld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button>
+              </div>
               <p data-i18n="services.2.desc">Laat een pand zich verkopen nog voordat de bezichtiging begint — met beeld dat vertrouwen wekt.</p>
             </div>
           </li>
           <li class="service-item" data-index="3">
             <span class="num">04</span>
             <div>
-              <h3 data-i18n="services.3.title">Restaurants &amp; Hotels</h3>
+              <div class="service-item-head">
+                <h3 data-i18n="services.3.title">Restaurants &amp; Hotels</h3>
+                <button class="panel-toggle" type="button" data-index="3" aria-expanded="false" aria-label="Toon voorbeeld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button>
+              </div>
               <p data-i18n="services.3.desc">Reserveringen die binnenkomen terwijl jij aan het werk bent, op elk apparaat foutloos.</p>
             </div>
           </li>
           <li class="service-item" data-index="4">
             <span class="num">05</span>
             <div>
-              <h3 data-i18n="services.4.title">Verzekeringen &amp; Financiële Diensten</h3>
+              <div class="service-item-head">
+                <h3 data-i18n="services.4.title">Verzekeringen &amp; Financiële Diensten</h3>
+                <button class="panel-toggle" type="button" data-index="4" aria-expanded="false" aria-label="Toon voorbeeld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button>
+              </div>
               <p data-i18n="services.4.desc">Vertrouwen wekken nog voordat het eerste gesprek begint — premium en professioneel.</p>
             </div>
           </li>
@@ -2655,6 +2716,18 @@
     });
     card.addEventListener('mouseleave', ()=>{
       inner.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    });
+  });
+
+  /* ---------- mobile-only: drop-down arrow reveals each industry's visual ---------- */
+  document.querySelectorAll('.panel-toggle').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const idx = btn.dataset.index;
+      const visual = document.querySelector(`.visual-image[data-index="${idx}"]`);
+      if(!visual) return;
+      const isOpen = visual.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
   });
 
